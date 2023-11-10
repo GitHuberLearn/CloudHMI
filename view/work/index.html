@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2023-11-10 14:25:42
+ * @LastEditTime: 2023-11-10 14:28:45
  -->
 <!DOCTYPE html>
 <html>
@@ -24,17 +24,23 @@
 		var LSList = {
 			type1: 'link',
 			type2: 'script',
+			type: 'scriptmodule',
 			//引入的路径列表
 			list1: [
 			],
 			list2: [
 				"plugins/lib/xe-utils.js",
 				"plugins/lib/echarts.min.js",
+			],
+			list: [
+				'js/guid-page/work/index.js'
 			]
 		};
 	</script>
 	<!--About css-->
-	<script type="text/javascript">writeImportFile(LSList.type1, LSList.list1);</script>
+	<script type="text/javascript">
+		writeImportFile(LSList.type1, LSList.list1);
+	</script>
 	<style>
 		.box {
 			height: 300px;
@@ -96,15 +102,9 @@
 </body>
 <!--Tripartite js-->
 <!--About js-->
-<script type="text/javascript">writeImportFile(LSList.type2, LSList.list2);</script>
 <script type="text/javascript">
-	const LSLists = {
-		type: 'scriptmodule',
-		list: [
-			'js/guid-page/work/index.js'
-		]
-	};
-	writeImportFile(LSLists.type, LSLists.list);
+	writeImportFile(LSList.type2, LSList.list2);
+	writeImportFile(LSList.type, LSList.list);
 </script>
 
 </html>

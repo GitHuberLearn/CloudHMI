@@ -1,12 +1,10 @@
+let { getRecentMonth, dateNs, initEchart } = await import(
+  `${cube.gatewayURL_module}js/product/index.js`
+);
 
-  let { getRecentMonth, dateNs, initEchart } = await import(
-    `${cube.gatewayURL_module}js/product/index.js`
-  );
-
-  let { getDateN } = await import(
-    `${cube.gatewayURL_module}js/product/mockData.js`
-  );
-
+let { getDateN } = await import(
+  `${cube.gatewayURL_module}js/product/mockData.js`
+);
 
 //选择项目文件右击打开
 $(function () {
