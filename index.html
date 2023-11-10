@@ -1,0 +1,60 @@
+<!--
+ * @Descripttion: 外站技术
+ * @version: 1.0.0
+ * @Author: YangKe
+ * @Date: 2019-12-17 09:41:06
+ * @LastEditors: ~
+ * @LastEditTime: 2023-11-09 15:21:02
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<title>外站技术</title>
+	<!--common css/js-->
+	<script src="js/common/common-cloud.js" type="text/javascript" charset="utf-8"></script>
+	<!--声明css,js变量-->
+	<script type="text/javascript">
+		var LSList = {
+			type1: 'link',
+			type2: 'script',
+			//引入的路径列表
+			list1: [
+			],
+			list2: [
+			]
+		};
+	</script>
+	<!--About css-->
+	<script type="text/javascript">writeImportFile(LSList.type1, LSList.list1);</script>
+</head>
+
+<body class="catalogue-url">
+	<pre class="foldBox">
+		云页面
+	</pre>
+	<p class="title"><i class="lins"></i>云服务</p>
+	<ol>
+		<li><a href="view/work/index.html">资金净值回收率</a></li>
+	</ol>
+</body>
+<!--Tripartite js-->
+<!--About js-->
+<script type="text/javascript">writeImportFile(LSList.type2, LSList.list2, true);</script>
+<script type="module">
+	let { dateNs } = await import(`${cube.gatewayURL_module}js/product/index.js`);
+	let { getDateN } = await import(`${cube.gatewayURL_module}js/product/mockData.js`);
+	console.log(dateNs);
+	console.log(getDateN(3))
+	$(function () {
+
+	})
+</script>
+
+</html>
