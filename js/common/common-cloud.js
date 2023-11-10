@@ -54,7 +54,19 @@ var writeImportFile = function (type, list, isBasics) {
   } else if (type === "script") {
     for (var i = 0; i < list.length; i++) {
       document.write(
-        '<script type="text/javascript" type=“module” charset="utf-8" src="' +
+        '<script type="text/javascript" type="module" charset="utf-8" src="' +
+          path +
+          list[i] +
+          "?v=" +
+          version +
+          '"></script>'
+      );
+    }
+  } else if (type === "scriptmodule") {
+    //用于模块import组件
+    for (var i = 0; i < list.length; i++) {
+      document.write(
+        '<script  type="module" src="' +
           path +
           list[i] +
           "?v=" +
