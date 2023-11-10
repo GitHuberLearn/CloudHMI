@@ -362,7 +362,8 @@ $(function () {
 });
 
 function option(chartList, title) {
-  const xAxis = [];
+  let xAxis = [];
+  let series = [];
   chartList.forEach((el, index) => {
     const show = index === 0 ? true : false;
     xAxis.push({
@@ -378,7 +379,8 @@ function option(chartList, title) {
       data: el.date,
     });
   });
-  const { x, xy, y } = optionxy(chartList);
+
+  const { x, xy, y, xy1 } = optionxy(chartList);
 
   xAxis.push({
     show: false,
@@ -389,7 +391,8 @@ function option(chartList, title) {
     },
     data: x,
   });
-  chartList.push(
+  series.push(
+    ...chartList,
     {
       xAxisIndex: title === "组合" ? 8 : 4,
       name: "净现率", //按照时间(重复率：斜率为0)
@@ -433,6 +436,28 @@ function option(chartList, title) {
         ]),
       },
       data: y,
+    },
+    {
+      xAxisIndex: title === "组合" ? 8 : 4,
+      name: "跨度", //按照时间去重(重复率：净现率相差)
+      type: "line",
+      smooth: true,
+      lineStyle: { color: "#009885" },
+      itemStyle: { color: "#009885" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#93C6C1",
+          },
+          {
+            offset: 0.8,
+            color: "#2C5852",
+          },
+        ]),
+      },
+      data: xy1,
     }
   );
   return {
@@ -478,13 +503,13 @@ function option(chartList, title) {
         splitLine: { lineStyle: { color: "#22467D" } },
       },
     ],
-    series: chartList,
+    series,
   };
 }
 
 function optionxy(chartList) {
-  const xAxisList = [];
-  chartList.forEach((el, index) => {
+  let xAxisList = [];
+  chartList.forEach((el) => {
     el.data.forEach((m, i) => {
       xAxisList.push({
         y: m,
@@ -492,45 +517,70 @@ function optionxy(chartList) {
       });
     });
   });
+
   //从小到大时间
-  const data = xAxisList.sort(function (a, b) {
-    return (
-      Date.parse(a.x.replace(/-/g, "/")) - Date.parse(b.x.replace(/-/g, "/"))
-    );
-  });
-  let x = [],
-    xy = [],
+  const data = sortMin(xAxisList);
+  let xy = [],
     obj = [];
-  data.forEach((el, index) => {
-    x.push(el.x);
+  data.forEach((el) => {
     xy.push([el.x, el.y]);
     obj.push({
       x: el.x,
       y: el.y,
     });
   });
-  x = Array.from(new Set(x));
-
-  const { y } = getMonthMax(obj);
-  return { x, xy, y };
+  const { x, y, xy1 } = getMonthMax(obj);
+  return { xy, x, y, xy1 };
 }
 
+//排序(从小到大)
+function sortMin(xAxisList) {
+  let list = xAxisList.concat([]); //防止改变原数据
+  list.sort(function (a, b) {
+    return (
+      Date.parse(a.x.replace(/-/g, "/")) - Date.parse(b.x.replace(/-/g, "/"))
+    );
+  });
+  return list;
+}
 //去重
 function getMonthMax(obj) {
   let map = new Map();
   const newArr = obj.filter((v) => !map.has(v.x) && map.set(v.x, v));
-  let arr = [];
-  let xy = [];
+  let x = [],
+    y = [];
+
+  let mm = [];
+
   newArr.forEach((el, index) => {
-    if (index > 0) {
-      const x = el.x.substring(0, 7);
-      const bex = newArr[index - 1].x.substring(0, 7);
-      const tx = Date.parse(x.replace(/-/g, "/"));
-      const betx = Date.parse(bex.replace(/-/g, "/"));
-      //console.log(tx - betx)
+    let txl = 0,
+      tafxl = 0;
+    if (index < newArr.length - 1) {
+      const xl = el.x.substring(0, 7);
+      txl = Date.parse(xl.replace(/-/g, "/"));
+      const afxl = newArr[index + 1].x.substring(0, 7);
+      tafxl = Date.parse(afxl.replace(/-/g, "/"));
     }
-    arr.push(el.y);
+    x.push(el.x);
+    y.push(el.y);
+    mm.push({
+      x: el.x,
+      y: el.y,
+      t: tafxl - txl,
+    });
+  });
+  console.log(mm);
+  //从小到大
+  mm.sort(function (a, b) {
+    return a.t - b.t;
+  });
+  //获取最大
+  const maxs = mm.filter((item) => item.t === 7948800000);
+
+  let xy = [];
+  mm.forEach((el) => {
     xy.push([el.x, el.y]);
   });
-  return { y: arr };
+
+  return { x, y, xy1: xy };
 }
