@@ -468,7 +468,6 @@ function option(chartList, title) {
         fontSize: 16,
         fontWeight: 600,
       },
-      top: "3%",
       left: "center",
       itemGap: 20,
     },
@@ -479,10 +478,10 @@ function option(chartList, title) {
     legend: {
       x: "right",
       textStyle: { color: "white" },
-      padding: [5, 10, 0, 0],
+      padding: [28, 10, 0, 0],
     },
     grid: {
-      top: "10%",
+      top: "20%",
       left: "5%",
       right: "3%",
       bottom: "10%",
