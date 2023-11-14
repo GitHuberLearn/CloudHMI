@@ -13,6 +13,7 @@ const time = {
 let data = {
   value: 6,
 };
+
 //选择项目文件右击打开
 $(function () {
   //初步启动
@@ -41,8 +42,8 @@ const listChart = () => {
 const list = () => {
   const months24 = [24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3];
   let month24Date = [];
-  //8.28
   let n24 = Object.assign({}, time);
+  let value24 = 0;
   months24.forEach((el) => {
     const day = getRecentMonth(n24, "yyyy-MM-dd");
     n24.num += el;
@@ -306,23 +307,22 @@ const listGroup = () => {
 
 const option = (chartList, title, value) => {
   let series = [],
-    yAxis = [];
+    seriesList = [];
   chartList.forEach((el, index) => {
-    yAxis.push({
+    seriesList.push({
       ...el,
       xAxisIndex: 0,
       data: [],
     });
     el.data.forEach((m, i) => {
-      yAxis[index].data.push([el.date[i], m]);
+      seriesList[index].data.push([el.date[i], m]);
     });
   });
   const { x, xy, y, xy1, xyn } = optionxy(chartList);
-  const months = value ? value : 6;
   series.push(
-    ...yAxis,
+    ...seriesList,
     {
-      name: "净现率", //按照时间(重复率：斜率为0)
+      name: "净现率", //全量净现值：按照时间(重复率：斜率为0)
       type: "line",
       smooth: true,
       lineStyle: { color: "#F5084B" },

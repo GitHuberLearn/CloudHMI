@@ -46,7 +46,8 @@ export function formatterFloat(cellValue, n) {
 }
 
 /**
- * @param {*月数} n 正数后几个月，负数前几个月 默认本月
+ * @param {*月数} n/num 正数后几个月，负数前几个月 默认本月
+ *                obj{time,num} time:时间
  * @param {*时间类型} type 默认yyyy-MM
  * @returns n个月月份
  */
