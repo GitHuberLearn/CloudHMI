@@ -366,12 +366,14 @@ const option = (chartList, title, value) => {
     {
       name: "全量跨度",
       type: "line",
-      symbol: "arrow",
       smooth: true,
+      symbol: "arrow",
+      symbolSize: 8,
+      symbolRotate: 270,
       lineStyle: {
         color: "#F508ED",
       },
-      itemStyle: { color: "#F508ED" },
+      itemStyle: { color: "#F276F0" },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
