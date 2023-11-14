@@ -6,303 +6,16 @@ let { getDateN } = await import(
   `${cube.gatewayURL_module}js/product/mockData.js`
 );
 
+const time = {
+  time: "2023-08-28",
+  num: 0,
+};
 let data = {
   value: 6,
 };
 //选择项目文件右击打开
 $(function () {
-  const time = {
-    time: "2023-08-28",
-    num: 0,
-  };
-  const list = (time) => {
-    const months24 = [24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3];
-    let month24Date = [];
-    //8.28
-    let n24 = Object.assign({}, time);
-    months24.forEach((el) => {
-      const day = getRecentMonth(n24, "yyyy-MM-dd");
-      n24.num += el;
-      month24Date.push(day);
-    });
-
-    const months12 = [12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24];
-    let month12Date = [];
-    let n12 = Object.assign({}, time);
-    months12.forEach((el) => {
-      const day = getRecentMonth(n12, "yyyy-MM-dd");
-      n12.num += el;
-      month12Date.push(day);
-    });
-
-    const months06 = [6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12];
-    let month06Date = [];
-    let n06 = Object.assign({}, time);
-    months06.forEach((el) => {
-      const day = getRecentMonth(n06, "yyyy-MM-dd");
-      n06.num += el;
-      month06Date.push(day);
-    });
-
-    const months03 = [3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6];
-    let month03Date = [];
-    let n03 = Object.assign({}, time);
-    months03.forEach((el) => {
-      const day = getRecentMonth(n03, "yyyy-MM-dd");
-      n03.num += el;
-      month03Date.push(day);
-    });
-
-    const chartList = [
-      {
-        name: "2年",
-        type: "line",
-        smooth: true,
-        lineStyle: { color: "#FDAD26" },
-        itemStyle: { color: "#FDAD26" },
-        areaStyle: {
-          opacity: 0.5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#FDAD26",
-            },
-            {
-              offset: 0.8,
-              color: "#322C5B",
-            },
-          ]),
-        },
-        data: months24,
-        date: month24Date,
-      },
-      {
-        name: "1年",
-        type: "line",
-        smooth: true,
-        lineStyle: { color: "#46E7A5" },
-        itemStyle: { color: "#46E7A5" },
-        areaStyle: {
-          opacity: 0.5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#1B527C",
-            },
-            {
-              offset: 0.8,
-              color: "#184E79",
-            },
-          ]),
-        },
-        data: months12,
-        date: month12Date,
-      },
-      {
-        name: "半年",
-        type: "line",
-        smooth: true,
-        lineStyle: { color: "#3FD7F8" },
-        itemStyle: { color: "#3FD7F8" },
-        areaStyle: {
-          opacity: 0.5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#153881",
-            },
-            {
-              offset: 0.8,
-              color: "#0B2678",
-            },
-          ]),
-        },
-        data: months06,
-        date: month06Date,
-      },
-      {
-        name: "3个月",
-        type: "line",
-        smooth: true,
-        lineStyle: { color: "#FF7A45" },
-        itemStyle: { color: "#FF7A45" },
-        areaStyle: {
-          opacity: 0.5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#B98989",
-            },
-            {
-              offset: 0.8,
-              color: "#B99B9B",
-            },
-          ]),
-        },
-        data: months03,
-        date: month03Date,
-      },
-    ];
-    return chartList;
-  };
-  const listBig = (time, bg) => {
-    const monthsBig03 = [
-      3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24,
-    ];
-    let monthBig03Date = [];
-    let nBig03 = Object.assign({}, time);
-    monthsBig03.forEach((el) => {
-      const day = getRecentMonth(nBig03, "yyyy-MM-dd");
-      nBig03.num += el;
-      monthBig03Date.push(day);
-    });
-
-    const monthsBig06 = [
-      6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3,
-    ];
-    let monthBig06Date = [];
-    let nBig06 = Object.assign({}, time);
-    monthsBig06.forEach((el) => {
-      const day = getRecentMonth(nBig06, "yyyy-MM-dd");
-      nBig06.num += el;
-      monthBig06Date.push(day);
-    });
-
-    const monthsBig12 = [
-      12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6,
-    ];
-    let monthBig12Date = [];
-    let nBig12 = Object.assign({}, time);
-    monthsBig12.forEach((el) => {
-      const day = getRecentMonth(nBig12, "yyyy-MM-dd");
-      nBig12.num += el;
-      monthBig12Date.push(day);
-    });
-
-    const monthsBig24 = [
-      24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12,
-    ];
-    let monthBig24Date = [];
-    let nBig24 = Object.assign({}, time);
-    monthsBig24.forEach((el) => {
-      const day = getRecentMonth(nBig24, "yyyy-MM-dd");
-      nBig24.num += el;
-      monthBig24Date.push(day);
-    });
-
-    const chartList = [
-      {
-        name: "2年",
-        type: "line",
-        smooth: true,
-        lineStyle: { color: bg ? "#EDED46" : "#FDAD26" },
-        itemStyle: { color: bg ? "#EDED46" : "#FDAD26" },
-        areaStyle: {
-          opacity: 0.5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#FDAD26",
-            },
-            {
-              offset: 0.8,
-              color: "#322C5B",
-            },
-          ]),
-        },
-        data: monthsBig24,
-        date: monthBig24Date,
-      },
-      {
-        name: "1年",
-        type: "line",
-        smooth: true,
-        lineStyle: { color: bg ? "#B2ED50" : "#46E7A5" },
-        itemStyle: { color: bg ? "#B2ED50" : "#46E7A5" },
-        areaStyle: {
-          opacity: 0.5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#1B527C",
-            },
-            {
-              offset: 0.8,
-              color: "#184E79",
-            },
-          ]),
-        },
-        data: monthsBig12,
-        date: monthBig12Date,
-      },
-      {
-        name: "半年",
-        type: "line",
-        smooth: true,
-        lineStyle: { color: bg ? "#D3EDED" : "#3FD7F8" },
-        itemStyle: { color: bg ? "#D3EDED" : "#3FD7F8" },
-        areaStyle: {
-          opacity: 0.5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#153881",
-            },
-            {
-              offset: 0.8,
-              color: "#0B2678",
-            },
-          ]),
-        },
-        data: monthsBig06,
-        date: monthBig06Date,
-      },
-      {
-        name: "3个月",
-        type: "line",
-        smooth: true,
-        lineStyle: { color: bg ? "#E01F6A" : "#FF7A45" },
-        itemStyle: { color: bg ? "#E01F6A" : "#FF7A45" },
-        areaStyle: {
-          opacity: 0.5,
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: "#B98989",
-            },
-            {
-              offset: 0.8,
-              color: "#B99B9B",
-            },
-          ]),
-        },
-        data: monthsBig03,
-        date: monthBig03Date,
-      },
-    ];
-    return chartList;
-  };
-  const listGroup = (time) => {
-    const group = list(time);
-    const groupBig = listBig(time, true);
-    const chartList = [...group, ...groupBig];
-    return chartList;
-  };
-  const listChart = () => {
-    //大→小
-    const _config = option(list(time), "大→小");
-    const myChart = echarts.init(document.getElementById("charts"));
-    initEchart(myChart, _config);
-    //小→大
-    const _configBig = option(listBig(time, true), "小→大");
-    const myChartBig = echarts.init(document.getElementById("chartsBig"));
-    initEchart(myChartBig, _configBig);
-    //组合
-    const _confiGroup = option(listGroup(time), "组合");
-    const myChartGroup = echarts.init(document.getElementById("chartsGroup"));
-    initEchart(myChartGroup, _confiGroup);
-  };
-
+  //初步启动
   listChart();
   $("#clicks").on("change", function () {
     const value = $(this).val();
@@ -310,8 +23,288 @@ $(function () {
     listChart();
   });
 });
+const listChart = () => {
+  //大→小
+  const _config = option(list(), "大→小");
+  const myChart = echarts.init(document.getElementById("charts"));
+  initEchart(myChart, _config);
+  //小→大
+  const _configBig = option(listBig(true), "小→大");
+  const myChartBig = echarts.init(document.getElementById("chartsBig"));
+  initEchart(myChartBig, _configBig);
+  //组合
+  const _confiGroup = option(listGroup(), "组合");
+  const myChartGroup = echarts.init(document.getElementById("chartsGroup"));
+  initEchart(myChartGroup, _confiGroup);
+};
 
-function option(chartList, title, value) {
+const list = () => {
+  const months24 = [24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3];
+  let month24Date = [];
+  //8.28
+  let n24 = Object.assign({}, time);
+  months24.forEach((el) => {
+    const day = getRecentMonth(n24, "yyyy-MM-dd");
+    n24.num += el;
+    month24Date.push(day);
+  });
+
+  const months12 = [12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24];
+  let month12Date = [];
+  let n12 = Object.assign({}, time);
+  months12.forEach((el) => {
+    const day = getRecentMonth(n12, "yyyy-MM-dd");
+    n12.num += el;
+    month12Date.push(day);
+  });
+
+  const months06 = [6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12];
+  let month06Date = [];
+  let n06 = Object.assign({}, time);
+  months06.forEach((el) => {
+    const day = getRecentMonth(n06, "yyyy-MM-dd");
+    n06.num += el;
+    month06Date.push(day);
+  });
+
+  const months03 = [3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6, 3, 24, 12, 6];
+  let month03Date = [];
+  let n03 = Object.assign({}, time);
+  months03.forEach((el) => {
+    const day = getRecentMonth(n03, "yyyy-MM-dd");
+    n03.num += el;
+    month03Date.push(day);
+  });
+
+  const chartList = [
+    {
+      name: "2年",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: "#FDAD26" },
+      itemStyle: { color: "#FDAD26" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#FDAD26",
+          },
+          {
+            offset: 0.8,
+            color: "#322C5B",
+          },
+        ]),
+      },
+      data: months24,
+      date: month24Date,
+    },
+    {
+      name: "1年",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: "#46E7A5" },
+      itemStyle: { color: "#46E7A5" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#1B527C",
+          },
+          {
+            offset: 0.8,
+            color: "#184E79",
+          },
+        ]),
+      },
+      data: months12,
+      date: month12Date,
+    },
+    {
+      name: "半年",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: "#3FD7F8" },
+      itemStyle: { color: "#3FD7F8" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#153881",
+          },
+          {
+            offset: 0.8,
+            color: "#0B2678",
+          },
+        ]),
+      },
+      data: months06,
+      date: month06Date,
+    },
+    {
+      name: "3个月",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: "#FF7A45" },
+      itemStyle: { color: "#FF7A45" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#B98989",
+          },
+          {
+            offset: 0.8,
+            color: "#B99B9B",
+          },
+        ]),
+      },
+      data: months03,
+      date: month03Date,
+    },
+  ];
+  return chartList;
+};
+const listBig = (bg) => {
+  const monthsBig03 = [3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24];
+  let monthBig03Date = [];
+  let nBig03 = Object.assign({}, time);
+  monthsBig03.forEach((el) => {
+    const day = getRecentMonth(nBig03, "yyyy-MM-dd");
+    nBig03.num += el;
+    monthBig03Date.push(day);
+  });
+
+  const monthsBig06 = [6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3];
+  let monthBig06Date = [];
+  let nBig06 = Object.assign({}, time);
+  monthsBig06.forEach((el) => {
+    const day = getRecentMonth(nBig06, "yyyy-MM-dd");
+    nBig06.num += el;
+    monthBig06Date.push(day);
+  });
+
+  const monthsBig12 = [12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6];
+  let monthBig12Date = [];
+  let nBig12 = Object.assign({}, time);
+  monthsBig12.forEach((el) => {
+    const day = getRecentMonth(nBig12, "yyyy-MM-dd");
+    nBig12.num += el;
+    monthBig12Date.push(day);
+  });
+
+  const monthsBig24 = [24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12, 24, 3, 6, 12];
+  let monthBig24Date = [];
+  let nBig24 = Object.assign({}, time);
+  monthsBig24.forEach((el) => {
+    const day = getRecentMonth(nBig24, "yyyy-MM-dd");
+    nBig24.num += el;
+    monthBig24Date.push(day);
+  });
+
+  const chartList = [
+    {
+      name: "2年",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: bg ? "#EDED46" : "#FDAD26" },
+      itemStyle: { color: bg ? "#EDED46" : "#FDAD26" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#FDAD26",
+          },
+          {
+            offset: 0.8,
+            color: "#322C5B",
+          },
+        ]),
+      },
+      data: monthsBig24,
+      date: monthBig24Date,
+    },
+    {
+      name: "1年",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: bg ? "#B2ED50" : "#46E7A5" },
+      itemStyle: { color: bg ? "#B2ED50" : "#46E7A5" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#1B527C",
+          },
+          {
+            offset: 0.8,
+            color: "#184E79",
+          },
+        ]),
+      },
+      data: monthsBig12,
+      date: monthBig12Date,
+    },
+    {
+      name: "半年",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: bg ? "#D3EDED" : "#3FD7F8" },
+      itemStyle: { color: bg ? "#D3EDED" : "#3FD7F8" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#153881",
+          },
+          {
+            offset: 0.8,
+            color: "#0B2678",
+          },
+        ]),
+      },
+      data: monthsBig06,
+      date: monthBig06Date,
+    },
+    {
+      name: "3个月",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: bg ? "#E01F6A" : "#FF7A45" },
+      itemStyle: { color: bg ? "#E01F6A" : "#FF7A45" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#B98989",
+          },
+          {
+            offset: 0.8,
+            color: "#B99B9B",
+          },
+        ]),
+      },
+      data: monthsBig03,
+      date: monthBig03Date,
+    },
+  ];
+  return chartList;
+};
+const listGroup = () => {
+  const group = list();
+  const groupBig = listBig(true);
+  const chartList = [...group, ...groupBig];
+  return chartList;
+};
+
+const option = (chartList, title, value) => {
   let series = [],
     yAxis = [];
   chartList.forEach((el, index) => {
@@ -373,8 +366,11 @@ function option(chartList, title, value) {
     {
       name: "全量跨度",
       type: "line",
+      symbol: "arrow",
       smooth: true,
-      lineStyle: { color: "#F508ED" },
+      lineStyle: {
+        color: "#F508ED",
+      },
       itemStyle: { color: "#F508ED" },
       areaStyle: {
         opacity: 0.5,
@@ -467,9 +463,9 @@ function option(chartList, title, value) {
     ],
     series,
   };
-}
+};
 
-function optionxy(chartList) {
+const optionxy = (chartList) => {
   let xAxisList = [];
   chartList.forEach((el) => {
     el.data.forEach((m, i) => {
@@ -491,10 +487,10 @@ function optionxy(chartList) {
   });
   const { x, y, xy1, xyn } = getMonthMax(obj);
   return { xy, x, y, xy1, xyn };
-}
+};
 
 //排序(时间从小到大)
-function sortMin(xAxisList) {
+const sortMin = (xAxisList) => {
   let list = xAxisList.concat([]); //防止改变原数据
   list.sort(function (a, b) {
     return (
@@ -502,9 +498,9 @@ function sortMin(xAxisList) {
     );
   });
   return list;
-}
+};
 
-function getMonthMax(obj) {
+const getMonthMax = (obj) => {
   //去重
   let map = new Map();
   const newArr = obj.filter((v) => !map.has(v.x) && map.set(v.x, v));
@@ -537,10 +533,10 @@ function getMonthMax(obj) {
   //let arr = Array.from(new Set(n));
   //console.log(arr);
   return { x, y, xy1: xy, xyn };
-}
+};
 
 // 月跨度差（31）
-function teve(el, index, obj) {
+const teve = (el, index, obj) => {
   let txl = 0,
     tafxl = 0,
     l = 0;
@@ -564,4 +560,4 @@ function teve(el, index, obj) {
     t: monthdiffer,
     n: l,
   };
-}
+};
