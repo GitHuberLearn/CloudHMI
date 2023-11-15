@@ -53,62 +53,39 @@ const listChart = () => {
   const myChartGroup = echarts.init(document.getElementById("chartsGroup"));
   initEchart(myChartGroup, _confiGroup);
 };
+const accrual = (months, principal) => {
+  let monthDate = [];
+  let value = [];
+  let value_simple = [];
+  let n = Object.assign({}, data.time);
+  let recycle = principal;
+  let recycle_simple = principal;
+  months.forEach((el) => {
+    const day = getRecentMonth(n, "yyyy-MM-dd");
+    monthDate.push(day);
+    n.num += el;
+    value.push(XEUtils.floor(recycle, 2));
+    value_simple.push(XEUtils.floor(recycle_simple, 2));
+    const accrual = annual_rate(el) * (el / 12);
+    const valuen = recycle * accrual;
+    recycle += valuen;
+    const valuen_simple = principal * accrual;
+    recycle_simple += valuen_simple;
+  });
+  return { monthDate, value, value_simple };
+};
 const list = () => {
   const months24 = minList(24);
-  let month24Date = [];
-  let n24 = Object.assign({}, data.time);
-  let value24 = [];
-  let recycle24 = data.principal.value24;
-  months24.forEach((el) => {
-    const day = getRecentMonth(n24, "yyyy-MM-dd");
-    month24Date.push(day);
-    value24.push(XEUtils.floor(recycle24, 2));
-    n24.num += el;
-    const value = recycle24 * annual_rate(el) * (el / 12);
-    recycle24 += value;
-  });
+  const data24 = accrual(months24, data.principal.value24);
 
   const months12 = minList(12);
-  let month12Date = [];
-  let n12 = Object.assign({}, data.time);
-  let value12 = [];
-  let recycle12 = data.principal.value12;
-  months12.forEach((el) => {
-    const day = getRecentMonth(n12, "yyyy-MM-dd");
-    month12Date.push(day);
-    value12.push(XEUtils.floor(recycle12, 2));
-    n12.num += el;
-    const value = recycle12 * annual_rate(el) * (el / 12);
-    recycle12 += value;
-  });
+  const data12 = accrual(months12, data.principal.value12);
 
   const months06 = minList(6);
-  let month06Date = [];
-  let n06 = Object.assign({}, data.time);
-  let value06 = [];
-  let recycle06 = data.principal.value06;
-  months06.forEach((el) => {
-    const day = getRecentMonth(n06, "yyyy-MM-dd");
-    month06Date.push(day);
-    value06.push(XEUtils.floor(recycle06, 2));
-    n06.num += el;
-    const value = recycle06 * annual_rate(el) * (el / 12);
-    recycle06 += value;
-  });
+  const data06 = accrual(months06, data.principal.value06);
 
   const months03 = minList(3);
-  let month03Date = [];
-  let n03 = Object.assign({}, data.time);
-  let value03 = [];
-  let recycle03 = data.principal.value03;
-  months03.forEach((el) => {
-    const day = getRecentMonth(n03, "yyyy-MM-dd");
-    month03Date.push(day);
-    value03.push(XEUtils.floor(recycle03, 2));
-    n03.num += el;
-    const value = recycle03 * annual_rate(el) * (el / 12);
-    recycle03 += value;
-  });
+  const data03 = accrual(months03, data.principal.value03);
 
   const chartList = [
     {
@@ -131,8 +108,9 @@ const list = () => {
         ]),
       },
       data: months24,
-      date: month24Date,
-      interest: value24,
+      date: data24.monthDate,
+      interest: data24.value,
+      interest_simple: data24.value_simple,
     },
     {
       name: "1年",
@@ -154,8 +132,9 @@ const list = () => {
         ]),
       },
       data: months12,
-      date: month12Date,
-      interest: value12,
+      date: data12.monthDate,
+      interest: data12.value,
+      interest_simple: data12.value_simple,
     },
     {
       name: "半年",
@@ -177,8 +156,9 @@ const list = () => {
         ]),
       },
       data: months06,
-      date: month06Date,
-      interest: value06,
+      date: data06.monthDate,
+      interest: data06.value,
+      interest_simple: data06.value_simple,
     },
     {
       name: "3个月",
@@ -200,68 +180,25 @@ const list = () => {
         ]),
       },
       data: months03,
-      date: month03Date,
-      interest: value03,
+      date: data03.monthDate,
+      interest: data03.value,
+      interest_simple: data03.value_simple,
     },
   ];
   return chartList;
 };
 const listBig = (bg) => {
   const monthsBig03 = maxList(3);
-  let monthBig03Date = [];
-  let nBig03 = Object.assign({}, data.time);
-  let value03 = [];
-  let recycle03 = data.principal.value03;
-  monthsBig03.forEach((el) => {
-    const day = getRecentMonth(nBig03, "yyyy-MM-dd");
-    monthBig03Date.push(day);
-    value03.push(XEUtils.floor(recycle03, 2));
-    nBig03.num += el;
-    const value = recycle03 * annual_rate(el) * (el / 12);
-    recycle03 += value;
-  });
+  const data03 = accrual(monthsBig03, data.principal.value03);
 
   const monthsBig06 = maxList(6);
-  let monthBig06Date = [];
-  let nBig06 = Object.assign({}, data.time);
-  let value06 = [];
-  let recycle06 = data.principal.value06;
-  monthsBig06.forEach((el) => {
-    const day = getRecentMonth(nBig06, "yyyy-MM-dd");
-    monthBig06Date.push(day);
-    value06.push(XEUtils.floor(recycle06, 2));
-    nBig06.num += el;
-    const value = recycle06 * annual_rate(el) * (el / 12);
-    recycle06 += value;
-  });
+  const data06 = accrual(monthsBig06, data.principal.value06);
 
   const monthsBig12 = maxList(12);
-  let monthBig12Date = [];
-  let nBig12 = Object.assign({}, data.time);
-  let value12 = [];
-  let recycle12 = data.principal.value12;
-  monthsBig12.forEach((el) => {
-    const day = getRecentMonth(nBig12, "yyyy-MM-dd");
-    monthBig12Date.push(day);
-    value12.push(XEUtils.floor(recycle12, 2));
-    nBig12.num += el;
-    const value = recycle12 * annual_rate(el) * (el / 12);
-    recycle12 += value;
-  });
+  const data12 = accrual(monthsBig12, data.principal.value12);
 
   const monthsBig24 = maxList(24);
-  let monthBig24Date = [];
-  let nBig24 = Object.assign({}, data.time);
-  let value24 = [];
-  let recycle24 = data.principal.value24;
-  monthsBig24.forEach((el) => {
-    const day = getRecentMonth(nBig24, "yyyy-MM-dd");
-    monthBig24Date.push(day);
-    value24.push(XEUtils.floor(recycle24, 2));
-    nBig24.num += el;
-    const value = recycle24 * annual_rate(el) * (el / 12);
-    recycle24 += value;
-  });
+  const data24 = accrual(monthsBig24, data.principal.value24);
 
   const chartList = [
     {
@@ -284,8 +221,9 @@ const listBig = (bg) => {
         ]),
       },
       data: monthsBig24,
-      date: monthBig24Date,
-      interest: value24,
+      date: data24.monthDate,
+      interest: data24.value,
+      interest_simple: data24.value_simple,
     },
     {
       name: "1年",
@@ -307,8 +245,9 @@ const listBig = (bg) => {
         ]),
       },
       data: monthsBig12,
-      date: monthBig12Date,
-      interest: value12,
+      date: data12.monthDate,
+      interest: data12.value,
+      interest_simple: data12.value_simple,
     },
     {
       name: "半年",
@@ -330,8 +269,9 @@ const listBig = (bg) => {
         ]),
       },
       data: monthsBig06,
-      date: monthBig06Date,
-      interest: value06,
+      date: data06.monthDate,
+      interest: data06.value,
+      interest_simple: data06.value_simple,
     },
     {
       name: "3个月",
@@ -353,8 +293,9 @@ const listBig = (bg) => {
         ]),
       },
       data: monthsBig03,
-      date: monthBig03Date,
-      interest: value03,
+      date: data03.monthDate,
+      interest: data03.value,
+      interest_simple: data03.value_simple,
     },
   ];
   return chartList;
@@ -410,7 +351,8 @@ const annual_rate = (principal) => {
 const option = (chartList, title) => {
   let series = [],
     seriesList = [],
-    seriesValue = [];
+    seriesValue = [],
+    seriesValue_simple = [];
   chartList.forEach((el, index) => {
     seriesList.push({
       ...el,
@@ -421,42 +363,26 @@ const option = (chartList, title) => {
       yAxisIndex: 1,
       data: [],
     });
+    seriesValue_simple.push({
+      ...el,
+      yAxisIndex: 1,
+      data: [],
+    });
     el.data.forEach((m, i) => {
       seriesList[index].data.push([el.date[i], m]);
       seriesValue[index].data.push([el.date[i], el.interest[i]]);
+      seriesValue_simple[index].data.push([el.date[i], el.interest_simple[i]]);
     });
   });
   const { x, xy, xyValue, y, xy1, xyn } = optionxy(chartList);
-  const { PI, PIs } = optionpi(seriesValue, title);
-  series.push(...seriesList, ...seriesValue);
+  const accrual = optionpi(seriesValue, title);
+  const accrual_simple = optionpi(seriesValue_simple, title);
+  series.push(...seriesList, ...seriesValue, ...seriesValue_simple);
   if (title != "组合") {
-    series.push({
-      yAxisIndex: 1,
-      name: "本息", //最长时间本息
-      type: "line",
-      smooth: true,
-      lineStyle: { color: "#F5084B" },
-      itemStyle: { color: "#F5084B" },
-      areaStyle: {
-        opacity: 0.5,
-        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-          {
-            offset: 0,
-            color: "#F27E9B",
-          },
-          {
-            offset: 0.8,
-            color: "#AF4664",
-          },
-        ]),
-      },
-      data: PI,
-    });
-  } else {
     series.push(
       {
         yAxisIndex: 1,
-        name: "本息", //最长时间本息(大→小)
+        name: "复息", //最长时间复息
         type: "line",
         smooth: true,
         lineStyle: { color: "#F5084B" },
@@ -474,11 +400,58 @@ const option = (chartList, title) => {
             },
           ]),
         },
-        data: PI,
+        data: accrual.PI,
       },
       {
         yAxisIndex: 1,
-        name: "本息", //最长时间本息(小→大)
+        name: "单息", //最长时间单息
+        type: "line",
+        smooth: true,
+        lineStyle: { color: "#DB29F0" },
+        itemStyle: { color: "#DB29F0" },
+        areaStyle: {
+          opacity: 0.5,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "#F27E9B",
+            },
+            {
+              offset: 0.8,
+              color: "#AF4664",
+            },
+          ]),
+        },
+        data: accrual_simple.PI,
+      }
+    );
+  } else {
+    series.push(
+      {
+        yAxisIndex: 1,
+        name: "复息", //最长时间复息(大→小)
+        type: "line",
+        smooth: true,
+        lineStyle: { color: "#F5084B" },
+        itemStyle: { color: "#F5084B" },
+        areaStyle: {
+          opacity: 0.5,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "#F27E9B",
+            },
+            {
+              offset: 0.8,
+              color: "#AF4664",
+            },
+          ]),
+        },
+        data: accrual.PI,
+      },
+      {
+        yAxisIndex: 1,
+        name: "复息", //最长时间复息(小→大)
         type: "line",
         smooth: true,
         lineStyle: { color: "#FF7A45" },
@@ -496,7 +469,51 @@ const option = (chartList, title) => {
             },
           ]),
         },
-        data: PIs,
+        data: accrual.PIs,
+      },
+      {
+        yAxisIndex: 1,
+        name: "单息", //最长时间单息(大→小)
+        type: "line",
+        smooth: true,
+        lineStyle: { color: "#F5084B" },
+        itemStyle: { color: "#F5084B" },
+        areaStyle: {
+          opacity: 0.5,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "#F27E9B",
+            },
+            {
+              offset: 0.8,
+              color: "#AF4664",
+            },
+          ]),
+        },
+        data: accrual_simple.PI,
+      },
+      {
+        yAxisIndex: 1,
+        name: "单息", //最长时间单息(小→大)
+        type: "line",
+        smooth: true,
+        lineStyle: { color: "#FF7A45" },
+        itemStyle: { color: "#FF7A45" },
+        areaStyle: {
+          opacity: 0.5,
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "#F27E9B",
+            },
+            {
+              offset: 0.8,
+              color: "#AF4664",
+            },
+          ]),
+        },
+        data: accrual_simple.PIs,
       }
     );
   }
