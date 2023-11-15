@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2023-11-13 17:59:55
+ * @LastEditTime: 2023-11-15 12:05:47
  -->
 <!DOCTYPE html>
 <html>
@@ -52,8 +52,16 @@
 	<pre class="foldBox">
 		云页面: 净现率
 		重复率：净现率和净现值相差
-		<span class="common-btn">总结：无论大→小还是小→大，重率都是4年，最大跨度6个月,且时间都一致</span>
-		选择跨度
+		<span class="common-btn">
+			总结：无论大→小还是小→大，重率都是3.75年(45个月)，最大跨度6个月,且时间都一致
+		</span>
+		选择循环量（默认4次）
+		<select id="clickCirculation">
+			<option value="4" selected>4次</option>
+			<option value="8">8次</option>
+			<option value="12" >12次</option>
+		</select>
+		选择跨度（默认6个月）
 		<select id="clicks">
 			<option value="0">0个月</option>
 			<option value="3">3个月</option>
@@ -67,6 +75,7 @@
 		<span class="common-btn theme-bgOrange">2027-05-28</span>
 		<span class="common-btn theme-bgOrange">2031-02-28</span>
 		<span class="common-btn theme-bgOrange">2034-11-28</span>
+		<span class="common-btn theme-bgOrange">2038-08-28</span>
 	</div>
 	<div class="title">
 		<span class="common-btn">开始跨度时间：（半年）</span>
@@ -87,6 +96,7 @@
 		<span class="common-btn theme-bgOrange">2027-05-28</span>
 		<span class="common-btn theme-bgOrange">2031-02-28</span>
 		<span class="common-btn theme-bgOrange">2034-11-28</span>
+		<span class="common-btn theme-bgOrange">2038-08-28</span>
 	</div>
 	<div class="title">
 		<span class="common-btn">开始跨度时间：（半年）</span>
