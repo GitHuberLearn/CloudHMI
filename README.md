@@ -21,9 +21,8 @@
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  一般的用工具 Vscode 导入根目录建立项目使用 serve 启动
+    Live Server › Settings: Multi Root Workspace Name (清空用了选择工作区)
 
 #### 使用说明
 
