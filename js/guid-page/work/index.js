@@ -329,21 +329,22 @@ const maxList = (val) => {
   const start = data.max.slice(index);
   return circu(start, end);
 };
-//年利率
+//年利率:专享类型
 const annual_rate = (principal) => {
   let rate = 0;
   switch (principal) {
     case 24:
-      rate = 0.0255;
+      // -> 2023: 0.0235
+      rate = 0.0255; //普通：0.019
       break;
     case 12:
-      rate = 0.0215;
+      rate = 0.0215; //普通：0.0175
       break;
     case 6:
-      rate = 0.0195;
+      rate = 0.0195; //普通：0.0155
       break;
     case 3:
-      rate = 0.0175;
+      rate = 0.0175; //普通：0.013
       break;
   }
   return rate;
