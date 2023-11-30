@@ -1,0 +1,133 @@
+<!--
+ * @Descripttion: 外站技术
+ * @version: 1.0.0
+ * @Author: YangKe
+ * @Date: 2019-12-17 09:41:06
+ * @LastEditors: ~
+ * @LastEditTime: 2023-11-30 14:10:13
+ -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<title>camera</title>
+	<!--common css/js-->
+	<script src="/js/common/common-cloud.js" type="text/javascript" charset="utf-8"></script>
+	<!--声明css,js变量-->
+	<script type="text/javascript">
+		var LSList = {
+			type1: 'link',
+			type2: 'script',
+			//引入的路径列表
+			list1: [
+			],
+			list2: [
+				"plugins/vue/vue.js",
+				"plugins/vue/vue-resource.js",
+				"plugins/vue/vue-router.js",
+			]
+		};
+	</script>
+	<style type="text/css">
+		.chart {
+			height: 80Vh;
+			background-color: bisque;
+			margin: 0 auto;
+			display: block;
+		}
+
+		.masklayer {
+			display: block;
+		}
+
+		.shoot {
+			padding: 2rem;
+			margin: 0 auto;
+			color: rgb(21, 121, 83);
+			font-size: 2.5rem;
+			text-align: center;
+		}
+	</style>
+	<!--About css-->
+	<script type="text/javascript">writeImportFile(LSList.type1, LSList.list1);</script>
+</head>
+
+<body class="catalogue-url">
+	<h1>camera</h1>
+	<!--mvvm-->
+	<!--view -->
+	<div id="app">
+		<div ref="wrapper" class="masklayer">
+			<video class="chart" ref="videoEl"></video>
+			<div @click="shoot" class="shoot btn btn-submit">
+				拍摄
+			</div>
+		</div>
+	</div>
+	<!--Tripartite js-->
+	<!--common js-->
+</body>
+<!--Tripartite js-->
+<!--About js-->
+<script type="text/javascript">writeImportFile(LSList.type2, LSList.list2);</script>
+<script lang="ts" type="module" setup>
+	var data = {
+		message: "hello wolrd",
+		info: "hehe",
+		isShow: true,
+		wrapper: null,
+		videoEl: null
+	};
+	var app = new Vue({
+		//el: vue实例规定,传入view的选择器
+		el: "#app",
+		//data属性: 传入model对应对象
+		data: data,
+		created() {
+			this.wrapper = this.$refs.wrapper
+			this.videoEl = this.$refs.videoEl
+		},
+		mounted() {
+			this.checkCamera()
+		},
+		methods: {
+			async checkCamera() {
+				const navigator = window.navigator.mediaDevices;
+				const devices = await navigator.enumerateDevices();
+				if (devices) {
+					const stream = await navigator.getUserMedia({
+						audio: true,
+						video: {
+							width: 300,
+							height: 300,
+							//facingMode: { exact: "environment" }, //强制后置摄像头
+							facingMode: "user", //前置摄像头
+						},
+					});
+					if (!this.videoEl.value) return;
+					this.videoEl.value.srcObject = stream;
+					this.videoEl.value.play();
+				}
+			},
+			shoot() {
+				if (!this.videoEl.value || !this.wrapper.value) return;
+				const canvas = document.createElement("canvas");
+				canvas.width = this.videoEl.value.videoWidth;
+				canvas.height = this.videoEl.value.videoHeight;
+				//拿到 canvas 上下文对象
+				const ctx = canvas.getContext("2d");
+				ctx?.drawImage(this.videoEl.value, 0, 0, canvas.width, canvas.height);
+				this.wrapper.value.appendChild(canvas);
+			}
+		}
+	});
+
+</script>
+
+</html>
