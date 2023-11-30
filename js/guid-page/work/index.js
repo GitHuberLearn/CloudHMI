@@ -89,7 +89,7 @@ const accrual = (months, principal) => {
     recycle_simple += valuen_simple;
     date_value.push({
       date: day,
-      reta: [month, rate, recycle], //月份，当年利率,未来回收值
+      reta: [month, rate, XEUtils.floor(recycle, 2)], //月份，当年利率,未来回收值
     });
   });
   return { monthDate, value, value_simple, date_value };
