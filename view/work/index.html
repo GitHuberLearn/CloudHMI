@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2023-11-30 15:24:05
+ * @LastEditTime: 2023-11-30 17:23:34
  -->
 <!DOCTYPE html>
 <html>
@@ -57,7 +57,7 @@
 		</span>
 		<span class="common-btn">
 			目前使用专享类型（缺点需要自己续存，实际利率只能按照最新更新的来计算）
-			利率每年有更新，且不能续存，并不易做到立即续存的行为，利率一律按照最开始利率计算，与实际会有变化浮动
+			利率每年有更新，定期会更新，由于不能续存，并不易做到立即续存的行为，实际利率仅代表当前实际利率，未来利率一律按照最开始利率计算，未来与实际利率有变化浮动，时间会滞后
 		</span>
 		选择循环量（默认4次）
 		<select id="clickCirculation">
@@ -70,6 +70,11 @@
 			<option value="0">0个月</option>
 			<option value="3">3个月</option>
 			<option value="6" selected>6个月</option>
+		</select>
+		显示信息（默认否）
+		<select id="click_show">
+			<option value="1">是</option>
+			<option value="0" selected>否</option>
 		</select>
 	</pre>
 	<p class="title"><i class="lins"></i>大→小（使用中）</p>
@@ -92,6 +97,7 @@
 		<span class="common-btn theme-bgGreen">2035-11-28 (2年06月)</span>
 		<span class="common-btn theme-bgGreen">2037-02-28 (1年03月)</span>
 	</div>
+	<div class="box box-bg-blue" id="charts_real"></div>
 	<div class="box box-bg-blue" id="charts"></div>
 	<p class="title"><i class="lins"></i>小→大</p>
 	<div class="title">

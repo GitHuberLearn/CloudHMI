@@ -20,6 +20,7 @@ let data = {
     value03: 20000,
   },
   circulation: 4,
+  click_show: 0,
   min: [24, 12, 6, 3],
   max: [3, 6, 12, 24],
 };
@@ -38,10 +39,21 @@ $(function () {
     data.value = value;
     listChart();
   });
+
+  $("#click_show").on("change", function () {
+    const value = $(this).val();
+    data.click_show = value;
+    listChart();
+  });
 });
 const listChart = () => {
   //大→小
-  const _config = option(list(), "大→小");
+  //实际利率
+  const _configt_real = option(list_real(), "大→小 (实际利率)");
+  const myChart_real = echarts.init(document.getElementById("charts_real"));
+  initEchart(myChart_real, _configt_real);
+  //固定利率
+  const _config = option(list(), "大→小 (固定利率)");
   const myChart = echarts.init(document.getElementById("charts"));
   initEchart(myChart, _config);
   //小→大
@@ -57,22 +69,151 @@ const accrual = (months, principal) => {
   let monthDate = [];
   let value = [];
   let value_simple = [];
+  let date_value = [];
   let n = Object.assign({}, data.time);
   let recycle = principal;
   let recycle_simple = principal;
   months.forEach((el) => {
     const day = getRecentMonth(n, "yyyy-MM-dd");
     monthDate.push(day);
-    n.num += el;
+    const num = el instanceof Array ? el[0] : el;
+    n.num += num;
     value.push(XEUtils.floor(recycle, 2));
     value_simple.push(XEUtils.floor(recycle_simple, 2));
-    const accrual = annual_rate(el) * (el / 12);
+    const rate = el instanceof Array ? el[1] : annual_rate(el);
+    const month = el instanceof Array ? el[0] : el;
+    const accrual = rate * (month / 12);
     const valuen = recycle * accrual;
     recycle += valuen;
     const valuen_simple = principal * accrual;
     recycle_simple += valuen_simple;
+    date_value.push({
+      date: day,
+      reta: [month, rate, recycle], //月份，当年利率,未来回收值
+    });
   });
-  return { monthDate, value, value_simple };
+  return { monthDate, value, value_simple, date_value };
+};
+const list_real = () => {
+  const months24 = minList(24);
+  const data24 = accrual(months24, data.principal.value24);
+
+  const months12 = minList(12);
+  const data12 = accrual(months12, data.principal.value12);
+
+  const months06 = minList(6);
+  const data06 = accrual(months06, data.principal.value06);
+
+  const months03 = minList(3);
+  const months03_rate = minList(3);
+  months03_rate[1] = [24, 0.0235];
+  const data03 = accrual(months03_rate, data.principal.value03);
+  const chartList = [
+    {
+      name: "2年",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: "#FDAD26" },
+      itemStyle: { color: "#FDAD26" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#FDAD26",
+          },
+          {
+            offset: 0.8,
+            color: "#322C5B",
+          },
+        ]),
+      },
+      data: months24,
+      date: data24.monthDate,
+      interest: data24.value,
+      interest_simple: data24.value_simple,
+      date_value: data24.date_value,
+    },
+    {
+      name: "1年",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: "#46E7A5" },
+      itemStyle: { color: "#46E7A5" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#1B527C",
+          },
+          {
+            offset: 0.8,
+            color: "#184E79",
+          },
+        ]),
+      },
+      data: months12,
+      date: data12.monthDate,
+      interest: data12.value,
+      interest_simple: data12.value_simple,
+      date_value: data12.date_value,
+    },
+    {
+      name: "半年",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: "#3FD7F8" },
+      itemStyle: { color: "#3FD7F8" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#153881",
+          },
+          {
+            offset: 0.8,
+            color: "#0B2678",
+          },
+        ]),
+      },
+      data: months06,
+      date: data06.monthDate,
+      interest: data06.value,
+      interest_simple: data06.value_simple,
+      date_value: data06.date_value,
+    },
+    {
+      name: "3个月",
+      type: "line",
+      smooth: true,
+      lineStyle: { color: "#FF7A45" },
+      itemStyle: { color: "#FF7A45" },
+      areaStyle: {
+        opacity: 0.5,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: "#B98989",
+          },
+          {
+            offset: 0.8,
+            color: "#B99B9B",
+          },
+        ]),
+      },
+      data: months03,
+      date: data03.monthDate,
+      interest: data03.value,
+      interest_simple: data03.value_simple,
+      date_value: data03.date_value,
+    },
+  ];
+  if (data.click_show === "1") {
+    console.log(chartList);
+  }
+  return chartList;
 };
 const list = () => {
   const months24 = minList(24);
@@ -86,7 +227,6 @@ const list = () => {
 
   const months03 = minList(3);
   const data03 = accrual(months03, data.principal.value03);
-
   const chartList = [
     {
       name: "2年",
