@@ -2,9 +2,11 @@ let { getRecentMonth, dateNs, initEchart } = await import(
   `${cube.gatewayURL_module}js/product/index.js`
 );
 
-let { getDateN } = await import(
+let { getDateN, getDateF } = await import(
   `${cube.gatewayURL_module}js/product/mockData.js`
 );
+
+console.log(getDateN(15));
 
 //全局变量
 let data = {
@@ -17,7 +19,7 @@ let data = {
     value24: 10000,
     value12: 5000,
     value06: 10000,
-    value03: 20000,
+    value03: 20000, //推迟2天
   },
   circulation: 4,
   click_show: 0,

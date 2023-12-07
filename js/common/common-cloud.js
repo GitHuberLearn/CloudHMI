@@ -21,8 +21,13 @@ var LSList = {
   type1: "link",
   type2: "script",
   // 引入的路径列表
-  list1: ["api_resource/lib/stylenew.css", "css/product/stylenew.css"],
+  list1: [
+    "plugins/element-ui/index.css",
+    "api_resource/lib/stylenew.css",
+    "css/product/stylenew.css",
+  ],
   list2: [
+    "plugins/element-ui/index.js",
     "plugins/jquery/jquery.min.js",
     "plugins/lib/xe-utils.js",
     "js/product/stylenew.js", //本部js

@@ -4,7 +4,7 @@
  * @Author: Kenny
  * @Date: 2023-01-05 14:18:41
  * @LastEditors: ~
- * @LastEditTime: 2023-11-07 14:39:30
+ * @LastEditTime: 2023-12-07 17:19:11
  */
 import {
   dateFs,
@@ -173,28 +173,34 @@ export const dateF = dateFs;
 export const dateN = dateNs;
 
 /**
- * @param {*天数} n
- * @param {*时间类型} type
+ * @param {*天数} n (正数：之前 负数：之后)
+ * @param {*时间类型} type: yyyy-MM yyyy-MM-dd
  * @returns 前n天:本天计入
  */
-export function getDateN(n, type) {
+export function getDateN(ns, type) {
+  if (!ns) return;
   let FDate = [];
+  let n = ns > 0 ? ns : -ns;
   for (let index = n - 1; index >= 0; index--) {
-    const date = getRecentDate(-index, type);
+    let indexs = ns > 0 ? -index : index;
+    const date = getRecentDate(indexs, type);
     FDate.push(date);
   }
   return FDate;
 }
 
 /**
- * @param {*天数} n
- * @param {*时间类型} type
+ * @param {*天数} n (正数：之前 负数：之后)
+ * @param {*时间类型} type: yyyy-MM yyyy-MM-dd
  * @returns 前n天:本天不计入
  */
-export function getDateF(n, type) {
+export function getDateF(ns, type) {
+  if (!ns) return;
   let FDate = [];
+  let n = ns > 0 ? ns : -ns;
   for (let index = n; index > 0; index--) {
-    const date = getRecentDate(-index, type);
+    let indexs = ns > 0 ? -index : index;
+    const date = getRecentDate(indexs, type);
     FDate.push(date);
   }
   return FDate;
