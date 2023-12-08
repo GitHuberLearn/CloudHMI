@@ -27,7 +27,7 @@ var LSList = {
     "css/product/stylenew.css",
   ],
   list2: [
-    "plugins/element-ui/index.js",
+    //"plugins/element-ui/index.js",
     "plugins/jquery/jquery.min.js",
     "plugins/lib/xe-utils.js",
     "js/product/stylenew.js", //本部js

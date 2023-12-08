@@ -40,6 +40,8 @@
 			background-color: bisque;
 			margin: 0 auto;
 			display: block;
+			color: aqua;
+			font-size: 30px;
 		}
 
 		.masklayer {
@@ -59,14 +61,14 @@
 </head>
 
 <body class="catalogue-url">
-	<h1>camera</h1>
 	<!--mvvm-->
 	<!--view -->
 	<div id="app">
-		<div ref="wrapper" class="masklayer">
-			<video class="chart" ref="videoEl"></video>
+		<h1>camera</h1>
+		<div ref="wrapper">
+			<div class="chart" ref="videoEl">{{info}}</div>
 			<div @click="shoot" class="shoot btn btn-submit">
-				拍摄
+				点击
 			</div>
 		</div>
 	</div>
@@ -76,7 +78,7 @@
 <!--Tripartite js-->
 <!--About js-->
 <script type="text/javascript">writeImportFile(LSList.type2, LSList.list2);</script>
-<script lang="ts" type="module" setup>
+<script type="module">
 	var data = {
 		message: "hello wolrd",
 		info: "hehe",
@@ -98,32 +100,10 @@
 		},
 		methods: {
 			async checkCamera() {
-				const navigator = window.navigator.mediaDevices;
-				const devices = await navigator.enumerateDevices();
-				if (devices) {
-					const stream = await navigator.getUserMedia({
-						audio: true,
-						video: {
-							width: 300,
-							height: 300,
-							//facingMode: { exact: "environment" }, //强制后置摄像头
-							facingMode: "user", //前置摄像头
-						},
-					});
-					if (!this.videoEl.value) return;
-					this.videoEl.value.srcObject = stream;
-					this.videoEl.value.play();
-				}
+				this.info = 'werre'
 			},
-			shoot() {
-				if (!this.videoEl.value || !this.wrapper.value) return;
-				const canvas = document.createElement("canvas");
-				canvas.width = this.videoEl.value.videoWidth;
-				canvas.height = this.videoEl.value.videoHeight;
-				//拿到 canvas 上下文对象
-				const ctx = canvas.getContext("2d");
-				ctx?.drawImage(this.videoEl.value, 0, 0, canvas.width, canvas.height);
-				this.wrapper.value.appendChild(canvas);
+			shoot(ev) {
+				console.log(ev)
 			}
 		}
 	});
