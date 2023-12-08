@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2023-12-07 17:23:19
+ * @LastEditTime: 2023-12-08 19:13:25
  -->
 <!DOCTYPE html>
 <html>
@@ -45,6 +45,27 @@
 		.box {
 			height: 300px;
 		}
+
+		.layui-form {
+			margin-top: 10px;
+		}
+
+		.layui-form .layui-form-item .layui-inline .layui-form-label {
+			width: auto;
+		}
+
+
+		.table-t,
+		.tables {
+			width: 80px;
+			display: inline-block;
+			text-align: center;
+			line-height: 1.5;
+		}
+
+		.tables {
+			border: 1px solid #b6a3a3;
+		}
 	</style>
 </head>
 
@@ -59,30 +80,46 @@
 			目前使用专享类型（缺点需要自己续存，实际利率只能按照最新更新的来计算）
 			利率每年有更新，定期会更新，由于不能续存，并不易做到立即续存的行为，实际利率仅代表当前实际利率，未来利率一律按照最开始利率计算，未来与实际利率有变化浮动，时间会滞后
 		</span>
-		选择日期（默认4次）
-		<select id="clickCirculation">
-			<option value="4" selected>4次</option>
-			<option value="8">8次</option>
-			<option value="12">12次</option>
-		</select>
-		选择循环量（默认4次）
-		<select id="clickCirculation">
-			<option value="4" selected>4次</option>
-			<option value="8">8次</option>
-			<option value="12" >12次</option>
-		</select>
-		选择跨度（默认6个月）
-		<select id="clicks">
-			<option value="0">0个月</option>
-			<option value="3">3个月</option>
-			<option value="6" selected>6个月</option>
-		</select>
-		显示信息（默认否）
-		<select id="click_show">
-			<option value="1">是</option>
-			<option value="0" selected>否</option>
-		</select>
 	</pre>
+	<form class="layui-form">
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">选择日期</label>
+				<div class="layui-input-inline">
+					<input type="text" id="selectDate" placeholder="yyyy-MM-dd">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">选择循环量（默认4次）</label>
+				<div class="layui-input-inline">
+					<select lay-filter="circulation">
+						<option value="4">4次</option>
+						<option value="8">8次</option>
+						<option value="12">12次</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">选择跨度（默认6个月）</label>
+				<div class="layui-input-inline">
+					<select lay-filter="spacing">
+						<option value="0">0个月</option>
+						<option value="3">3个月</option>
+						<option value="6" selected>6个月</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">显示信息（默认否）</label>
+				<div class="layui-input-inline">
+					<select lay-filter="message">
+						<option value="1">是</option>
+						<option value="0" selected>否</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</form>
 	<p class="title"><i class="lins"></i>大→小（使用中）</p>
 	<div class="title">
 		<span class="common-btn">重复率：</span>
@@ -104,6 +141,31 @@
 		<span class="common-btn theme-bgGreen">2037-02-28 (1年03月)</span>
 	</div>
 	<div class="box box-bg-blue" id="charts_real"></div>
+	<!-- <table id="table" lay-filter="test"></table> -->
+	<div id="view"></div>
+	<script id="compare" type="text/html">
+		{{# if(d.click_show === "1"){ }}
+			<ul class="list">
+				{{# layui.each(d.compare, function(index, item){ }}
+				<li>
+					<p class="title">{{item.name}}</p>
+					<p>
+						<span class="table-t">实际发布值</span>
+						{{# layui.each(item.interest, function(index, item){ }}
+						<span class="tables">{{ item }}</span>
+						{{# }); }}
+					</p>
+					<p>
+						<span class="table-t">固定发布值</span>
+						{{# layui.each(d.compare_real[index].interest, function(index, item){ }}
+						<span class="tables">{{ item }}</span>
+						{{# }); }}
+					</p>
+				</li>
+				{{# }); }}
+			</ul>
+		{{# } }}
+	</script>
 	<div class="box box-bg-blue" id="charts"></div>
 	<p class="title"><i class="lins"></i>小→大</p>
 	<div class="title">

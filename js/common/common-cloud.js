@@ -22,14 +22,15 @@ var LSList = {
   type2: "script",
   // 引入的路径列表
   list1: [
-    "plugins/element-ui/index.css",
+    "plugins/layui/css/layui.css",
     "api_resource/lib/stylenew.css",
     "css/product/stylenew.css",
   ],
   list2: [
-    //"plugins/element-ui/index.js",
     "plugins/jquery/jquery.min.js",
     "plugins/lib/xe-utils.js",
+    "plugins/layer/layer.js", //目前layui还没有实现全局调用，先加入 需要在layui前面
+    "plugins/layui/layui.js",
     "js/product/stylenew.js", //本部js
   ],
 };

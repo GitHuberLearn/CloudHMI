@@ -6,7 +6,7 @@ let { getDateN, getDateF } = await import(
   `${cube.gatewayURL_module}js/product/mockData.js`
 );
 
-console.log(getDateN(15));
+//console.log(getDateN(15));
 
 //全局变量
 let data = {
@@ -19,32 +19,61 @@ let data = {
     value24: 10000,
     value12: 5000,
     value06: 10000,
-    value03: 20000, //推迟2天
+    value03: 20000,
   },
   circulation: 4,
   click_show: 0,
   min: [24, 12, 6, 3],
   max: [3, 6, 12, 24],
+  compare: [],
+  compare_real: [],
 };
-
+let laytpl = null,
+  table = null;
 //选择项目文件右击打开
 $(function () {
-  //初步启动
-  listChart();
-  $("#clickCirculation").on("change", function () {
-    const value = $(this).val();
-    data.circulation = value;
-    listChart();
-  });
-  $("#clicks").on("change", function () {
-    const value = $(this).val();
-    data.value = value;
-    listChart();
-  });
+  //layui声明模块
+  layui.use(["table", "laytpl", "form", "laydate"], function () {
+    var form = layui.form;
+    var laydate = layui.laydate;
 
-  $("#click_show").on("change", function () {
-    const value = $(this).val();
-    data.click_show = value;
+    laydate.render({
+      elem: "#selectDate",
+      value: "2023-08-28",
+      mark: {
+        "0-05-25": "生日",
+        "0-12-31": "跨年", //每年12月31日
+        "0-0-25": "工资", //每个月25号
+        "2023-8-28": "", //具体日期
+        "2023-11-28": "预发value03", //如果为空字符，则默认显示数字+徽章
+        "2023-11-30": "发布value03", //推迟2天
+      },
+      done: function (value) {
+        data.time.time = value;
+        listChart();
+      },
+    });
+    form.on("select(circulation)", function (env) {
+      const value = env.value;
+      data.circulation = value;
+      listChart();
+    });
+
+    form.on("select(spacing)", function (env) {
+      const value = env.value;
+      data.value = value;
+      listChart();
+    });
+
+    form.on("select(message)", function (env) {
+      const value = env.value;
+      data.click_show = value;
+      listChart();
+    });
+
+    laytpl = layui.laytpl;
+    table = layui.table;
+    //初步启动
     listChart();
   });
 });
@@ -132,9 +161,9 @@ const list_real = () => {
       },
       data: months24,
       date: data24.monthDate,
+      date_value: data24.date_value,
       interest: data24.value,
       interest_simple: data24.value_simple,
-      date_value: data24.date_value,
     },
     {
       name: "1年",
@@ -157,9 +186,9 @@ const list_real = () => {
       },
       data: months12,
       date: data12.monthDate,
+      date_value: data12.date_value,
       interest: data12.value,
       interest_simple: data12.value_simple,
-      date_value: data12.date_value,
     },
     {
       name: "半年",
@@ -182,9 +211,9 @@ const list_real = () => {
       },
       data: months06,
       date: data06.monthDate,
+      date_value: data06.date_value,
       interest: data06.value,
       interest_simple: data06.value_simple,
-      date_value: data06.date_value,
     },
     {
       name: "3个月",
@@ -206,14 +235,15 @@ const list_real = () => {
         ]),
       },
       data: months03,
+      date_value: data03.date_value,
       date: data03.monthDate,
       interest: data03.value,
       interest_simple: data03.value_simple,
-      date_value: data03.date_value,
     },
   ];
   if (data.click_show === "1") {
-    console.log(chartList);
+    data.compare = chartList;
+    console.log("实际发布值interest", chartList);
   }
   return chartList;
 };
@@ -327,6 +357,18 @@ const list = () => {
       interest_simple: data03.value_simple,
     },
   ];
+  var getTpl = compare.innerHTML,
+    view = document.getElementById("view");
+
+  if (data.click_show === "1") {
+    data.compare_real = chartList;
+    console.log("固定发布值interest", chartList);
+    laytpl(getTpl).render(data, function (html) {
+      view.innerHTML = html;
+    });
+  } else {
+    view.innerHTML = "";
+  }
   return chartList;
 };
 const listBig = (bg) => {
