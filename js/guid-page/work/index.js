@@ -1,3 +1,4 @@
+//跨度值: [24, 12, 6, 3]
 let { getRecentMonth, dateNs, initEchart } = await import(
   `${cube.gatewayURL_module}js/product/index.js`
 );
@@ -14,7 +15,7 @@ let data = {
     time: "2023-08-28",
     num: 0,
   },
-  value: 6,
+  value: 6, //跨度值
   principal: {
     value24: 10000,
     value12: 5000,
@@ -77,6 +78,9 @@ $(function () {
     listChart();
   });
 });
+/**
+ * 图表渲染
+ */
 const listChart = () => {
   //大→小
   //实际利率
@@ -96,6 +100,11 @@ const listChart = () => {
   const myChartGroup = echarts.init(document.getElementById("chartsGroup"));
   initEchart(myChartGroup, _confiGroup);
 };
+/**
+ * @param {*月列表} months
+ * @param {*本金} principal
+ * @returns 返回Echart数据
+ */
 const accrual = (months, principal) => {
   let monthDate = [];
   let value = [];
@@ -125,6 +134,11 @@ const accrual = (months, principal) => {
   });
   return { monthDate, value, value_simple, date_value };
 };
+//大→小
+/**
+ * 根据xx_rate一次填实际利率
+ * @returns 返回实际数据
+ */
 const list_real = () => {
   const months24 = minList(24);
   const data24 = accrual(months24, data.principal.value24);
@@ -133,7 +147,9 @@ const list_real = () => {
   const data12 = accrual(months12, data.principal.value12);
 
   const months06 = minList(6);
-  const data06 = accrual(months06, data.principal.value06);
+  const months06_rate = minList(6);
+  months06_rate[1] = [3, 0.0165];
+  const data06 = accrual(months06_rate, data.principal.value06);
 
   const months03 = minList(3);
   const months03_rate = minList(3);
@@ -247,6 +263,9 @@ const list_real = () => {
   }
   return chartList;
 };
+/**
+ * @returns 返回固定数据
+ */
 const list = () => {
   const months24 = minList(24);
   const data24 = accrual(months24, data.principal.value24);
@@ -371,6 +390,11 @@ const list = () => {
   }
   return chartList;
 };
+//小→大
+/**
+ * @param {*是否默认颜色} bg
+ * @returns 返回固定数据
+ */
 const listBig = (bg) => {
   const monthsBig03 = maxList(3);
   const data03 = accrual(monthsBig03, data.principal.value03);
@@ -484,6 +508,10 @@ const listBig = (bg) => {
   ];
   return chartList;
 };
+//组合
+/**
+ * @returns 组合数据
+ */
 const listGroup = () => {
   const group = list();
   const groupBig = listBig(true);
@@ -501,12 +529,22 @@ const circu = (start, end) => {
   }
   return arr;
 };
+/**
+ * 大→小
+ * @param {*跨度值} val
+ * @returns 循环列表
+ */
 const minList = (val) => {
   const index = data.min.indexOf(val);
   const end = data.min.slice(0, index);
   const start = data.min.slice(index);
   return circu(start, end);
 };
+/**
+ * 小→大
+ * @param {*跨度值} val
+ * @returns 循环列表
+ */
 const maxList = (val) => {
   const index = data.max.indexOf(val);
   const end = data.max.slice(0, index);
@@ -533,6 +571,11 @@ const annual_rate = (principal) => {
   }
   return rate;
 };
+/**
+ * @param {*数据列表} chartList
+ * @param {*名称} title
+ * @returns Echart数据
+ */
 const option = (chartList, title) => {
   let series = [],
     seriesList = [],
@@ -883,6 +926,12 @@ const option = (chartList, title) => {
     series,
   };
 };
+/**
+ *
+ * @param {*所有数据列表} chartList
+ * @param {*名称} title
+ * @returns 获取对应两端（大→小、小→大）数据
+ */
 const optionpi = (chartList, title) => {
   let PI = [],
     PIs = [];
@@ -892,8 +941,10 @@ const optionpi = (chartList, title) => {
       interests = 0;
     chartList.forEach((m, i) => {
       if (i < 4) {
+        //大→小
         interest += m.data[index][1];
       } else {
+        //小→大
         interests += m.data[index][1];
       }
     });
@@ -902,6 +953,12 @@ const optionpi = (chartList, title) => {
   });
   return { PI, PIs };
 };
+/**
+ *
+ * @param {*数据列表} chartList
+ * @param {*名称} title
+ * @returns 获取对应数据
+ */
 const maxTime = (chartList, title) => {
   let arr = [];
   switch (title) {
@@ -914,6 +971,11 @@ const maxTime = (chartList, title) => {
   }
   return arr;
 };
+/**
+ *
+ * @param {*所有数据} chartList
+ * @returns 配置数据格式
+ */
 const optionxy = (chartList) => {
   let xAxisList = [];
   chartList.forEach((el) => {
@@ -952,6 +1014,11 @@ const sortMin = (xAxisList) => {
   });
   return list;
 };
+/**
+ *
+ * @param {*数组对象} obj
+ * @returns 处理对应数据
+ */
 const getMonthMax = (obj) => {
   //去重
   let map = new Map();
