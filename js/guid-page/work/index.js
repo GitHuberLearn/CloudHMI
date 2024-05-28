@@ -148,7 +148,8 @@ const list_real = () => {
 
   const months06 = minList(6);
   const months06_rate = minList(6);
-  months06_rate[1] = [3, 0.0165];
+  months06_rate[1] = [months06_rate[1], 0.0165];//20240528-10139.15
+  months06_rate[2] = [months06_rate[2], 0.0215];//20260528-10575.13
   const data06 = accrual(months06_rate, data.principal.value06);
 
   const months03 = minList(3);
