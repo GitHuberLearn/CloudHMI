@@ -25,8 +25,7 @@ var LSList = {
   list1: [
     "plugins/layui/css/layui.css",
     "api_resource/lib/stylenew.css",
-    "css/product/stylenew.css",
-    //"css/index.scss",
+    "css/index.css",
   ],
   list2: [
     "plugins/jquery/jquery.min.js",
