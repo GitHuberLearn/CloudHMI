@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2024-02-29 18:04:39
+ * @LastEditTime: 2024-09-02 11:55:46
  -->
 <!DOCTYPE html>
 <html>
@@ -54,7 +54,6 @@
 			width: auto;
 		}
 
-
 		.table-t,
 		.tables {
 			width: 80px;
@@ -73,17 +72,23 @@
 	<pre class="foldBox">
 		云页面: 净现率
 		重复率：净现率和净现值相差
-		<span class="common-btn">
+		<span class="common-btn default">
 			总结：无论大→小还是小→大，每期重率3.75年(45个月)首期复利（98元），最大跨度6个月，15年复利2651元
 		</span>
-		<span class="common-btn">
+		<span class="common-btn default">
 			目前使用专享类型（缺点需要自己续存，实际利率只能按照最新更新的来计算）
 			利率每年有更新，定期会更新，由于不能续存，并不易做到立即续存的行为，实际利率仅代表当前实际利率，未来利率一律按照最开始利率计算，未来与实际利率有变化浮动，时间会滞后
 		</span>
-
-		<span class="common-btn">
+		<span class="common-btn default">
 			一项三线（复利与单利、跨度值）
 		</span>
+		<span class="common-btn default theme-bgOrange tal">
+			操作流程：<br/>
+			list_real_一次填入实际利率 -> annual_rate_记录每年实际利率 ->
+			onClickMsg记录未来回收日以及预发轮询月
+		</span>
+
+		
 	</pre>
 	<form class="layui-form">
 		<div class="layui-form-item">
@@ -126,23 +131,23 @@
 	</form>
 	<p class="title"><i class="lins"></i>大→小（使用中）</p>
 	<div class="title">
-		<span class="common-btn">重复率：</span>
-		<span class="common-btn">2023-08-28</span>
-		<span class="common-btn theme-bgOrange">2027-05-28</span>
-		<span class="common-btn theme-bgOrange">2031-02-28</span>
-		<span class="common-btn theme-bgOrange">2034-11-28</span>
-		<span class="common-btn theme-bgOrange">2038-08-28</span>
+		<span class="common-btn default">重复率：</span>
+		<span class="common-btn default">2023-08-28</span>
+		<span class="common-btn default theme-bgOrange">2027-05-28</span>
+		<span class="common-btn default theme-bgOrange">2031-02-28</span>
+		<span class="common-btn default theme-bgOrange">2034-11-28</span>
+		<span class="common-btn default theme-bgOrange">2038-08-28</span>
 	</div>
 	<div class="title">
-		<span class="common-btn">开始跨度时间：（半年）</span>
-		<span class="common-btn theme-bgGreen">2024-08-28</span>
-		<span class="common-btn theme-bgGreen">2025-11-28 (1年03月)</span>
-		<span class="common-btn theme-bgGreen">2028-05-28 (2年06月)</span>
-		<span class="common-btn theme-bgGreen">2029-08-28 (1年03月)</span>
-		<span class="common-btn theme-bgGreen">2032-02-28 (2年06月)</span>
-		<span class="common-btn theme-bgGreen">2033-05-28 (1年03月)</span>
-		<span class="common-btn theme-bgGreen">2035-11-28 (2年06月)</span>
-		<span class="common-btn theme-bgGreen">2037-02-28 (1年03月)</span>
+		<span class="common-btn default">开始跨度时间：（半年）</span>
+		<span class="common-btn default theme-bgGreen">2024-08-28</span>
+		<span class="common-btn default theme-bgGreen">2025-11-28 (1年03月)</span>
+		<span class="common-btn default theme-bgGreen">2028-05-28 (2年06月)</span>
+		<span class="common-btn default theme-bgGreen">2029-08-28 (1年03月)</span>
+		<span class="common-btn default theme-bgGreen">2032-02-28 (2年06月)</span>
+		<span class="common-btn default theme-bgGreen">2033-05-28 (1年03月)</span>
+		<span class="common-btn default theme-bgGreen">2035-11-28 (2年06月)</span>
+		<span class="common-btn default theme-bgGreen">2037-02-28 (1年03月)</span>
 	</div>
 	<div class="box box-bg-blue" id="charts_real"></div>
 	<!-- <table id="table" lay-filter="test"></table> -->
@@ -173,28 +178,28 @@
 	<div class="box box-bg-blue" id="charts"></div>
 	<p class="title"><i class="lins"></i>小→大</p>
 	<div class="title">
-		<span class="common-btn">重复率：</span>
-		<span class="common-btn">2023-08-28</span>
-		<span class="common-btn theme-bgOrange">2027-05-28</span>
-		<span class="common-btn theme-bgOrange">2031-02-28</span>
-		<span class="common-btn theme-bgOrange">2034-11-28</span>
-		<span class="common-btn theme-bgOrange">2038-08-28</span>
+		<span class="common-btn default">重复率：</span>
+		<span class="common-btn default">2023-08-28</span>
+		<span class="common-btn default theme-bgOrange">2027-05-28</span>
+		<span class="common-btn default theme-bgOrange">2031-02-28</span>
+		<span class="common-btn default theme-bgOrange">2034-11-28</span>
+		<span class="common-btn default theme-bgOrange">2038-08-28</span>
 	</div>
 	<div class="title">
-		<span class="common-btn">开始跨度时间：（半年）</span>
-		<span class="common-btn theme-bgGreen">2024-08-28</span>
-		<span class="common-btn theme-bgGreen">2025-11-28 (1年03月)</span>
-		<span class="common-btn theme-bgGreen">2028-05-28 (2年06月)</span>
-		<span class="common-btn theme-bgGreen">2029-08-28 (1年03月)</span>
-		<span class="common-btn theme-bgGreen">2032-02-28 (2年06月)</span>
-		<span class="common-btn theme-bgGreen">2033-05-28 (1年03月)</span>
-		<span class="common-btn theme-bgGreen">2035-11-28 (2年06月)</span>
-		<span class="common-btn theme-bgGreen">2037-02-28 (1年03月)</span>
+		<span class="common-btn default">开始跨度时间：（半年）</span>
+		<span class="common-btn default theme-bgGreen">2024-08-28</span>
+		<span class="common-btn default theme-bgGreen">2025-11-28 (1年03月)</span>
+		<span class="common-btn default theme-bgGreen">2028-05-28 (2年06月)</span>
+		<span class="common-btn default theme-bgGreen">2029-08-28 (1年03月)</span>
+		<span class="common-btn default theme-bgGreen">2032-02-28 (2年06月)</span>
+		<span class="common-btn default theme-bgGreen">2033-05-28 (1年03月)</span>
+		<span class="common-btn default theme-bgGreen">2035-11-28 (2年06月)</span>
+		<span class="common-btn default theme-bgGreen">2037-02-28 (1年03月)</span>
 	</div>
 	<div class="box box-bg-blue" id="chartsBig"></div>
 	<p class="title"><i class="lins"></i>组合</p>
 	<div class="title">
-		<span class="common-btn theme-bgGreen">3.75年复率，跨度3-6月</span>
+		<span class="common-btn default theme-bgGreen">3.75年复率，跨度3-6月</span>
 	</div>
 	<div class="box box-bg-blue" id="chartsGroup"></div>
 </body>

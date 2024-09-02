@@ -37,19 +37,20 @@ $(function () {
   layui.use(["table", "laytpl", "form", "laydate"], function () {
     var form = layui.form;
     var laydate = layui.laydate;
-
     laydate.render({
       elem: "#selectDate",
-      value: "2023-08-28",
-      mark: {
-        "0-05-25": "生日",
-        "0-12-31": "跨年", //每年12月31日
-        "0-0-25": "工资", //每个月25号
-        "2023-8-28": "", //具体日期
-        "2023-11-28": "预发value03", //如果为空字符，则默认显示数字+徽章
-        "2023-11-30": "发布value03", //推迟2天
-      },
+      // format: 'yyyy/MM/dd',// HH:mm:ss
+      value: new Date(),//显示当前时间，2023-08-28
+      mark: onClickMsg(),
       done: function (value) {
+        const list = onClickMsg();
+        const keys = Object.keys(list)
+        const values = Object.values(list)
+        keys.forEach((element, index) => {
+          if (element === value) {
+            layer.msg(values[index]);
+          }
+        });
         data.time.time = value;
         listChart();
       },
@@ -78,6 +79,22 @@ $(function () {
     listChart();
   });
 });
+
+/**
+ * 点击渲染msg
+ */
+const onClickMsg = () => {
+  return {
+    /**
+      * 如果为空字符，则默认显示数字+徽章
+      */
+    "0-05-25": "生日",//每年-xx
+    "0-12-31": "跨年",
+    "0-0-25": "工资",
+    "2023-8-28": "投资日",
+    "2025-02-28": "value12预发value03",
+  }
+}
 /**
  * 图表渲染
  */
@@ -136,25 +153,28 @@ const accrual = (months, principal) => {
 };
 //大→小
 /**
- * 根据xx_rate一次填实际利率
+ * 根据xx_rate一次填入实际利率
  * @returns 返回实际数据
  */
 const list_real = () => {
+  //value24
   const months24 = minList(24);
   const data24 = accrual(months24, data.principal.value24);
-
+  //value12
   const months12 = minList(12);
-  const data12 = accrual(months12, data.principal.value12);
-
+  const months12_rate = minList(12);
+  months12_rate[1] = [months12_rate[1], 0.0175];//2025-02-28-5152.19
+  const data12 = accrual(months12_rate, data.principal.value12);
+  //value06
   const months06 = minList(6);
   const months06_rate = minList(6);
-  months06_rate[1] = [months06_rate[1], 0.0165];//20240528-10139.15
-  months06_rate[2] = [months06_rate[2], 0.0215];//20260528-10575.13
+  months06_rate[1] = [months06_rate[1], 0.0165];//2024-05-28-10139.15
+  months06_rate[2] = [months06_rate[2], 0.0215];//2026-05-28-10575.13
   const data06 = accrual(months06_rate, data.principal.value06);
-
+  //value03
   const months03 = minList(3);
   const months03_rate = minList(3);
-  months03_rate[1] = [24, 0.0235];
+  months03_rate[1] = [months03_rate[1], 0.0235];//2025-11-28-21031.61
   const data03 = accrual(months03_rate, data.principal.value03);
   const chartList = [
     {
@@ -558,15 +578,18 @@ const annual_rate = (principal) => {
   switch (principal) {
     case 24:
       // -> 2023: 0.0235
+      // -> 2024: 0.0215
       rate = 0.0255; //普通：0.019
       break;
     case 12:
       rate = 0.0215; //普通：0.0175
       break;
     case 6:
+      // -> 2024: 0.0175
       rate = 0.0195; //普通：0.0155
       break;
     case 3:
+      // -> 2024: 0.0165
       rate = 0.0175; //普通：0.013
       break;
   }

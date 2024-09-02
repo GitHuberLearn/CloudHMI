@@ -1,0 +1,271 @@
+@import "./variables.scss";
+
+@mixin el-form-fz-fzfff {
+  color: $fzcolor;
+  font-size: 0.8rem;
+}
+
+@mixin el-form-label {
+  .el-form-item__label {
+    position: relative;
+  }
+
+  .el-form-item__label::after {
+    content: " :";
+  }
+}
+
+@mixin el-form-disabled-css-fzfff {
+  background: none;
+  border-width: 0;
+  color: $fzcolor;
+  text-align: left;
+
+  .el-range-separator,
+  .el-range__icon {
+    color: $fzcolor;
+  }
+}
+
+@mixin el-form-disabled-fzfff {
+  .el-range-editor.is-disabled {
+    @include el-form-disabled-css-fzfff;
+  }
+
+  .is-disabled {
+
+    *,
+    .el-radio__inner::after {
+      cursor: default !important;
+
+    }
+
+    .el-input__inner,
+    .el-textarea__inner,
+    .el-range-input {
+      @include el-form-disabled-css-fzfff;
+    }
+
+    .el-range-input {
+      text-align: center;
+    }
+
+    .el-input-number__decrease,
+    .el-input-number__increase,
+    .el-input__suffix {
+      display: none;
+    }
+  }
+}
+
+@mixin el-form-disabled-css {
+  background: none;
+  border-width: 0;
+  color: #333;
+  text-align: left;
+
+  .el-range-separator,
+  .el-range__icon {
+    color: #333;
+  }
+}
+
+@mixin el-form-disabled {
+  .el-range-editor.is-disabled {
+    @include el-form-disabled-css;
+  }
+
+  .el-input-group--append.is-disabled {
+    .el-input__inner {
+      border-width: 1px;
+      border-color: #eee;
+    }
+  }
+
+  .is-disabled {
+
+    *,
+    .el-radio__inner::after {
+      cursor: default !important;
+
+    }
+
+
+    .el-input__inner,
+    .el-textarea__inner,
+    .el-range-input {
+      @include el-form-disabled-css;
+    }
+
+    .el-range-input {
+      text-align: center;
+    }
+
+    .el-input-number__decrease,
+    .el-input-number__increase,
+    .el-input__suffix {
+      display: none;
+    }
+  }
+}
+
+@mixin el-select-dropdown {
+  background: $mainbg;
+  border-color: $bdcolor;
+
+  .el-scrollbar__wrap {
+    max-height: 10rem;
+  }
+
+  span {
+    color: $fzcolor;
+    font-size: 0.8rem;
+  }
+
+  .el-select-dropdown__item.hover,
+  .el-select-dropdown__item:hover,
+  .el-cascader__search-input {
+    background: $mainbg1;
+    border-color: $mainbg1;
+  }
+
+  .popper__arrow {
+    border-bottom-color: $bdcolor !important;
+  }
+
+  .popper__arrow::after {
+    border-bottom-color: $mainbg !important;
+  }
+
+  .el-cascader-node:not(.is-disabled):focus,
+  .el-cascader-node:not(.is-disabled):hover {
+    background: $mainbg100;
+  }
+
+  .el-icon-arrow-right:before {
+    color: $fzcolor;
+  }
+
+}
+
+@mixin patm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin male {
+  background: #018ffa;
+}
+
+@mixin female {
+  background: #ff5983;
+}
+
+@mixin colort {
+  font-family: Impact;
+  background: linear-gradient(to bottom, #fff, #6fbdd3, #5195a8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@mixin colortitle {
+  font-family: Impact;
+  background: linear-gradient(to bottom, #fff, #f1f1f1, #70cbe4);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: #d3dce6;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #99a9bf;
+    border-radius: 20px;
+  }
+}
+
+@mixin relative {
+  position: relative;
+  @include wh;
+}
+
+@mixin absolute {
+  @include wh;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+@mixin wautos {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+@mixin wauto {
+  width: 100%;
+  height: auto;
+}
+
+@mixin pd8 {
+  padding: 0.8rem 0;
+  box-sizing: border-box;
+}
+
+@mixin wh {
+  width: 100%;
+  height: 100%;
+}
+
+//倒三角
+//$position:位置：top:向下，left：向右
+//$w:大小
+//$borderColor：线条颜色
+//$bg：背景
+@mixin triangle($position, $w,
+  $borderColor,
+  $bg) {
+  .popper__arrow {
+    position: absolute;
+    bottom: 0;
+    left: 42%;
+  }
+
+  .popper__arrow::after {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border: #{$w} solid transparent;
+    border-#{$position}: #{$w} solid #{$borderColor};
+  }
+
+  .popper__arrow::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 0px;
+    height: 0px;
+    border: #{$w} solid transparent;
+    border-#{$position}: #{$w} solid #{$bg};
+  }
+
+}

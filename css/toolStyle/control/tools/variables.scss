@@ -1,0 +1,155 @@
+@import "./variables-min.scss";
+//indexDashboard
+$fzcolor: #e5f7ff;
+$fzcolorActive: #ffcb8d;
+$fzcolor_6fb0d5: #6fb0d5;
+$fzcolor_b7cbd3: #b7cbd3;
+$fzcolor_4ec3e7: #4ec3e7;
+$fzcolor_1ac9ff: #1ac9ff;
+$fzcolor_06ecff: #06ecff;
+$fzcolor_56c1f9: #56c1f9;
+$fzcolor_00FFF4: #00FFF4;
+$fzcolor_09DEF8: #09DEF8;
+//颜色
+$red: red;
+$red_ff6c34: #ff6c34;
+$red_ff703a: #ff703a;
+$red_ff6325: #ff6325;
+$red_ff8143: #ff8143;
+
+$violet: violet;
+
+$orange: orange;
+$orange_f0c187: #f0c187;
+$orange_F8AC15: #F8AC15;
+$orange_908B56: #908B56;
+$orange_f6b747: #f6b747;
+$orange_fffa64: #fffa64;
+$orange_fbd44a: #fbd44a;
+
+$green: green;
+$green_52C41A: #52C41A;
+$green_2ed2c7: #2ed2c7;
+$green_3adacf: #3adacf;
+$green_03c59b: #03c59b;
+$green_34f2d5: #34f2d5;
+$green_7ed071: #7ed071;
+
+
+
+
+$gray: gray;
+$black: black;
+
+$blue: blue;
+$blue_19c6ea: #19c6ea;
+$blue_56c1f9: #56c1f9;
+$blue_00E5FF: #00E5FF;
+$blue_1AC9FF: #1AC9FF;
+$blue_1585fa: #1585fa;
+
+$color-black: black;
+$color-fff: #fff;
+$color-eee: #eee;
+$color-ddd: #ddd;
+$color-949090: #949090;
+
+//背景
+$mainbg: #131f53;
+$mainbg-2E2EBF: #2E2EBF;
+$mainbg-2E2EBF-depth: #161681;
+$mainbg-0A1365: #0A1365;
+$mainbg_22337e: #22337e;
+$mainbg100: #1e4a7ce6;
+$mainbg30: #214977;
+$mainbg_062a53: #062a53;
+$mainbg_082183: #082183;
+$mainbg_235a99: #235a99;
+$mainbg_0c52a0: #0c52a0;
+$mainbg_286cb7e6: #286cb7e6;
+
+$popperBox: #19369d;
+$popperBoxdb: #546cc4;
+
+$toopcolor: #00af94;
+
+$blueTh: $blue_1585fa;
+$tablebd: $mainbg_286cb7e6;
+$bdcolor: $tablebd;
+
+// 颜色
+$--color-red: #fc625d;
+$--color-warn: #fcbc40;
+$--color-success: #34c749;
+
+// 文字
+$--color-text: #1d2129;
+$--color-text-1: #4e5969;
+$--color-text-2: #86909c;
+$--color-text-3: #c9cdd4;
+$--color-text-4: #f2f3f5;
+
+// 变亮值
+$--light-shalow: 2%;
+
+// 白色
+$--color-light-bg: #fff;
+$--color-light-bg-1: #fafafc;
+$--color-light-bg-1-shallow: lighten($--color-light-bg-1, $--light-shalow);
+$--color-light-bg-2: #f2f3f5;
+$--color-light-bg-2-shallow: lighten($--color-light-bg-2, $--light-shalow);
+$--color-light-bg-3: #e5e6eb;
+$--color-light-bg-3-shallow: lighten($--color-light-bg-3, $--light-shalow);
+$--color-light-bg-4: #e3e3e4;
+$--color-light-bg-4-shallow: lighten($--color-light-bg-4, $--light-shalow);
+$--color-light-bg-5: #bebebe;
+$--color-light-bg-5-shallow: lighten($--color-light-bg-5, $--light-shalow);
+
+// 变暗值
+$--dark-shalow: 2%;
+
+// 黑色
+$--color-dark-black: #000;
+$--color-dark-bg-1: #18181c;
+$--color-dark-bg-1-shallow: darken($--color-dark-bg-1, $--dark-shalow);
+$--color-dark-bg-2: #232324;
+$--color-dark-bg-2-shallow: darken($--color-dark-bg-2, $--dark-shalow);
+$--color-dark-bg-3: #2a2a2b;
+$--color-dark-bg-3-shallow: darken($--color-dark-bg-3, $--dark-shalow);
+$--color-dark-bg-4: #313132;
+$--color-dark-bg-4-shallow: darken($--color-dark-bg-4, $--dark-shalow);
+$--color-dark-bg-5: #373739;
+$--color-dark-bg-5-shallow: darken($--color-dark-bg-5, $--dark-shalow);
+
+// 最大宽度
+$--max-width: 1920px;
+// 顶部距离
+$--header-height: 60px;
+// 底部距离
+$--footer-height: 50px;
+// 模糊
+$--filter-blur-base: blur(20px);
+// 毛玻璃
+$--filter-color-login-dark: rgba(35, 35, 36, 0.7);
+$--filter-color-login-dark-shallow: rgba(35, 35, 36, 0.3);
+$--filter-color-login-light: rgba(240, 240, 240, 0.7);
+$--filter-color-login-light-shallow: rgba(240, 240, 240, 0.3);
+
+// 边框
+$--border-radius-base: 8px;
+// 阴影
+$--border-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+
+// sidebar
+$menuText: #e9e7e7;
+$menuTextOpened: #fff;
+$menuActiveText: #ffd04b;
+$subMenuActiveText: #0AC8DB; //https://github.com/ElemeFE/element/issues/12951
+$menuBg: #304156;
+$menuHover: #249FED;
+$subMenuBg: #1f2d3d;
+$subMenuHover: #249FED;
+$sideBarWidth: 246px;
+$sideBarWidth: 246px;
+$iconFz: 16px;

@@ -20,11 +20,13 @@ cube = new CUBE();
 var LSList = {
   type1: "link",
   type2: "script",
+  type1_scss: "link_scss",
   // 引入的路径列表
   list1: [
     "plugins/layui/css/layui.css",
     "api_resource/lib/stylenew.css",
     "css/product/stylenew.css",
+    //"css/index.scss",
   ],
   list2: [
     "plugins/jquery/jquery.min.js",
@@ -50,22 +52,22 @@ var writeImportFile = function (type, list, isBasics) {
     for (var i = 0; i < list.length; i++) {
       document.write(
         '<link rel="stylesheet" type="text/css" href="' +
-          path +
-          list[i] +
-          "?v=" +
-          version +
-          '">'
+        path +
+        list[i] +
+        "?v=" +
+        version +
+        '">'
       );
     }
   } else if (type === "script") {
     for (var i = 0; i < list.length; i++) {
       document.write(
         '<script type="text/javascript" type="module" charset="utf-8" src="' +
-          path +
-          list[i] +
-          "?v=" +
-          version +
-          '"></script>'
+        path +
+        list[i] +
+        "?v=" +
+        version +
+        '"></script>'
       );
     }
   } else if (type === "scriptmodule") {
@@ -73,11 +75,11 @@ var writeImportFile = function (type, list, isBasics) {
     for (var i = 0; i < list.length; i++) {
       document.write(
         '<script  type="module" src="' +
-          path +
-          list[i] +
-          "?v=" +
-          version +
-          '"></script>'
+        path +
+        list[i] +
+        "?v=" +
+        version +
+        '"></script>'
       );
     }
   }
@@ -87,8 +89,8 @@ var writeImportFile = function (type, list, isBasics) {
 //logon 图片 //module
 document.write(
   '<link rel="shortcut icon" type="image/x-icon" href="' +
-    cube.gatewayURL_basics +
-    'favicon.ico">'
+  cube.gatewayURL_basics +
+  'favicon.ico">'
 );
 
 writeImportFile(LSList.type1, LSList.list1, true);
