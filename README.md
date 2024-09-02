@@ -4,7 +4,7 @@
  * @Author: Eric
  * @Date: 2022-10-08 15:53:31
  * @LastEditors: ~
- * @LastEditTime: 2024-04-22 15:13:26
+ * @LastEditTime: 2024-09-02 12:08:08
 -->
 
 # WebFrontEndClass
@@ -17,6 +17,7 @@
 
          1. 加入layui
          2.添加自定义日期功能
+         3.引入sass
 
 ## 软件架构
 
@@ -27,12 +28,14 @@
 ```bash
 - 1.  一般的用工具 Vscode 导入根目录建立项目使用 serve 启动
     Live Server › Settings: Multi Root Workspace Name (清空用了选择工作区)
+- 2.安装sass:npm install -g sass
 ```
 
 ## 使用说明
 
 ```bash
-1.  xxxx
+1.  编译scss：sass xx.scss xx.css
+1.1 监视编译：sass --watch xx.scss:xx.css
 2.  xxxx
 3.  xxxx
 ```
