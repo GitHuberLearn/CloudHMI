@@ -734,16 +734,3 @@ h1 {
 .layui-tree .layui-tree-entry:hover {
 	background: rgba(229, 240, 251, 0.9)
 }
-
-
-.tac {
-	text-align: center !important;
-}
-
-.tal {
-	text-align: left !important;
-}
-
-.tar {
-	text-align: right !important;
-}
