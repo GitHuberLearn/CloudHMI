@@ -4,24 +4,34 @@
  * @Author: Eric
  * @Date: 2022-10-08 15:53:31
  * @LastEditors: ~
- * @LastEditTime: 2024-09-02 12:08:08
+ * @LastEditTime: 2025-03-11 09:54:20
 -->
 
 # WebFrontEndClass
 
 ## 介绍
 
+```bash
+# URL
+- 生产：http://cloudhmi.s3-website-us-east-1.amazonaws.com
+- 测试：x
+- 本地：http://127.0.0.1:5501
+```
+
 ## 1 CloudHMI ： 云界面
 
-        作为部署云机界面独立页面
-
-         1. 加入layui
-         2.添加自定义日期功能
-         3.引入sass
+```bash
+作为部署云机界面独立页面
+    1. 加入layui
+    2.添加自定义日期功能
+    3.引入sass
+```
 
 ## 软件架构
 
-     软件架构说明
+```bash
+软件架构说明
+```
 
 ## 安装教程
 

@@ -10,9 +10,12 @@ let { getDateN, getDateF } = await import(
 //console.log(getDateN(15));
 
 //全局变量
+let laytpl = null,
+  time = '2023-08-28',//显示当前时间new Date()
+  table = null;
 let data = {
   time: {
-    time: "2023-08-28",
+    time,
     num: 0,
   },
   value: 6, //跨度值
@@ -29,8 +32,6 @@ let data = {
   compare: [],
   compare_real: [],
 };
-let laytpl = null,
-  table = null;
 //选择项目文件右击打开
 $(function () {
   //layui声明模块
@@ -40,7 +41,7 @@ $(function () {
     laydate.render({
       elem: "#selectDate",
       // format: 'yyyy/MM/dd',// HH:mm:ss
-      value: new Date(),//显示当前时间，2023-08-28
+      value: time,
       mark: onClickMsg(),
       done: function (value) {
         const list = onClickMsg();
@@ -164,7 +165,9 @@ const list_real = () => {
   //value12
   const months12 = minList(12);
   const months12_rate = minList(12);
-  months12_rate[1] = [months12_rate[1], 0.0175];//2025-02-28-5152.19
+  //年-月-日-回收期（月）-利率-本息
+  months12_rate[1] = [months12_rate[1], 0.0175];//2025-02-28-6-0.0175-5152.19
+  months12_rate[2] = [months12_rate[2], 0.013];//2025-05-28-3-0.013-5168.94
   const data12 = accrual(months12_rate, data.principal.value12);
   //value06
   const months06 = minList(6);
@@ -586,12 +589,14 @@ const annual_rate = (principal) => {
       rate = 0.0215; //普通：0.0175
       break;
     case 6:
-      // -> 2024: 0.0175
+      // -> 2024-08-28: 0.0175
       rate = 0.0195; //普通：0.0155
       break;
     case 3:
       // -> 2024: 0.0165
-      rate = 0.0175; //普通：0.013
+      // -> 2024: 0.0175
+      // -> 2025-02-28: 0.013
+      rate = 0.013; //普通：0.013 
       break;
   }
   return rate;
