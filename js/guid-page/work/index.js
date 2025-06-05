@@ -180,13 +180,13 @@ const accrual = (months, principal) => {
  * @returns 返回实际数据
  */
 const list_real = () => {
+  //目标（年/月/日）-回收期（月）-利率-本息
   //value24:v24
   const months24 = minList(24);
   const data24 = accrual(months24, data.principal.value24);
   //value12:v12
   const months12 = minList(12);
   const months12_rate = minList(12);
-  //目标（年/月/日）-回收期（月）-利率-本息
   months12_rate[1] = [months12_rate[1], 0.0175];//2025/02/28-06-0.0175-5152.19
   months12_rate[2] = [months12_rate[2], 0.0130];//2025/05/28-03-0.0130-5168.94（实际2025-06-04取5168.99-使用续存）
   months12_rate[3] = [months12_rate[3], 0.0140];//2027/06/04-24-0.0140-5313.72（实际2025-06-04存储5168.99）
@@ -194,13 +194,13 @@ const list_real = () => {
   //value06:v06
   const months06 = minList(6);
   const months06_rate = minList(6);
-  months06_rate[1] = [months06_rate[1], 0.0165];//2024-05-28-10139.15
-  months06_rate[2] = [months06_rate[2], 0.0215];//2026-05-28-10575.13
+  months06_rate[1] = [months06_rate[1], 0.0165];//2024/05/28-10139.15
+  months06_rate[2] = [months06_rate[2], 0.0215];//2026/05/28-10575.13
   const data06 = accrual(months06_rate, data.principal.value06);
   //value03:v03
   const months03 = minList(3);
   const months03_rate = minList(3);
-  months03_rate[1] = [months03_rate[1], 0.0235];//2025-11-28-21031.61
+  months03_rate[1] = [months03_rate[1], 0.0235];//2025/11/28-21031.61
   const data03 = accrual(months03_rate, data.principal.value03);
   const chartList = [
     {
@@ -313,7 +313,7 @@ const list_real = () => {
 /**
  * @returns 返回固定数据
  */
-const list = () => {
+const list = (text) => {
   const months24 = minList(24);
   const data24 = accrual(months24, data.principal.value24);
 
@@ -423,12 +423,13 @@ const list = () => {
       interest_simple: data03.value_simple,
     },
   ];
+
   var getTpl = compare.innerHTML,
     view = document.getElementById("view");
-
   if (data.message === "1") {
     data.compare_real = chartList;
-    console.log("固定发布值interest", chartList);
+    const le = text ? `-${text}` : ''
+    console.log(`固定发布值interest${le}`, chartList);
     laytpl(getTpl).render(data, function (html) {
       view.innerHTML = html;
     });
@@ -560,7 +561,7 @@ const listBig = (bg) => {
  * @returns 组合数据
  */
 const listGroup = () => {
-  const group = list();
+  const group = list('组合');
   const groupBig = listBig(true);
   const chartList = [...group, ...groupBig];
   return chartList;
@@ -605,13 +606,13 @@ const annual_rate = (principal) => {
     case 24:
       // -> 2023: 0.0235
       // -> 2024: 0.0215
-      rate = 0.0255; //普通：0.019
+      // ->2025/05/28: 0.0140
+      rate = 0.0140; //普通：0.019
       break;
     case 12:
       // ->2025/08/28: 0.0175
       // ->2025/02/28: 0.0130
-      // ->2025/05/28: 0.0140
-      rate = 0.0140; //普通：0.0175
+      rate = 0.0140;//普通：0.0175
       break;
     case 6:
       // -> 2024-08-28: 0.0175

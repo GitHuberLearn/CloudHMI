@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2025-06-05 16:29:14
+ * @LastEditTime: 2025-06-05 17:33:57
  -->
 <!DOCTYPE html>
 <html>
@@ -84,8 +84,9 @@
 		</span>
 		<span class="common-btn default theme-bgOrange tal">
 			操作流程：<br/>
-			list_real_一次填入实际利率 -> annual_rate_记录每年实际利率 ->
-			onClickMsg记录投资日，未来回收日(预发轮询月)
+			list_real _一次填入实际利率 -> 
+			annual_rate _记录每年实际利率 ->
+			onClickMsg 记录投资日，未来回收日(预发轮询月)
 		</span>
 	</pre>
 	<form class="layui-form" lay-filter="val-filter">
@@ -150,11 +151,10 @@
 		<span class="common-btn default theme-bgGreen">2035-11-28 (2年06月)</span>
 		<span class="common-btn default theme-bgGreen">2037-02-28 (1年03月)</span>
 	</div>
-	<div class="box box-bg-blue" id="charts_real"></div>
 	<!-- <table id="table" lay-filter="test"></table> -->
 	<div id="view"></div>
 	<script id="compare" type="text/html">
-		{{# if(d.click_show === "1"){ }}
+		{{# if(d.message === "1"){ }}
 			<ul class="list">
 				{{# layui.each(d.compare, function(index, item){ }}
 				<li>
@@ -162,13 +162,13 @@
 					<p>
 						<span class="table-t">实际发布值</span>
 						{{# layui.each(item.interest, function(index, item){ }}
-						<span class="tables">{{ item }}</span>
+							<span class="tables">{{ item }}</span>
 						{{# }); }}
 					</p>
 					<p>
 						<span class="table-t">固定发布值</span>
 						{{# layui.each(d.compare_real[index].interest, function(index, item){ }}
-						<span class="tables">{{ item }}</span>
+							<span class="tables">{{ item }}</span>
 						{{# }); }}
 					</p>
 				</li>
@@ -176,6 +176,7 @@
 			</ul>
 		{{# } }}
 	</script>
+	<div class="box box-bg-blue" id="charts_real"></div>
 	<div class="box box-bg-blue" id="charts"></div>
 	<p class="title"><i class="lins"></i>小→大</p>
 	<div class="title">
