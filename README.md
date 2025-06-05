@@ -1,33 +1,76 @@
 <!--
  * @Descripttion: Sustainable
  * @version: 1.0.0
- * @Author: Eric
+ * @Author: Kenny
  * @Date: 2022-10-08 15:53:31
  * @LastEditors: ~
- * @LastEditTime: 2025-03-11 09:54:20
+ * @LastEditTime: 2025-06-05 16:58:34
 -->
-
-# WebFrontEndClass
-
-## 介绍
+# CloudHMI：云页面 2022-10-08 - xx20xx-xx-xx
 
 ```bash
+# 计划：实现动态接口改利调息
+# 功能
++ 作为部署云机界面独立页面
+* 加入layui
+* 添加自定义日期功能
+* 引入sass
+* 现金利息流
 # URL
 - 生产：http://cloudhmi.s3-website-us-east-1.amazonaws.com
 - 测试：x
 - 本地：http://127.0.0.1:5501
 ```
 
-## 1 CloudHMI ： 云界面
+## 项目开发
+
+### 运行
 
 ```bash
-# 功能
-- 作为部署云机界面独立页面
-+ 1.加入layui
-+ 2.添加自定义日期功能
-+ 3.引入sass
-+ 4.现金利息流
-* 计划：实现动态接口改利调息
+- 1.  一般的用工具 Vscode 导入根目录建立项目使用 serve 启动
+    Live Server › Settings: Multi Root Workspace Name (清空用了选择工作区)
+- 2.安装sass:npm install -g sass
+```
+
+### 发布
+
+```bash
+# 构建环境
+- 亚马逊云S3
+```
+
+### 使用
+
+```shell
+### CloudHMI 介绍
+xxx（组件名称）
+├── CloudHMI 
+│   └── view// 界面
+│   └── js // 方法
+```
+
+### 代码提交
+
+```bash
+- * x
+```
+
+## 项目里程碑 2022-10-08 ~
+
+### 项目(xx)明细 2022-10-08 ~
+
+```bash
+# 总控
+- master（xx-dev）：20xx-xx-xx 状态
+- master[20xx-xx-xx]：xx-dev[20xx-xx-xx] 状态
+* 来源：xx
+# 版本
+
+⭐ 状态说明
+- ING：属于进行中，未合并到master
+- DONE：完成状态，已经合并到master
+- DONE-MOCK：完成状态，仅是模拟数据
+- PAUSE：暂停状态
 ```
 
 ## 软件架构
@@ -37,12 +80,6 @@ jq+layui
 ```
 
 ## 安装教程
-
-```bash
-- 1.  一般的用工具 Vscode 导入根目录建立项目使用 serve 启动
-    Live Server › Settings: Multi Root Workspace Name (清空用了选择工作区)
-- 2.安装sass:npm install -g sass
-```
 
 ## 使用说明
 

@@ -13,20 +13,26 @@ let { getDateN, getDateF } = await import(
 let laytpl = null,
   time = '2023-08-28',//显示当前时间new Date()
   table = null;
-let data = {
+const init = {
+  circulation: 4,
+  spacing: 6, //跨度值
+  message: 0,//显示信息
+}
+const initData = {
   time: {
     time,
     num: 0,
   },
-  value: 6, //跨度值
+  ...init
+}
+let data = {
+  ...initData,
   principal: {
     value24: 10000,
     value12: 5000,
     value06: 10000,
     value03: 20000,
   },
-  circulation: 4,
-  click_show: 0,
   min: [24, 12, 6, 3],
   max: [3, 6, 12, 24],
   compare: [],
@@ -35,9 +41,11 @@ let data = {
 //选择项目文件右击打开
 $(function () {
   //layui声明模块
-  layui.use(["table", "laytpl", "form", "laydate"], function () {
+  layui.use(function () {
+    var $ = layui.$;
     var form = layui.form;
     var laydate = layui.laydate;
+    var layer = layui.layer;
     laydate.render({
       elem: "#selectDate",
       // format: 'yyyy/MM/dd',// HH:mm:ss
@@ -56,6 +64,17 @@ $(function () {
         listChart();
       },
     });
+    // 表单赋值
+    $('#LAY-component-form-setval').on('click', function () {
+      Object.assign(data, initData)
+      form.val('val-filter', {
+        date: time,
+        ...init
+      });
+      listChart();
+      return false;// 阻止默认 form 跳转
+    });
+
     form.on("select(circulation)", function (env) {
       const value = env.value;
       data.circulation = value;
@@ -64,13 +83,13 @@ $(function () {
 
     form.on("select(spacing)", function (env) {
       const value = env.value;
-      data.value = value;
+      data.spacing = value;
       listChart();
     });
 
     form.on("select(message)", function (env) {
       const value = env.value;
-      data.click_show = value;
+      data.message = value;
       listChart();
     });
 
@@ -92,9 +111,11 @@ const onClickMsg = () => {
     "0-05-25": "生日",//每年-xx
     "0-12-31": "跨年",
     "0-0-25": "工资",
-    "2023-8-28": "投资日",
-    "2025-02-28": "投资日",
-    "2025-05-28": "value03预发value24",
+    "2023-08-28": "v12投资日",
+    "2025-02-28": "v12投资日",
+    "2025-05-28": "v12:m03预发m24",
+    "2025-06-04": "v12投资日",
+    "2027-06-04": "v12:m24预发m12",
   }
 }
 /**
@@ -159,23 +180,24 @@ const accrual = (months, principal) => {
  * @returns 返回实际数据
  */
 const list_real = () => {
-  //value24
+  //value24:v24
   const months24 = minList(24);
   const data24 = accrual(months24, data.principal.value24);
-  //value12
+  //value12:v12
   const months12 = minList(12);
   const months12_rate = minList(12);
-  //年-月-日-回收期（月）-利率-本息
-  months12_rate[1] = [months12_rate[1], 0.0175];//2025-02-28-6-0.0175-5152.19
-  months12_rate[2] = [months12_rate[2], 0.013];//2025-05-28-3-0.013-5168.94
+  //目标（年/月/日）-回收期（月）-利率-本息
+  months12_rate[1] = [months12_rate[1], 0.0175];//2025/02/28-06-0.0175-5152.19
+  months12_rate[2] = [months12_rate[2], 0.0130];//2025/05/28-03-0.0130-5168.94（实际2025-06-04取5168.99-使用续存）
+  months12_rate[3] = [months12_rate[3], 0.0140];//2027/06/04-24-0.0140-5313.72（实际2025-06-04存储5168.99）
   const data12 = accrual(months12_rate, data.principal.value12);
-  //value06
+  //value06:v06
   const months06 = minList(6);
   const months06_rate = minList(6);
   months06_rate[1] = [months06_rate[1], 0.0165];//2024-05-28-10139.15
   months06_rate[2] = [months06_rate[2], 0.0215];//2026-05-28-10575.13
   const data06 = accrual(months06_rate, data.principal.value06);
-  //value03
+  //value03:v03
   const months03 = minList(3);
   const months03_rate = minList(3);
   months03_rate[1] = [months03_rate[1], 0.0235];//2025-11-28-21031.61
@@ -282,7 +304,7 @@ const list_real = () => {
       interest_simple: data03.value_simple,
     },
   ];
-  if (data.click_show === "1") {
+  if (data.message === "1") {
     data.compare = chartList;
     console.log("实际发布值interest", chartList);
   }
@@ -404,7 +426,7 @@ const list = () => {
   var getTpl = compare.innerHTML,
     view = document.getElementById("view");
 
-  if (data.click_show === "1") {
+  if (data.message === "1") {
     data.compare_real = chartList;
     console.log("固定发布值interest", chartList);
     laytpl(getTpl).render(data, function (html) {
@@ -586,7 +608,10 @@ const annual_rate = (principal) => {
       rate = 0.0255; //普通：0.019
       break;
     case 12:
-      rate = 0.0215; //普通：0.0175
+      // ->2025/08/28: 0.0175
+      // ->2025/02/28: 0.0130
+      // ->2025/05/28: 0.0140
+      rate = 0.0140; //普通：0.0175
       break;
     case 6:
       // -> 2024-08-28: 0.0175
@@ -867,7 +892,7 @@ const option = (chartList, title) => {
       data: xy1,
     },
     {
-      name: "跨度" + data.value + "个月",
+      name: "跨度" + data.spacing + "个月",
       type: "line",
       smooth: true,
       lineStyle: { color: "#F508ED" },
@@ -1073,7 +1098,7 @@ const getMonthMax = (obj) => {
     xyn = [];
   list.forEach((el) => {
     xy.push([el.x, el.n]);
-    if (el.n === Number(data.value)) {
+    if (el.n === Number(data.spacing)) {
       xyn.push([el.x, el.y]);
     }
   });
