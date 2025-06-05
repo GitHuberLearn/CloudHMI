@@ -4,7 +4,7 @@
  * @Author: Kenny
  * @Date: 2022-10-08 15:53:31
  * @LastEditors: ~
- * @LastEditTime: 2025-06-05 16:58:34
+ * @LastEditTime: 2025-06-05 17:06:50
 -->
 # CloudHMI：云页面 2022-10-08 - xx20xx-xx-xx
 
@@ -30,6 +30,8 @@
 - 1.  一般的用工具 Vscode 导入根目录建立项目使用 serve 启动
     Live Server › Settings: Multi Root Workspace Name (清空用了选择工作区)
 - 2.安装sass:npm install -g sass
+- 2.1  编译scss：sass xx.scss xx.css
+- 2.2 监视编译：sass --watch xx.scss:xx.css
 ```
 
 ### 发布
@@ -61,10 +63,10 @@ xxx（组件名称）
 
 ```bash
 # 总控
-- master（xx-dev）：20xx-xx-xx 状态
-- master[20xx-xx-xx]：xx-dev[20xx-xx-xx] 状态
-* 来源：xx
+- main：2022-10-08 ING
+* 来源：自创
 # 版本
+## main1.0（2022-10-08 ~ 2025-xx-xx)
 
 ⭐ 状态说明
 - ING：属于进行中，未合并到master
@@ -73,39 +75,26 @@ xxx（组件名称）
 - PAUSE：暂停状态
 ```
 
-## 软件架构
+## 技术支持
+
+### 开发技术说明
 
 ```bash
-jq+layui
+- 基于 jQuery v3.2.1
+- 基于 layui v2.11.2
 ```
 
-## 安装教程
+### 相关Code
 
-## 使用说明
-
-```bash
-1.  编译scss：sass xx.scss xx.css
-1.1 监视编译：sass --watch xx.scss:xx.css
-2.  xxxx
-3.  xxxx
+```js
+//message
+layer.msg('value');
 ```
 
-## 参与贡献
+### 交流
 
-```bash
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-```
+QQ 群：xx
 
-## 特技
+![QQ群](x.png)
 
-```bash
-1.  使用 Readme_XXX.md 来支持不同的语言，例如 Readme_en.md, Readme_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
-```
+![渲染海报](x.png)
