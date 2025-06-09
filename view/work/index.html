@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2025-06-09 10:44:21
+ * @LastEditTime: 2025-06-09 14:32:32
  -->
 <!DOCTYPE html>
 <html>
@@ -64,6 +64,45 @@
 
 		.tables {
 			border: 1px solid #b6a3a3;
+		}
+
+		.view-pr {
+			text-align: center;
+			background: #6d16ba21;
+			padding: 15px;
+			box-sizing: border-box;
+		}
+
+		.principal-Interest {
+			margin: 0 auto;
+			font-size: 50px;
+			background-image: -webkit-linear-gradient(left,
+					blue,
+					#66ffff 10%,
+					#cc00ff 20%,
+					#cc00cc 30%,
+					#ccccff 40%,
+					#00ffff 50%,
+					#ccccff 60%,
+					#cc00cc 70%,
+					#cc00ff 80%,
+					#66ffff 90%,
+					blue 100%);
+			-webkit-text-fill-color: transparent;
+			-webkit-background-clip: text;
+			-webkit-background-size: 200% 100%;
+			-webkit-animation: masked-animation 4s linear infinite;
+
+		}
+
+		@keyframes masked-animation {
+			0% {
+				background-position: 0 0;
+			}
+
+			100% {
+				background-position: -100% 0;
+			}
 		}
 	</style>
 </head>
@@ -131,6 +170,41 @@
 			</div>
 		</div>
 	</form>
+	<form class="layui-form" lay-filter="calc-filter">
+		<div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">本金</label>
+				<div class="layui-input-inline">
+					<input type="text" lay-affix="number" step="1" placeholder="输入本金" name="principal">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">利率</label>
+				<div class="layui-input-inline">
+					<input type="text" lay-affix="number" step="0.01" placeholder="输入利率" name="interestRate">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">时长</label>
+				<div class="layui-input-inline">
+					<input type="text" lay-affix="number" step="1" placeholder="输入时长（月）" name="duration">
+				</div>
+			</div>
+			<div class="layui-inline">
+				<button class="layui-btn" id="LAY-component-form-getval">计算</button>
+			</div>
+			<div class="layui-inline">
+				<button class="layui-btn" type="reset">重置</button>
+			</div>
+		</div>
+	</form>
+	<div id="view_pr" class="view-pr"></div>
+	<script id="compare_pr" type="text/html">
+		<span class="principal-Interest">
+			{{ d }}
+		</span>
+	</script>
+
 	<p class="title"><i class="lins"></i>大→小（使用中）</p>
 	<div class="title">
 		<span class="common-btn default">重复率：</span>

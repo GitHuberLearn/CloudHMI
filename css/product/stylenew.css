@@ -203,14 +203,13 @@ textarea,
 input,
 select,
 textarea {
-	min-width: 150px
+	min-width: 190px
 }
 
 input,
 select,
 label {
-	height: 30px;
-	line-height: 30px
+	height: 38px;
 }
 
 select {

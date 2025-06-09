@@ -28,6 +28,7 @@ $(function () {
  * 详情页面log开关  false：关  true：开
  * @param {*any} data 
  * @param {*boole} boole 默认开启
+ * 无法定位具体距离位置
  */
 function log(data, boole) {
   var isOpenLog = boole ? boole : true;

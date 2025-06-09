@@ -26,6 +26,7 @@ const initData = {
   ...init
 }
 let data = {
+  principalInterest: 0,
   ...initData,
   principal: {
     value24: 10000,
@@ -63,6 +64,23 @@ $(function () {
         data.time.time = value;
         listChart();
       },
+    });
+    // 表单计算
+    $('#LAY-component-form-getval').on('click', function () {
+      let getval = form.val('calc-filter');
+      const { principal, interestRate, duration } = getval;
+      data.principalInterest = Number(principal) + principal * interestRate / 100 / 12 * duration;
+      principalInterestCalc();
+      return false;// 阻止默认 form 跳转
+    });
+    //重置
+    $('#LAY-component-form-reset').on('click', function () {
+      Object.assign(data, initData)
+      form.val('calc-filter', {
+        date: time,
+        ...init
+      });
+      return false;// 阻止默认 form 跳转
     });
     // 表单赋值
     $('#LAY-component-form-setval').on('click', function () {
@@ -316,6 +334,21 @@ const list_real = () => {
   return chartList;
 };
 /**
+ * @returns 返回本息
+ */
+const principalInterestCalc = () => {
+  let getTpl = compare_pr.innerHTML,
+    view = document.getElementById("view_pr"), value = Math.round(data.principalInterest * 100) / 100;
+  //本息赋值
+  if (value > 0) {
+    laytpl(getTpl).render(value, function (html) {
+      view.innerHTML = html;
+    });
+  } else {
+    view.innerHTML = "-";
+  }
+};
+/**
  * @returns 返回固定数据
  */
 const list = (text) => {
@@ -428,9 +461,9 @@ const list = (text) => {
       interest_simple: data03.value_simple,
     },
   ];
-
-  var getTpl = compare.innerHTML,
+  let getTpl = compare.innerHTML,
     view = document.getElementById("view");
+  //列表赋值
   if (data.message === "1") {
     data.compare_real = chartList;
     const le = text ? `-${text}` : ''
