@@ -180,27 +180,32 @@ const accrual = (months, principal) => {
  * @returns 返回实际数据
  */
 const list_real = () => {
-  //目标（年/月/日）-回收期（月）-利率-本息
+  //目标（年/月/日） ~ 回收期（月） ~ 利率 ~ 本息
   //value24:v24
   const months24 = minList(24);
-  const data24 = accrual(months24, data.principal.value24);
+  const months24_rate = minList(24);
+  months24_rate[0] = [months24_rate[0], 0.0255];//2023/08/28 ~ 24 ~ 0.0255 ~ 10510
+  const data24 = accrual(months24_rate, data.principal.value24);
   //value12:v12
   const months12 = minList(12);
   const months12_rate = minList(12);
-  months12_rate[1] = [months12_rate[1], 0.0175];//2025/02/28-06-0.0175-5152.19
-  months12_rate[2] = [months12_rate[2], 0.0130];//2025/05/28-03-0.0130-5168.94（实际2025-06-04取5168.99-使用续存）
-  months12_rate[3] = [months12_rate[3], 0.0140];//2027/06/04-24-0.0140-5313.72（实际2025-06-04存储5168.99）
+  months12_rate[0] = [months12_rate[0], 0.0215];//2023/08/28 ~ 12 ~ 0.0215 ~ 5107.5
+  months12_rate[1] = [months12_rate[1], 0.0175];//2025/02/28 ~ 06 ~ 0.0175 ~ 5152.19
+  months12_rate[2] = [months12_rate[2], 0.0130];//2025/05/28 ~ 03 ~ 0.0130 ~ 5168.94（实际2025-06-04取5168.99-使用续存）
+  months12_rate[3] = [months12_rate[3], 0.0140];//2027/06/04 ~ 24 ~ 0.0140 ~ 5313.72（实际2025-06-04存储5168.99）
   const data12 = accrual(months12_rate, data.principal.value12);
   //value06:v06
   const months06 = minList(6);
   const months06_rate = minList(6);
-  months06_rate[1] = [months06_rate[1], 0.0165];//2024/05/28-10139.15
-  months06_rate[2] = [months06_rate[2], 0.0215];//2026/05/28-10575.13
+  months06_rate[0] = [months06_rate[0], 0.0195];//2023/08/28 ~ 06 ~ 0.0195 ~ 10097.5
+  months06_rate[1] = [months06_rate[1], 0.0165];//2024/02/28 ~ 03 ~ 0.0165 ~ 10139.15
+  months06_rate[2] = [months06_rate[2], 0.0215];//2026/05/28 ~ 24 ~ 0.0215 ~ 10575.13
   const data06 = accrual(months06_rate, data.principal.value06);
   //value03:v03
   const months03 = minList(3);
   const months03_rate = minList(3);
-  months03_rate[1] = [months03_rate[1], 0.0235];//2025/11/28-21031.61
+  months03_rate[0] = [months03_rate[0], 0.0175];//2023/08/28 ~ 03 ~ 0.0175 ~ 20087.5
+  months03_rate[1] = [months03_rate[1], 0.0235];//2023/11/30 ~ 24 ~ 0.0235 ~ 21031.61
   const data03 = accrual(months03_rate, data.principal.value03);
   const chartList = [
     {
@@ -603,30 +608,33 @@ const maxList = (val) => {
 const annual_rate = (principal) => {
   let rate = 0;
   switch (principal) {
+    //专享 - 普通
     case 24:
-      // -> 2023: 0.0235
-      // -> 2024: 0.0215
-      // ->2025/05/28: 0.0140
-      rate = 0.0140; //普通：0.019
+      // -> 2023/08/28: 0.0255 - 0.019
+      // -> 2023/11/30: 0.0235
+      // -> 2026/05/28: 0.0215
+      // -> 2027/06/04: 0.0140
+      rate = 0.0140;
       break;
     case 12:
-      // ->2025/08/28: 0.0175
-      // ->2025/02/28: 0.0130
-      rate = 0.0140;//普通：0.0175
+      // -> 2023/08/28: 0.0215 - 0.0175
+      rate = 0.0215;
       break;
     case 6:
-      // -> 2024-08-28: 0.0175
-      rate = 0.0195; //普通：0.0155
+      // -> 2023/08/28: 0.0195 - 0.0155
+      // -> 2025/02/28: 0.0175
+      rate = 0.0175;
       break;
     case 3:
-      // -> 2024: 0.0165
-      // -> 2024: 0.0175
-      // -> 2025-02-28: 0.013
-      rate = 0.013; //普通：0.013 
+      // -> 2023/08/28: 0.0175 - 0.013
+      // -> 2024/02/28: 0.0165
+      // -> 2025/05/28: 0.013
+      rate = 0.013;
       break;
   }
   return rate;
 };
+
 /**
  * @param {*数据列表} chartList
  * @param {*名称} title
