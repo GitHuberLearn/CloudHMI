@@ -1,5 +1,4 @@
 //跨度值: [24, 12, 6, 3]
-console.log(2)
 const { getRecentMonth, dateNs, initEchart } = await import(
   `${cube.gatewayURL_module}js/product/index.js`
 );
@@ -18,6 +17,12 @@ const init = {
   circulation: 4,
   spacing: 6, //跨度值
   message: 0,//显示信息
+}
+
+const init_calc = {
+  principal: null,
+  interestRate: null,
+  duration: null,
 }
 const initData = {
   time: {
@@ -66,29 +71,33 @@ $(function () {
         listChart();
       },
     });
-    // 表单计算
+    // 表单2计算
     $('#LAY-component-form-getval').on('click', function () {
       let getval = form.val('calc-filter');
       const { principal, interestRate, duration } = getval;
+      if (!principal || !interestRate || !duration) {
+        layer.msg('请输入必选项');
+        return false;
+      }
       data.principalInterest = Number(principal) + principal * interestRate / 100 / 12 * duration;
       principalInterestCalc();
       return false;// 阻止默认 form 跳转
     });
-    //重置
+    // 表单2重置
     $('#LAY-component-form-reset').on('click', function () {
-      Object.assign(data, initData)
       form.val('calc-filter', {
-        date: time,
-        ...init
+        ...init_calc
       });
+      data.principalInterest = 0;
+      principalInterestCalc();
       return false;// 阻止默认 form 跳转
     });
-    // 表单赋值
+    // 表单1重置
     $('#LAY-component-form-setval').on('click', function () {
       Object.assign(data, initData)
       form.val('val-filter', {
         date: time,
-        ...init
+        ...init_calc
       });
       listChart();
       return false;// 阻止默认 form 跳转
