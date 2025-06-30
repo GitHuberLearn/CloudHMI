@@ -1,9 +1,10 @@
 //跨度值: [24, 12, 6, 3]
-let { getRecentMonth, dateNs, initEchart } = await import(
+console.log(2)
+const { getRecentMonth, dateNs, initEchart } = await import(
   `${cube.gatewayURL_module}js/product/index.js`
 );
 
-let { getDateN, getDateF } = await import(
+const { getDateN, getDateF } = await import(
   `${cube.gatewayURL_module}js/product/mockData.js`
 );
 
