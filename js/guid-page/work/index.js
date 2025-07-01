@@ -44,12 +44,18 @@ let data = {
   max: [3, 6, 12, 24],
   compare: [],
   compare_real: [],
-  monthsList: []
+  monthsList: [],
+  monthsPresentActualRate: [],
+  monthsMsg: null
 };
 //选择项目文件右击打开
 $(function () {
   //layui声明模块
-  layui.use(function () {
+  layui.use(async () => {
+    //请求数据
+    await initList();
+    //初步启动
+    await listChart();
     var $ = layui.$;
     var form = layui.form;
     var laydate = layui.laydate;
@@ -58,9 +64,9 @@ $(function () {
       elem: "#selectDate",
       // format: 'yyyy/MM/dd',// HH:mm:ss
       value: time,
-      mark: onClickMsg(),
+      mark: data.monthsMsg,
       done: function (value) {
-        const list = onClickMsg();
+        const list = data.monthsMsg;
         const keys = Object.keys(list)
         const values = Object.values(list)
         keys.forEach((element, index) => {
@@ -103,19 +109,16 @@ $(function () {
       listChart();
       return false;// 阻止默认 form 跳转
     });
-
     form.on("select(circulation)", function (env) {
       const value = env.value;
       data.circulation = value;
       listChart();
     });
-
     form.on("select(spacing)", function (env) {
       const value = env.value;
       data.spacing = value;
       listChart();
     });
-
     form.on("select(message)", function (env) {
       const value = env.value;
       data.message = value;
@@ -123,18 +126,18 @@ $(function () {
     });
     laytpl = layui.laytpl;
     table = layui.table;
-    //初步启动
-    listChart();
   });
 });
 
 /**
+ * 里程碑
  * 点击渲染msg
  */
 const onClickMsg = () => {
   return {
     /**
-      * 如果为空字符，则默认显示数字+徽章
+     * 里程碑
+     * 如果为空字符，则默认显示数字+徽章
       */
     "0-05-25": "生日",//每年-xx
     "0-12-31": "跨年",
@@ -175,13 +178,67 @@ const requestData = () => {
   });
 };
 /**
+ * 当下实际利率 
+ */
+const requestAtPresentActualRate = () => {
+  return new Promise((resolve, reject) => {
+    const url = cube.gatewayURL_resource + "/atPresentactualRate";
+    HttpUtils.request.get(url, null, (result) => {
+      if (result.code == 200) {
+        resolve(result.data);
+      }
+    }, (error) => {
+      reject(error);
+    });
+  });
+};
+/**
+ * 数据里程碑数据
+ */
+const requestMsg = () => {
+  return new Promise((resolve, reject) => {
+    const url = cube.gatewayURL_resource + "/milestone";
+    HttpUtils.request.get(url, null, (result) => {
+      if (result.code == 200) {
+        resolve(result.data);
+      }
+    }, (error) => {
+      reject(error);
+    });
+  });
+};
+/**
+ * 图表渲染
+ */
+const initList = async () => {
+  //当下实际利率
+  try {
+    data.monthsPresentActualRate = await requestAtPresentActualRate();
+  } catch (error) {
+    console.error(error);
+  }
+  //数据里程碑数据
+  try {
+    data.monthsMsg = await requestMsg();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+/**
  * 图表渲染
  */
 const listChart = async () => {
+  //数据请求
+  try {
+    data.monthsList = await requestData();
+  } catch (error) {
+    console.error(error);
+  }
   //大→小
   //实际利率
-  const data = await list_real()
-  const _configt_real = option(data, "大→小 (实际利率)");
+  const real = await list_real()
+  const _configt_real = option(real, "大→小 (实际利率)");
   const myChart_real = echarts.init(document.getElementById("charts_real"));
   initEchart(myChart_real, _configt_real);
   //固定利率
@@ -210,14 +267,14 @@ const accrual = (months, principal) => {
   let n = Object.assign({}, data.time);
   let recycle = principal;
   let recycle_simple = principal;
-  months.forEach((el) => {
+  months.forEach(async (el) => {
     const day = getRecentMonth(n, "yyyy-MM-dd");
     monthDate.push(day);
     const num = el instanceof Array ? el[0] : el;
     n.num += num;
     value.push(XEUtils.floor(recycle, 2));
     value_simple.push(XEUtils.floor(recycle_simple, 2));
-    const rate = el instanceof Array ? el[1] : annual_rate(el);
+    const rate = el instanceof Array ? el[1] : await annual_rate(el);
     const month = el instanceof Array ? el[0] : el;
     const accrual = rate * (month / 12);
     const valuen = recycle * accrual;
@@ -237,11 +294,6 @@ const accrual = (months, principal) => {
  * @returns 返回实际数据
  */
 const list_real = async () => {
-  try {
-    data.monthsList = await requestData();
-  } catch (error) {
-    console.error(error);
-  }
   const months_rate = data.monthsList;
   //四大绩效率
   const months24_rate = months_rate.months24_rate.data;
@@ -679,31 +731,25 @@ const maxList = (val) => {
   return circu(start, end);
 };
 //年利率:专享类型
-const annual_rate = (principal) => {
+const annual_rate = async (principal) => {
+  const { months24_rate,
+    months12_rate,
+    months06_rate,
+    months03_rate } = data.monthsPresentActualRate;
   let rate = 0;
   switch (principal) {
     //专享 - 普通
     case 24:
-      // -> 2023/08/28: 0.0255 - 0.019
-      // -> 2023/11/30: 0.0235
-      // -> 2026/05/28: 0.0215
-      // -> 2027/06/04: 0.0140
-      rate = 0.0140;
+      rate = months24_rate.value;
       break;
     case 12:
-      // -> 2023/08/28: 0.0215 - 0.0175
-      rate = 0.0215;
+      rate = months12_rate.value;
       break;
     case 6:
-      // -> 2023/08/28: 0.0195 - 0.0155
-      // -> 2025/02/28: 0.0175
-      rate = 0.0175;
+      rate = months06_rate.value;
       break;
     case 3:
-      // -> 2023/08/28: 0.0175 - 0.013
-      // -> 2024/02/28: 0.0165
-      // -> 2025/05/28: 0.013
-      rate = 0.013;
+      rate = months03_rate.value;
       break;
   }
   return rate;
