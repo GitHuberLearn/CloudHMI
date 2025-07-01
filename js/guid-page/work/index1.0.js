@@ -97,7 +97,7 @@ $(function () {
       Object.assign(data, initData)
       form.val('val-filter', {
         date: time,
-        ...init_calc
+        ...init
       });
       listChart();
       return false;// 阻止默认 form 跳转
