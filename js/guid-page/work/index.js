@@ -275,10 +275,7 @@ const accrual = async (months, principal) => {
     monthDate.push(day);
     const num = el instanceof Array ? el[0] : el;
     n.num += num;
-    // 调试输出：检查 recycle 的初始值
-    // if (principal === 10000 && !(el instanceof Array)) {
-    //   console.log("Before update:", recycle); // 输出应为旧值
-    // }
+
     value.push(XEUtils.floor(recycle, 2));
     value_simple.push(XEUtils.floor(recycle_simple, 2));
     // 异步获取利率
@@ -288,11 +285,7 @@ const accrual = async (months, principal) => {
     // 计算复利并更新 recycle
     const valuen = recycle * accrual;
     recycle += valuen;
-    // 调试输出：检查 recycle 的更新后值
-    // if (principal === 10000 && !(el instanceof Array)) {
-    //   console.log("After update:", recycle); // 输出应为新值
-    // }
-    // 简单利息计算（仅用于演示）
+    // 简单利息计算
     const valuen_simple = principal * accrual;
     recycle_simple += valuen_simple;
     date_value.push({
@@ -498,6 +491,7 @@ const list = async (text) => {
   const months24 = minList(24);
   const data24 = await accrual(months24, data.principal.value24);
 
+  //months12 目前利率完全和实际一样atPresentactualRate，所以实际和固定无差异
   const months12 = minList(12);
   const data12 = await accrual(months12, data.principal.value12);
 
@@ -781,13 +775,13 @@ const maxList = (val) => {
   return circu(start, end);
 };
 //年利率:专享类型
-const annual_rate = async (principal) => {
+const annual_rate = async (months) => {
   const { months24_rate,
     months12_rate,
     months06_rate,
     months03_rate } = data.monthsPresentActualRate;
   let rate = 0;
-  switch (principal) {
+  switch (months) {
     //专享 - 普通
     case 24:
       rate = months24_rate.value;
