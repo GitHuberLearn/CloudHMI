@@ -3,7 +3,7 @@ CUBEINIT = function () {
   var self = this;
   var urls = window.location.pathname;
   var path = /CloudHMI/;
-  var result = path.test(urls) ? "/CloudHMI/" : "/";
+  var result = path.test(urls) ? "/CloudHMI" : "";
   /* url前缀 */
   self.gatewayURL_basics = result; //项目部署所在访问根基础资源地址
   var resultModules = path.test(urls)
@@ -21,18 +21,18 @@ var LSList = {
   type1_scss: "link_scss",
   // 引入的路径列表
   list1: [
-    "plugins/layui/css/layui.css",
-    "api_resource/lib/stylenew.css",
-    "css/index.css",
+    "/plugins/layui/css/layui.css",
+    "/api_resource/lib/stylenew.css",
+    "/css/index.css",
   ],
   list2: [
-    "plugins/jquery/jquery.min.js",
-    'plugins/knockout/knockout-3.2.0.js',
-    'plugins/knockout/knockout.mapping.js',
-    "plugins/lib/xe-utils.js",
-    "plugins/layui/layui.js",
-    'js/product/httpClient.js',
-    "js/product/stylenew.js", //本部js
+    "/plugins/jquery/jquery.min.js",
+    '/plugins/knockout/knockout-3.2.0.js',
+    '/plugins/knockout/knockout.mapping.js',
+    "/plugins/lib/xe-utils.js",
+    "/plugins/layui/layui.js",
+    '/js/product/httpClient.js',
+    "/js/product/stylenew.js", //本部js
   ],
 };
 
@@ -89,7 +89,7 @@ var writeImportFile = function (type, list, isBasics) {
 document.write(
   '<link rel="shortcut icon" type="image/x-icon" href="' +
   cubeInit.gatewayURL_basics +
-  'favicon.ico">'
+  '/favicon.ico">'
 );
 
 writeImportFile(LSList.type1, LSList.list1, true);
@@ -119,16 +119,16 @@ if (IEVersion() >= 9) {
         // logcat("加载异常标签名称=<" + elem.tagName.toLowerCase() + ">，标签id=" + elem.id + ",标签src=" + elem.src);
         if (elem.classList.contains("userIMG")) {
           //用户异常图片加载
-          elem.src = cubeInit.gatewayURL_basics + "images/error/user.png";
+          elem.src = cubeInit.gatewayURL_basics + "/images/error/user.png";
         } else if (elem.classList.contains("logoIMG")) {
           //logo异常图片加载
-          elem.src = cubeInit.gatewayURL_basics + "images/logo.png";
+          elem.src = cubeInit.gatewayURL_basics + "/images/logo.png";
         } else if (elem.classList.contains("media-object")) {
           //详情异常图片加载
-          elem.src = cubeInit.gatewayURL_basics + "images/error/nullifor.png";
+          elem.src = cubeInit.gatewayURL_basics + "/images/error/nullifor.png";
         } else {
           //其他
-          elem.src = cubeInit.gatewayURL_basics + "images/error/nullifor1.png";
+          elem.src = cubeInit.gatewayURL_basics + "/images/error/nullifor1.png";
         }
       }
     },

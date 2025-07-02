@@ -1,13 +1,15 @@
+const { getMockData } = await import(
+  `${cube.gatewayURL_module}/help/index.js`
+);
+
 //跨度值: [24, 12, 6, 3]
 const { getRecentMonth, dateNs, initEchart } = await import(
-  `${cube.gatewayURL_module}js/product/index.js`
+  `${cube.gatewayURL_module}/js/product/index.js`
 );
 
 const { getDateN, getDateF } = await import(
-  `${cube.gatewayURL_module}js/product/mockData.js`
+  `${cube.gatewayURL_module}/js/product/mockData.js`
 );
-
-// console.log(getDateN(15));
 
 //全局变量
 let laytpl = null,
@@ -78,6 +80,11 @@ $(function () {
         listChart();
       },
     });
+    // 显示mock数据
+    $('#LAY-Mock').on('click', function () {
+      console.log(getMockData({ isMock: true }))
+    });
+
     // 表单2计算
     $('#LAY-component-form-getval').on('click', function () {
       let getval = form.val('calc-filter');
@@ -129,26 +136,6 @@ $(function () {
   });
 });
 
-/**
- * 里程碑
- * 点击渲染msg
- */
-const onClickMsg = () => {
-  return {
-    /**
-     * 里程碑
-     * 如果为空字符，则默认显示数字+徽章
-      */
-    "0-05-25": "生日",//每年-xx
-    "0-12-31": "跨年",
-    "0-0-25": "工资",
-    "2023-08-28": "v12投资日",
-    "2025-02-28": "v12投资日",
-    "2025-05-28": "v12:m03预发m24",
-    "2025-06-04": "v12投资日",
-    "2027-06-04": "v12:m24预发m12",
-  }
-}
 /**
  * 数据请求
  */
