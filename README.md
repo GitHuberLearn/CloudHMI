@@ -4,7 +4,7 @@
  * @Author: Kenny
  * @Date: 2022-10-08 15:53:31
  * @LastEditors: ~
- * @LastEditTime: 2025-06-05 17:06:50
+ * @LastEditTime: 2025-07-01 18:04:58
 -->
 # CloudHMI：云页面 2022-10-08 - xx20xx-xx-xx
 
@@ -71,7 +71,7 @@ xxx（组件名称）
 + 深化净现率
 + 添加本息计算功能
 ## main2.0（2025-06-10 ~ 2025-xx-xx)
-+ 实现动态接口fox改利调息
++ 实现动态接口apifox改利调息
 
 ⭐ 状态说明
 - ING：属于进行中，未合并到master
