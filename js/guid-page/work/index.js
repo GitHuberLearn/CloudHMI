@@ -242,15 +242,18 @@ const listChart = async () => {
   const myChart_real = echarts.init(document.getElementById("charts_real"));
   initEchart(myChart_real, _configt_real);
   //固定利率
-  const _config = option(list(), "大→小 (固定利率)");
+  const fixed = await list()
+  const _config = option(fixed, "大→小 (固定利率)");
   const myChart = echarts.init(document.getElementById("charts"));
   initEchart(myChart, _config);
   //小→大
-  const _configBig = option(listBig(true), "小→大");
+  const toBig = await listBig(true)
+  const _configBig = option(toBig, "小→大");
   const myChartBig = echarts.init(document.getElementById("chartsBig"));
   initEchart(myChartBig, _configBig);
   //组合
-  const _confiGroup = option(listGroup(), "组合");
+  const Groups = await listGroup()
+  const _confiGroup = option(Groups, "组合");
   const myChartGroup = echarts.init(document.getElementById("chartsGroup"));
   initEchart(myChartGroup, _confiGroup);
 };
@@ -259,7 +262,7 @@ const listChart = async () => {
  * @param {*本金} principal
  * @returns 返回Echart数据
  */
-const accrual = (months, principal) => {
+const accrual = async (months, principal) => {
   let monthDate = [];
   let value = [];
   let value_simple = [];
@@ -267,13 +270,60 @@ const accrual = (months, principal) => {
   let n = Object.assign({}, data.time);
   let recycle = principal;
   let recycle_simple = principal;
+  for (const el of months) { // 改为 for...of 循环
+    const day = getRecentMonth(n, "yyyy-MM-dd");
+    monthDate.push(day);
+    const num = el instanceof Array ? el[0] : el;
+    n.num += num;
+    // 调试输出：检查 recycle 的初始值
+    // if (principal === 10000 && !(el instanceof Array)) {
+    //   console.log("Before update:", recycle); // 输出应为旧值
+    // }
+    value.push(XEUtils.floor(recycle, 2));
+    value_simple.push(XEUtils.floor(recycle_simple, 2));
+    // 异步获取利率
+    const rate = el instanceof Array ? el[1] : await annual_rate(el);
+    const month = el instanceof Array ? el[0] : el;
+    const accrual = rate * (month / 12);
+    // 计算复利并更新 recycle
+    const valuen = recycle * accrual;
+    recycle += valuen;
+    // 调试输出：检查 recycle 的更新后值
+    // if (principal === 10000 && !(el instanceof Array)) {
+    //   console.log("After update:", recycle); // 输出应为新值
+    // }
+    // 简单利息计算（仅用于演示）
+    const valuen_simple = principal * accrual;
+    recycle_simple += valuen_simple;
+    date_value.push({
+      date: day,
+      reta: [month, rate, XEUtils.floor(recycle, 2)],
+    });
+  }
+  return { monthDate, value, value_simple, date_value };
+};
+
+const accrual1 = (months, principal) => {
+  let monthDate = [];
+  let value = [];
+  let value_simple = [];
+  let date_value = [];
+  let n = Object.assign({}, data.time);
+  let recycle = principal;
+  let recycle_simple = principal;
+  let as = 0
+  //forEach 无法正确处理 async 回调函数
   months.forEach(async (el) => {
     const day = getRecentMonth(n, "yyyy-MM-dd");
     monthDate.push(day);
     const num = el instanceof Array ? el[0] : el;
     n.num += num;
+    if (principal === 10000 && !(el instanceof Array)) {
+      console.log(recycle, el, await annual_rate(el), as++)
+    }
     value.push(XEUtils.floor(recycle, 2));
     value_simple.push(XEUtils.floor(recycle_simple, 2));
+    //recycle 在异步操作时出现值未更新的问题，主要源于 forEach 循环与 async/await 的不兼容使用
     const rate = el instanceof Array ? el[1] : await annual_rate(el);
     const month = el instanceof Array ? el[0] : el;
     const accrual = rate * (month / 12);
@@ -304,19 +354,19 @@ const list_real = async () => {
   //目标（年/月/日） ~ 回收期（月） ~ 利率 ~ 本息
   //value24:v24
   const months24 = minList(24);
-  const data24 = accrual(months24_rate, data.principal.value24);
+  const data24 = await accrual(months24_rate, data.principal.value24);
 
   //value12:v12
   const months12 = minList(12);
-  const data12 = accrual(months12_rate, data.principal.value12);
+  const data12 = await accrual(months12_rate, data.principal.value12);
 
   //value06:v06
   const months06 = minList(6);
-  const data06 = accrual(months06_rate, data.principal.value06);
+  const data06 = await accrual(months06_rate, data.principal.value06);
 
   //value03:v03
   const months03 = minList(3);
-  const data03 = accrual(months03_rate, data.principal.value03);
+  const data03 = await accrual(months03_rate, data.principal.value03);
 
   const chartList = [
     {
@@ -444,18 +494,18 @@ const principalInterestCalc = () => {
 /**
  * @returns 返回固定数据
  */
-const list = (text) => {
+const list = async (text) => {
   const months24 = minList(24);
-  const data24 = accrual(months24, data.principal.value24);
+  const data24 = await accrual(months24, data.principal.value24);
 
   const months12 = minList(12);
-  const data12 = accrual(months12, data.principal.value12);
+  const data12 = await accrual(months12, data.principal.value12);
 
   const months06 = minList(6);
-  const data06 = accrual(months06, data.principal.value06);
+  const data06 = await accrual(months06, data.principal.value06);
 
   const months03 = minList(3);
-  const data03 = accrual(months03, data.principal.value03);
+  const data03 = await accrual(months03, data.principal.value03);
   const chartList = [
     {
       name: "2年",
@@ -574,18 +624,18 @@ const list = (text) => {
  * @param {*是否默认颜色} bg
  * @returns 返回固定数据
  */
-const listBig = (bg) => {
+const listBig = async (bg) => {
   const monthsBig03 = maxList(3);
-  const data03 = accrual(monthsBig03, data.principal.value03);
+  const data03 = await accrual(monthsBig03, data.principal.value03);
 
   const monthsBig06 = maxList(6);
-  const data06 = accrual(monthsBig06, data.principal.value06);
+  const data06 = await accrual(monthsBig06, data.principal.value06);
 
   const monthsBig12 = maxList(12);
-  const data12 = accrual(monthsBig12, data.principal.value12);
+  const data12 = await accrual(monthsBig12, data.principal.value12);
 
   const monthsBig24 = maxList(24);
-  const data24 = accrual(monthsBig24, data.principal.value24);
+  const data24 = await accrual(monthsBig24, data.principal.value24);
 
   const chartList = [
     {
@@ -691,9 +741,9 @@ const listBig = (bg) => {
 /**
  * @returns 组合数据
  */
-const listGroup = () => {
-  const group = list('组合');
-  const groupBig = listBig(true);
+const listGroup = async () => {
+  const group = await list('组合');
+  const groupBig = await listBig(true);
   const chartList = [...group, ...groupBig];
   return chartList;
 };
@@ -752,7 +802,7 @@ const annual_rate = async (principal) => {
       rate = months03_rate.value;
       break;
   }
-  return rate;
+  return Number(rate);
 };
 
 /**
