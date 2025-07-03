@@ -33,6 +33,7 @@ const initData = {
   },
   ...init
 }
+const key = `跨度${init.spacing}个月`;
 let data = {
   principalInterest: 0,
   ...initData,
@@ -48,7 +49,20 @@ let data = {
   compare_real: [],
   monthsList: [],
   monthsPresentActualRate: [],
-  monthsMsg: null
+  monthsMsg: null,
+  selected: {
+    '2年': true,
+    '1年': false,
+    '半年': false,
+    '3个月': false,
+    '复息': false,
+    '单息': false,
+    '收益值': false,
+    '净现率': false,
+    '净现值': false,
+    '全量跨度': false,
+    [key]: false
+  }
 };
 //选择项目文件右击打开
 $(function () {
@@ -80,6 +94,24 @@ $(function () {
         listChart();
       },
     });
+    // 选择数据
+    $('#LAY-twoYears').on('click', function () {
+      selectedlistChart({ key: '2年' })
+    });
+    $('#LAY-oneYear').on('click', function () {
+      selectedlistChart({ key: '1年' })
+    });
+    $('#LAY-halfYear').on('click', function () {
+      selectedlistChart({ key: '半年' })
+    });
+    $('#LAY-march').on('click', function () {
+      selectedlistChart({ key: '3个月' })
+    });
+
+    $('#LAY-Choose').on('click', function () {
+      selectedlistChart({ status: 1 })
+    });
+
     // 显示mock数据
     $('#LAY-Mock').on('click', function () {
       console.log(getMockData({ isMock: true }))
@@ -124,6 +156,8 @@ $(function () {
     form.on("select(spacing)", function (env) {
       const value = env.value;
       data.spacing = value;
+      const key = `跨度${data.spacing}个月`;
+      data.selected[key] = false;
       listChart();
     });
     form.on("select(message)", function (env) {
@@ -195,7 +229,7 @@ const requestMsg = () => {
   });
 };
 /**
- * 图表渲染
+ * 图表数据请求
  */
 const initList = async () => {
   //当下实际利率
@@ -210,6 +244,24 @@ const initList = async () => {
   } catch (error) {
     console.error(error);
   }
+};
+
+/**
+ * 图例选中状态
+ * @param {Object} key 对象
+ * key：选中项,status ：状态 1反选 0不选择
+ * @returns 所有选择状态
+ */
+const selectedlistChart = (obj) => {
+  const { key, status } = obj
+  const selects = Object.fromEntries(
+    Object.entries(data.selected).map(([key, value]) => [key, status ? !value : false])
+  )
+  if (key) {
+    selects[key] = true;
+  }
+  data.selected = selects;
+  listChart();
 };
 
 /**
@@ -262,7 +314,6 @@ const accrual = async (months, principal) => {
     monthDate.push(day);
     const num = el instanceof Array ? el[0] : el;
     n.num += num;
-
     value.push(XEUtils.floor(recycle, 2));
     value_simple.push(XEUtils.floor(recycle_simple, 2));
     // 异步获取利率
@@ -280,42 +331,6 @@ const accrual = async (months, principal) => {
       reta: [month, rate, XEUtils.floor(recycle, 2)],
     });
   }
-  return { monthDate, value, value_simple, date_value };
-};
-
-const accrual1 = (months, principal) => {
-  let monthDate = [];
-  let value = [];
-  let value_simple = [];
-  let date_value = [];
-  let n = Object.assign({}, data.time);
-  let recycle = principal;
-  let recycle_simple = principal;
-  let as = 0
-  //forEach 无法正确处理 async 回调函数
-  months.forEach(async (el) => {
-    const day = getRecentMonth(n, "yyyy-MM-dd");
-    monthDate.push(day);
-    const num = el instanceof Array ? el[0] : el;
-    n.num += num;
-    if (principal === 10000 && !(el instanceof Array)) {
-      console.log(recycle, el, await annual_rate(el), as++)
-    }
-    value.push(XEUtils.floor(recycle, 2));
-    value_simple.push(XEUtils.floor(recycle_simple, 2));
-    //recycle 在异步操作时出现值未更新的问题，主要源于 forEach 循环与 async/await 的不兼容使用
-    const rate = el instanceof Array ? el[1] : await annual_rate(el);
-    const month = el instanceof Array ? el[0] : el;
-    const accrual = rate * (month / 12);
-    const valuen = recycle * accrual;
-    recycle += valuen;
-    const valuen_simple = principal * accrual;
-    recycle_simple += valuen_simple;
-    date_value.push({
-      date: day,
-      reta: [month, rate, XEUtils.floor(recycle, 2)], //月份，当年利率,未来回收值
-    });
-  });
   return { monthDate, value, value_simple, date_value };
 };
 //大→小
@@ -1073,7 +1088,14 @@ const option = (chartList, title) => {
       data: xyn,
     }
   );
+  const selected = data.selected
   return {
+    legend: {
+      x: "center",
+      textStyle: { color: "white" },
+      padding: [28, 10, 0, 0],
+      selected,
+    },
     title: {
       text: title,
       textStyle: {
@@ -1087,11 +1109,6 @@ const option = (chartList, title) => {
     tooltip: {
       trigger: "axis",
       confine: true,
-    },
-    legend: {
-      x: "center",
-      textStyle: { color: "white" },
-      padding: [28, 10, 0, 0],
     },
     grid: {
       top: "20%",
