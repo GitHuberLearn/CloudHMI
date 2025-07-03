@@ -352,6 +352,23 @@ function ApabiReaderXz() {
     layer.closeAll();
     window.location.href = "http://forspeed.onlinedown.net/down/PRCReaderSetup-4.5.2-1790.zip";
 }
+
+// CUBEINITs = function () {
+//     var self = this;
+//     var urls = window.location.pathname;
+//     var path = /CloudHMI/;
+//     var result = path.test(urls) ? "/CloudHMI" : "";
+//     /* url前缀 */
+//     self.gatewayURL_basics = result; //项目部署所在访问根基础资源地址
+//     var resultModules = path.test(urls)
+//         ? "/CloudHMI/view/module_demo/"
+//         : "/view/module_demo/";
+//     self.gatewayURL_module = result; //整体使用时，本部特有地址
+//     //self.gatewayURL_basics = "http://127.0.0.1:8020/outproject/Dom/"; //项目部署所在访问地址
+// };
+// cubeInits = new CUBEINITs();
+// console.log(1, cubeInits.gatewayURL_basic)
+
 CUBE = function () {
     var self = this;
 
@@ -396,7 +413,7 @@ CUBE = function () {
 
 
     self._includeFrameworkJs = function (name) {
-        document.write("<script type='text/javascript' src='" + "/js/" + name + "'></script>");
+        document.write("<script type='text/javascript' src='" + "/CloudHMI/js/" + name + "'></script>");
     }
 
     /**
@@ -753,5 +770,6 @@ CUBE = function () {
         return fmt;
     }
 }
+
 cube = new CUBE();
 cube.init();
