@@ -1,10 +1,10 @@
 <!--
  * @Descripttion: Sustainable
- * @version: 1.0.0
+ * @version: 2.0.0
  * @Author: Kenny
  * @Date: 2022-10-08 15:53:31
  * @LastEditors: ~
- * @LastEditTime: 2025-07-01 18:04:58
+ * @LastEditTime: 2025-07-04 12:44:52
 -->
 # CloudHMI：云页面 2022-10-08 - xx20xx-xx-xx
 
