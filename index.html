@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2024-05-28 13:45:55
+ * @LastEditTime: 2025-07-23 12:09:01
  -->
 <!DOCTYPE html>
 <html>
@@ -52,8 +52,8 @@
 <!--About js-->
 <script type="text/javascript">writeImportFile(LSList.type2, LSList.list2, true);</script>
 <script type="module">
-	let { dateNs } = await import(`${cube.gatewayURL_module}js/product/index.js`);
-	let { getDateN } = await import(`${cube.gatewayURL_module}js/product/mockData.js`);
+	let { dateNs } = await import(`${cube.gatewayURL_module}/js/product/index.js`);
+	let { getDateN } = await import(`${cube.gatewayURL_module}/js/product/mockData.js`);
 	console.log(dateNs);
 	console.log(getDateN(3))
 	$(function () {
