@@ -1,3 +1,17 @@
 @import './product/layui.css';
-@import "./toolStyle/index.scss";
+//@import "./toolStyle/index.scss";
 @import './product/stylenew.css';
+
+.snapshot {
+    display: flex;
+    justify-self: flex-start;
+
+    .icon {
+        width: 550px;
+        margin-right: 5px;
+    }
+
+    .icon-min {
+        width: 100px;
+    }
+}
