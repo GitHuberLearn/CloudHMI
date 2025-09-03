@@ -1,24 +1,28 @@
 @import "./variables-min.scss";
-//indexDashboard
-$fzcolor: #e5f7ff;
-$fzcolorActive: #ffcb8d;
-$fzcolor_6fb0d5: #6fb0d5;
-$fzcolor_b7cbd3: #b7cbd3;
-$fzcolor_4ec3e7: #4ec3e7;
-$fzcolor_1ac9ff: #1ac9ff;
-$fzcolor_06ecff: #06ecff;
-$fzcolor_56c1f9: #56c1f9;
-$fzcolor_00FFF4: #00FFF4;
-$fzcolor_09DEF8: #09DEF8;
+//自定义
+$mainbg: #0A1365;
+$f_color: #E5F7FF;
+
+$f_color_main: #333;
+$f_color_title: #1ac9ff; //标题颜色
+$f_color: #e5f7ff;
+$f_color_active: #ffcb8d;
+
+$f_color_6fb0d5: #6fb0d5;
+$f_color_b7cbd3: #b7cbd3;
+$f_color_4ec3e7: #4ec3e7;
+$f_color_1ac9ff: #1ac9ff;
+$f_color_06ecff: #06ecff;
+$f_color_56c1f9: #56c1f9;
+$f_color_00FFF4: #00FFF4;
+$f_color_09DEF8: #09DEF8;
 //颜色
 $red: red;
 $red_ff6c34: #ff6c34;
 $red_ff703a: #ff703a;
 $red_ff6325: #ff6325;
 $red_ff8143: #ff8143;
-
 $violet: violet;
-
 $orange: orange;
 $orange_f0c187: #f0c187;
 $orange_F8AC15: #F8AC15;
@@ -26,7 +30,6 @@ $orange_908B56: #908B56;
 $orange_f6b747: #f6b747;
 $orange_fffa64: #fffa64;
 $orange_fbd44a: #fbd44a;
-
 $green: green;
 $green_52C41A: #52C41A;
 $green_2ed2c7: #2ed2c7;
@@ -34,19 +37,15 @@ $green_3adacf: #3adacf;
 $green_03c59b: #03c59b;
 $green_34f2d5: #34f2d5;
 $green_7ed071: #7ed071;
-
-
-
-
 $gray: gray;
 $black: black;
-
 $blue: blue;
-$blue_19c6ea: #19c6ea;
-$blue_56c1f9: #56c1f9;
-$blue_00E5FF: #00E5FF;
-$blue_1AC9FF: #1AC9FF;
 $blue_1585fa: #1585fa;
+$blue_56c1f9: #56c1f9;
+$blue_19c6ea: #19c6ea;
+$blue_1AC9FF: #1AC9FF;
+$blue_00E5FF: #00E5FF;
+$blue_BCF0FE: #BCF0FE;
 
 $color-black: black;
 $color-fff: #fff;
@@ -55,18 +54,17 @@ $color-ddd: #ddd;
 $color-949090: #949090;
 
 //背景
-$mainbg: #131f53;
 $mainbg-2E2EBF: #2E2EBF;
 $mainbg-2E2EBF-depth: #161681;
 $mainbg-0A1365: #0A1365;
 $mainbg_22337e: #22337e;
-$mainbg100: #1e4a7ce6;
+$mainbg100: #1E4673;
 $mainbg30: #214977;
 $mainbg_062a53: #062a53;
 $mainbg_082183: #082183;
 $mainbg_235a99: #235a99;
 $mainbg_0c52a0: #0c52a0;
-$mainbg_286cb7e6: #286cb7e6;
+$mainbg_286cb7e6: #2764A8;
 
 $popperBox: #19369d;
 $popperBoxdb: #546cc4;
@@ -139,17 +137,3 @@ $--filter-color-login-light-shallow: rgba(240, 240, 240, 0.3);
 $--border-radius-base: 8px;
 // 阴影
 $--border-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-
-
-// sidebar
-$menuText: #e9e7e7;
-$menuTextOpened: #fff;
-$menuActiveText: #ffd04b;
-$subMenuActiveText: #0AC8DB; //https://github.com/ElemeFE/element/issues/12951
-$menuBg: #304156;
-$menuHover: #249FED;
-$subMenuBg: #1f2d3d;
-$subMenuHover: #249FED;
-$sideBarWidth: 246px;
-$sideBarWidth: 246px;
-$iconFz: 16px;

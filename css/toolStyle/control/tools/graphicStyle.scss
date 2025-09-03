@@ -1,0 +1,35 @@
+//graphicStyle：图形样式
+$w: 30px;
+
+/* 梯形 */
+.trapezoid {
+    @include trapezoid($w);
+    display: inline-block;
+    font-weight: bolder;
+    background: #4376B3;
+}
+
+//标准梯形
+.trapezoid.is-trapezoid {
+    clip-path: polygon(26% 0%, 74% 0%, 100% 100%, 0% 100%);
+}
+
+//倒立梯形
+.trapezoid.inverted-trapezoid {
+    clip-path: polygon(26% 100%, 74% 100%, 100% 0%, 0% 0%);
+}
+
+//第一
+.trapezoid.trapezoid-1 {
+    background: #F8624A;
+}
+
+//第二
+.trapezoid.trapezoid-2 {
+    background: #F8B04A;
+}
+
+//第三
+.trapezoid.trapezoid-3 {
+    background: #1E7FED;
+}

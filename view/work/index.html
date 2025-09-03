@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2025-07-03 18:13:04
+ * @LastEditTime: 2025-09-03 10:44:19
  -->
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
 	<title>净现率</title>
 	<!--common css/js-->
 	<!--本地：去掉/CloudHMI -->
-	<script src="/CloudHMI/js/common/common-cloud.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/common/common-cloud.js" type="text/javascript" charset="utf-8"></script>
 	<!--声明css,js变量-->
 	<script type="text/javascript">
 		var LSList = {
@@ -124,7 +124,8 @@
 		</span>
 		<span class="common-btn default theme-bgOrange tal">
 			操作流程：<br/>
-			<p class="fc_fff">list_real _一次填入实际利率 ->  (netPresentTrend)</p>
+			<p class="fc_fff">2年-1w 1年-5k 半年-1w 3个月-2w = 4.5w</p>
+			<p class="fc_fff">list_real _一次填入实际利率 ->  (netPresentTrend*3)</p>
 			<p class="fc_fff">annual_rate _记录每年实际利率 -> (atPresentactualRate)</p>
 			<p class="fc_fff">onClickMsg 记录投资日，未来回收日(预发轮询月)(milestone)</p>
 			<button class="layui-btn layui-btn-normal layui-btn-sm layui-btn-radius" id="LAY-Mock">Mock</button>
@@ -263,13 +264,12 @@
 	</script>
 	<div class="container">
 		<div class="tac">
-			<button class="layui-btn layui-btn-normal" id="LAY-twoYears">2年</button>
-			<button class="layui-btn layui-btn-normal" id="LAY-oneYear">1年</button>
-			<button class="layui-btn layui-btn-normal" id="LAY-halfYear">半年</button>
-			<button class="layui-btn layui-btn-normal" id="LAY-march">3个月</button>
-
+			<button class="layui-btn layui-btn-normal" id="LAY-twoYears">2年-1w</button>
+			<button class="layui-btn layui-btn-normal" id="LAY-oneYear">1年-5k</button>
+			<button class="layui-btn layui-btn-normal" id="LAY-halfYear">半年-1w</button>
+			<button class="layui-btn layui-btn-normal" id="LAY-march">3个月-2w</button>
 			<button class="layui-btn layui-btn-normal" id="LAY-Choose">反选</button>
-
+			<button class="layui-btn" title="4.5w+10">合计</button>
 		</div>
 	</div>
 	<div class="box box-bg-blue" id="charts_real"></div>

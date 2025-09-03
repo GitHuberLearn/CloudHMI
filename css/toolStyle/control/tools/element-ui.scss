@@ -1,3 +1,6 @@
+//@import "https://unpkg.com/element-ui/lib/theme-chalk/message.css";
+// @import "https://unpkg.com/element-ui/lib/theme-chalk/index.css";//使用CDN对压缩无用,反而打包变大
+
 .el-dropdown-link {
   cursor: pointer;
   color: #409EFF;
@@ -27,9 +30,18 @@
   }
 }
 
-.el-upload__input {
-  display: none;
+.el-upload--picture-card {
+  i {
+    @include wh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
+
+// .el-upload__input {
+//   display: none;
+// }
 
 // to fixed https://github.com/ElemeFE/element/issues/2461
 .el-dialog {
@@ -37,6 +49,25 @@
   left: 0;
   position: relative;
   margin: 0 auto;
+
+  $min-h: 23rem;
+  $max-h: 44rem;
+
+  .content {
+    width: 100%;
+    min-height: $min-h;
+    max-height: $max-h;
+    padding-top: 0.5rem;
+    overflow: auto;
+
+    .content-data {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      position: relative;
+      color: #333;
+    }
+  }
 }
 
 // refine element ui upload
@@ -68,6 +99,31 @@
   overflow: hidden;
   @include el-form-disabled;
 
+  .el-input-number {
+    width: 46%;
+  }
+
+  .el-form-item.fr {
+    margin-right: 0;
+  }
+
+  .upload-item {
+    .el-image {
+      float: left;
+    }
+  }
+
+  .el-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  video {
+    @include wh;
+    max-width: 250px;
+    max-height: 250px;
+  }
+
   .w-item {
     width: 50%;
     display: inline-block;
@@ -84,29 +140,28 @@
   }
 }
 
-@mixin el-form-ws {
+@mixin fl {
   float: left;
-  display: block;
 }
 
 .el-form-w50 {
   .el-form-item {
     width: 50%;
-    @include el-form-ws;
+    @include fl;
   }
 }
 
 .el-form-w33 {
   .el-form-item {
     width: 33.33%;
-    @include el-form-ws;
+    @include fl;
   }
 }
 
 .el-form-w25 {
   .el-form-item {
     width: 25%;
-    @include el-form-ws;
+    @include fl;
   }
 }
 
@@ -137,9 +192,23 @@
   }
 }
 
-.el-popover__reference-wrapper .ellipsis {
-  display: block;
-  text-align: left;
+.el-popover__reference-wrapper {
+  .ellipsis {
+    display: block;
+    text-align: left;
+  }
+
+  .popperBox-l,
+  .popperBox-r {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+  }
+
+  .popperBox-r {
+    right: 0;
+  }
 }
 
 .el-popover.popperBox,
@@ -162,6 +231,7 @@
     max-height: 6.3rem;
     overflow: auto;
   }
+
 }
 
 .el-popover.popperBox[x-placement^="bottom"],
@@ -189,7 +259,7 @@
 .tsp.el-tooltip__popper {
   background: $popperBox;
   border: 1px solid $popperBoxdb;
-  color: $fzcolor;
+  color: $f_color;
 }
 
 .tsp.el-tooltip__popper[x-placement^="right"] {
@@ -256,23 +326,16 @@
     margin: 0 auto;
   }
 
-  .content-data {
-    min-height: 300px;
-    max-height: 600px;
-    overflow: auto;
-    position: relative;
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      transform: scale(0.99);
-    }
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    transform: scale(0.99);
   }
 
   .app-container {
@@ -289,23 +352,134 @@
   }
 }
 
-.el-dialog__body-content .el-dialog__body {
-  padding: 0;
+.el-dialog__body-content {
+  .el-dialog__body {
+    padding: 0;
 
-  .content-data {
-    padding: 30px 15px;
-    box-sizing: border-box;
+    .content-data {
+      padding: 30px 15px;
+      box-sizing: border-box;
+    }
   }
 }
 
-//el-table
+//受DialogCenterCenter影响：后期更换命名为el-dialog_wrapper_auto
+.el-dialog__wrapper20,
+.el-dialog_wrapper_auto {
+  .content {
+    min-height: auto;
+
+    .box3,
+    .ellipsis {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+//el-switch:文字在内部
+.switchStyle {
+  .el-switch__label {
+    position: absolute;
+    display: none;
+    color: #fff;
+  }
+
+  .el-switch__core {
+    background-color: rgba(166, 166, 166, 1);
+  }
+
+  .el-switch__label,
+  .el-switch__core {
+    width: 60px !important; //2个文字的宽度
+  }
+
+  .el-switch__label--left {
+    z-index: 9;
+    left: 5px;
+  }
+
+  .el-switch__label--right {
+    z-index: 9;
+    right: 5px;
+  }
+
+
+  .el-switch__label.is-active {
+    display: block;
+  }
+}
+
+//el-button
+.cell-btn-list {
+  @include flex-align;
+
+  .el-button {
+    margin-right: 10px;
+  }
+}
+
+.el-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .el-icon-loading {
+    text-align: center;
+    font-size: 30px;
+  }
+}
+
+/**
+* el-table
+* 默认居中，其他可以通过align="left、right" 调整
+*/
 .el-table {
+  .el-table__cell {
+    text-align: center;
+  }
+
+  .el-table__cell.is-left {
+    text-align: left; //因is-left原样式方式不生效
+  }
+
   th {
     text-align: center !important;
   }
 
   .cell {
-    @include el-form-disabled;
+
+    //@include el-form-disabled;
+
+    //固定样式
+    .table-auto {
+      display: flex;
+      overflow: auto;
+
+      .table-list {
+        padding: 2px;
+        box-sizing: border-box;
+      }
+    }
+
+    //el-table-column :width="220"
+    .box-view-50 {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+    }
+
+    .box-view-100 {
+      width: 180px;
+      height: 180px;
+      display: inline-block;
+    }
+
+    .cell-box {
+      max-height: 150px;
+      overflow: auto;
+    }
 
     .icon {
       font-size: 20px;
@@ -332,9 +506,7 @@
   }
 
   .cell-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-align;
 
     //受.el-button+.el-button影响用margin-left，不要用margin-right
     .el-button {

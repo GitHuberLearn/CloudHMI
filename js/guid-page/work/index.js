@@ -1,6 +1,4 @@
-const { getMockData } = await import(
-  `${cube.gatewayURL_module}/help/index.js`
-);
+const { getMockData } = await import(`${cube.gatewayURL_module}/help/index.js`);
 
 //跨度值: [24, 12, 6, 3]
 const { getRecentMonth, dateNs, initEchart } = await import(
@@ -13,32 +11,32 @@ const { getDateN, getDateF } = await import(
 
 //全局变量
 let laytpl = null,
-  time = '2023-08-28',//显示当前时间new Date()
+  time = "2023-08-28", //显示当前时间new Date()
   table = null;
 const init = {
   circulation: 4,
   spacing: 6, //跨度值
-  message: 0,//显示信息
-}
+  message: 0, //显示信息
+};
 
 const init_calc = {
   principal: null,
   interestRate: null,
   duration: null,
-}
+};
 const initData = {
   time: {
     time,
     num: 0,
   },
-  ...init
-}
+  ...init,
+};
 const key = `跨度${init.spacing}个月`;
 let data = {
   principalInterest: 0,
   ...initData,
   principal: {
-    value24: 10000,
+    value24: 10000, //10W
     value12: 5000,
     value06: 10000,
     value03: 20000,
@@ -51,18 +49,18 @@ let data = {
   monthsPresentActualRate: [],
   monthsMsg: null,
   selected: {
-    '2年': true,
-    '1年': false,
-    '半年': false,
-    '3个月': false,
-    '复息': false,
-    '单息': false,
-    '收益值': false,
-    '净现率': false,
-    '净现值': false,
-    '全量跨度': false,
-    [key]: false
-  }
+    "2年": true,
+    "1年": false,
+    半年: false,
+    "3个月": false,
+    复息: false,
+    单息: false,
+    收益值: false,
+    净现率: false,
+    净现值: false,
+    全量跨度: false,
+    [key]: false,
+  },
 };
 //选择项目文件右击打开
 $(function () {
@@ -83,8 +81,8 @@ $(function () {
       mark: data.monthsMsg,
       done: function (value) {
         const list = data.monthsMsg;
-        const keys = Object.keys(list)
-        const values = Object.values(list)
+        const keys = Object.keys(list);
+        const values = Object.values(list);
         keys.forEach((element, index) => {
           if (element === value) {
             layer.msg(values[index]);
@@ -95,58 +93,59 @@ $(function () {
       },
     });
     // 选择数据
-    $('#LAY-twoYears').on('click', function () {
-      selectedlistChart({ key: '2年' })
+    $("#LAY-twoYears").on("click", function () {
+      selectedlistChart({ key: "2年" });
     });
-    $('#LAY-oneYear').on('click', function () {
-      selectedlistChart({ key: '1年' })
+    $("#LAY-oneYear").on("click", function () {
+      selectedlistChart({ key: "1年" });
     });
-    $('#LAY-halfYear').on('click', function () {
-      selectedlistChart({ key: '半年' })
+    $("#LAY-halfYear").on("click", function () {
+      selectedlistChart({ key: "半年" });
     });
-    $('#LAY-march').on('click', function () {
-      selectedlistChart({ key: '3个月' })
+    $("#LAY-march").on("click", function () {
+      selectedlistChart({ key: "3个月" });
     });
 
-    $('#LAY-Choose').on('click', function () {
-      selectedlistChart({ status: 1 })
+    $("#LAY-Choose").on("click", function () {
+      selectedlistChart({ status: 1 });
     });
 
     // 显示mock数据
-    $('#LAY-Mock').on('click', function () {
-      console.log(getMockData({ isMock: true }))
+    $("#LAY-Mock").on("click", function () {
+      console.log(getMockData({ isMock: true }));
     });
 
     // 表单2计算
-    $('#LAY-component-form-getval').on('click', function () {
-      let getval = form.val('calc-filter');
+    $("#LAY-component-form-getval").on("click", function () {
+      let getval = form.val("calc-filter");
       const { principal, interestRate, duration } = getval;
       if (!principal || !interestRate || !duration) {
-        layer.msg('请输入必选项');
+        layer.msg("请输入必选项");
         return false;
       }
-      data.principalInterest = Number(principal) + principal * interestRate / 100 / 12 * duration;
+      data.principalInterest =
+        Number(principal) + ((principal * interestRate) / 100 / 12) * duration;
       principalInterestCalc();
-      return false;// 阻止默认 form 跳转
+      return false; // 阻止默认 form 跳转
     });
     // 表单2重置
-    $('#LAY-component-form-reset').on('click', function () {
-      form.val('calc-filter', {
-        ...init_calc
+    $("#LAY-component-form-reset").on("click", function () {
+      form.val("calc-filter", {
+        ...init_calc,
       });
       data.principalInterest = 0;
       principalInterestCalc();
-      return false;// 阻止默认 form 跳转
+      return false; // 阻止默认 form 跳转
     });
     // 表单1重置
-    $('#LAY-component-form-setval').on('click', function () {
-      Object.assign(data, initData)
-      form.val('val-filter', {
+    $("#LAY-component-form-setval").on("click", function () {
+      Object.assign(data, initData);
+      form.val("val-filter", {
         date: time,
-        ...init
+        ...init,
       });
       listChart();
-      return false;// 阻止默认 form 跳转
+      return false; // 阻止默认 form 跳转
     });
     form.on("select(circulation)", function (env) {
       const value = env.value;
@@ -177,15 +176,20 @@ const requestData = () => {
   return new Promise((resolve, reject) => {
     const url = cube.gatewayURL_resource + "/netPresentTrend";
     const parame = {
-      circulation: data.circulation
+      circulation: data.circulation,
     };
-    HttpUtils.request.get(url, parame, (result) => {
-      if (result.code == 200) {
-        resolve(result.data);
+    HttpUtils.request.get(
+      url,
+      parame,
+      (result) => {
+        if (result.code == 200) {
+          resolve(result.data);
+        }
+      },
+      (error) => {
+        reject(error);
       }
-    }, (error) => {
-      reject(error);
-    });
+    );
     // getUnshippedCount()
     //   .then((response) => {
     //     if (response.code === 1) {
@@ -199,18 +203,23 @@ const requestData = () => {
   });
 };
 /**
- * 当下实际利率 
+ * 当下实际利率
  */
 const requestAtPresentActualRate = () => {
   return new Promise((resolve, reject) => {
     const url = cube.gatewayURL_resource + "/atPresentactualRate";
-    HttpUtils.request.get(url, null, (result) => {
-      if (result.code == 200) {
-        resolve(result.data);
+    HttpUtils.request.get(
+      url,
+      null,
+      (result) => {
+        if (result.code == 200) {
+          resolve(result.data);
+        }
+      },
+      (error) => {
+        reject(error);
       }
-    }, (error) => {
-      reject(error);
-    });
+    );
   });
 };
 /**
@@ -219,13 +228,18 @@ const requestAtPresentActualRate = () => {
 const requestMsg = () => {
   return new Promise((resolve, reject) => {
     const url = cube.gatewayURL_resource + "/milestone";
-    HttpUtils.request.get(url, null, (result) => {
-      if (result.code == 200) {
-        resolve(result.data);
+    HttpUtils.request.get(
+      url,
+      null,
+      (result) => {
+        if (result.code == 200) {
+          resolve(result.data);
+        }
+      },
+      (error) => {
+        reject(error);
       }
-    }, (error) => {
-      reject(error);
-    });
+    );
   });
 };
 /**
@@ -253,10 +267,13 @@ const initList = async () => {
  * @returns 所有选择状态
  */
 const selectedlistChart = (obj) => {
-  const { key, status } = obj
+  const { key, status } = obj;
   const selects = Object.fromEntries(
-    Object.entries(data.selected).map(([key, value]) => [key, status ? !value : false])
-  )
+    Object.entries(data.selected).map(([key, value]) => [
+      key,
+      status ? !value : false,
+    ])
+  );
   if (key) {
     selects[key] = true;
   }
@@ -276,22 +293,22 @@ const listChart = async () => {
   }
   //大→小
   //实际利率
-  const real = await list_real()
+  const real = await list_real();
   const _configt_real = option(real, "大→小 (实际利率)");
   const myChart_real = echarts.init(document.getElementById("charts_real"));
   initEchart(myChart_real, _configt_real);
   //固定利率
-  const fixed = await list()
+  const fixed = await list();
   const _config = option(fixed, "大→小 (固定利率)");
   const myChart = echarts.init(document.getElementById("charts"));
   initEchart(myChart, _config);
   //小→大
-  const toBig = await listBig(true)
+  const toBig = await listBig(true);
   const _configBig = option(toBig, "小→大");
   const myChartBig = echarts.init(document.getElementById("chartsBig"));
   initEchart(myChartBig, _configBig);
   //组合
-  const Groups = await listGroup()
+  const Groups = await listGroup();
   const _confiGroup = option(Groups, "组合");
   const myChartGroup = echarts.init(document.getElementById("chartsGroup"));
   initEchart(myChartGroup, _confiGroup);
@@ -309,7 +326,8 @@ const accrual = async (months, principal) => {
   let n = Object.assign({}, data.time);
   let recycle = principal;
   let recycle_simple = principal;
-  for (const el of months) { // 改为 for...of 循环
+  for (const el of months) {
+    // 改为 for...of 循环
     const day = getRecentMonth(n, "yyyy-MM-dd");
     monthDate.push(day);
     const num = el instanceof Array ? el[0] : el;
@@ -476,7 +494,8 @@ const list_real = async () => {
  */
 const principalInterestCalc = () => {
   let getTpl = compare_pr.innerHTML,
-    view = document.getElementById("view_pr"), value = Math.round(data.principalInterest * 100) / 100;
+    view = document.getElementById("view_pr"),
+    value = Math.round(data.principalInterest * 100) / 100;
   //本息赋值
   if (value > 0) {
     laytpl(getTpl).render(value, function (html) {
@@ -605,7 +624,7 @@ const list = async (text) => {
   //列表赋值
   if (data.message === "1") {
     data.compare_real = chartList;
-    const le = text ? `-${text}` : ''
+    const le = text ? `-${text}` : "";
     console.log(`固定发布值interest${le}`, chartList);
     laytpl(getTpl).render(data, function (html) {
       view.innerHTML = html;
@@ -738,7 +757,7 @@ const listBig = async (bg) => {
  * @returns 组合数据
  */
 const listGroup = async () => {
-  const group = await list('组合');
+  const group = await list("组合");
   const groupBig = await listBig(true);
   const chartList = [...group, ...groupBig];
   return chartList;
@@ -778,10 +797,8 @@ const maxList = (val) => {
 };
 //年利率:专享类型
 const annual_rate = async (months) => {
-  const { months24_rate,
-    months12_rate,
-    months06_rate,
-    months03_rate } = data.monthsPresentActualRate;
+  const { months24_rate, months12_rate, months06_rate, months03_rate } =
+    data.monthsPresentActualRate;
   let rate = 0;
   switch (months) {
     //专享 - 普通
@@ -1088,7 +1105,7 @@ const option = (chartList, title) => {
       data: xyn,
     }
   );
-  const selected = data.selected
+  const selected = data.selected;
   return {
     legend: {
       x: "center",

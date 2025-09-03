@@ -1,0 +1,68 @@
+/*
+Error: Undefined mixin 'trapezoid'.
+        on line 6 of E:\GITCode\GIT\Github\CloudHMI\css\toolStyle\control\tools\graphicStyle.scss, in `trapezoid'
+        from line 6 of E:\GITCode\GIT\Github\CloudHMI\css\toolStyle\control\tools\graphicStyle.scss
+
+1: //graphicStyle：图形样式
+2: $w: 30px;
+3: 
+4: /* 梯形 *\/
+5: .trapezoid {
+6:     @include trapezoid($w);
+7:     display: inline-block;
+8:     font-weight: bolder;
+9:     background: #4376B3;
+10: }
+11: 
+
+Backtrace:
+E:\GITCode\GIT\Github\CloudHMI\css\toolStyle\control\tools\graphicStyle.scss:6:in `trapezoid'
+E:\GITCode\GIT\Github\CloudHMI\css\toolStyle\control\tools\graphicStyle.scss:6
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:352:in `block in visit_mixin'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:98:in `block in with_mixin'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:135:in `with_frame'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:98:in `with_mixin'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:350:in `visit_mixin'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `block in with_base'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:135:in `with_frame'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `with_base'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:444:in `block (2 levels) in visit_rule'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:444:in `map'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:444:in `block in visit_rule'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:442:in `visit_rule'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `block in with_base'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:135:in `with_frame'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/stack.rb:79:in `with_base'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:162:in `visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `map'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:161:in `visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/visitors/perform.rb:10:in `visit'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/root_node.rb:36:in `css_tree'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/tree/root_node.rb:20:in `render'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/engine.rb:290:in `render'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:400:in `run'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/sass_scss.rb:63:in `process_result'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:52:in `parse'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/lib/sass/exec/base.rb:19:in `parse!'
+D:/ITWindows/Koala/rubygems/gems/sass-3.5.2/bin/sass:13:in `<top (required)>'
+D:/ITWindows/Koala/bin/sass:22:in `load'
+D:/ITWindows/Koala/bin/sass:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined mixin 'trapezoid'.\A         on line 6 of E:\GITCode\GIT\Github\CloudHMI\css\toolStyle\control\tools\graphicStyle.scss, in `trapezoid'\A         from line 6 of E:\GITCode\GIT\Github\CloudHMI\css\toolStyle\control\tools\graphicStyle.scss\A \A 1: //graphicStyle：图形样式\A 2: $w: 30px;\A 3: \A 4: /* 梯形 */\A 5: .trapezoid {\A 6:     @include trapezoid($w);\A 7:     display: inline-block;\A 8:     font-weight: bolder;\A 9:     background: #4376B3;\A 10: }\A 11: "; }
