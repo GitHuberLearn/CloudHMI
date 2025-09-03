@@ -4,26 +4,52 @@
  * @Author: Kenny
  * @Date: 2024-07-05 11:06:37
  * @LastEditors: ~
- * @LastEditTime: 2025-07-09 09:49:58
+ * @LastEditTime: 2025-09-03 11:01:57
  */
 @import "./mixin.scss";
 
-//字体颜色
-.fz-style-blue {
+//颜色
+.fc-fff {
+    color: $f_color;
+}
+
+.c-fff {
+    color: $f_color_fff;
+}
+
+.c-blue {
     color: $blue_BCF0FE;
 }
 
-.fz-style-red {
+.c-red {
     color: $red_ff6c34;
 }
 
-.fz-style-orange {
+.c-orange {
     color: $orange_F8AC15;
 }
 
-.fz-style-green {
+.c-green {
     color: $green_34f2d5;
 }
+
+
+
+// .fz-style-blue {
+//     color: $blue_BCF0FE;
+// }
+
+// .fz-style-red {
+//     color: $red_ff6c34;
+// }
+
+// .fz-style-orange {
+//     color: $orange_F8AC15;
+// }
+
+// .fz-style-green {
+//     color: $green_34f2d5;
+// }
 
 
 

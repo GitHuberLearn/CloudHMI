@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2025-09-03 10:44:19
+ * @LastEditTime: 2025-09-03 11:26:52
  -->
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
 	<title>净现率</title>
 	<!--common css/js-->
 	<!--本地：去掉/CloudHMI -->
-	<script src="/js/common/common-cloud.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/CloudHMI/js/common/common-cloud.js" type="text/javascript" charset="utf-8"></script>
 	<!--声明css,js变量-->
 	<script type="text/javascript">
 		var LSList = {
@@ -123,12 +123,14 @@
 			一项三线（复利与单利、跨度值）
 		</span>
 		<span class="common-btn default theme-bgOrange tal">
-			操作流程：<br/>
-			<p class="fc_fff">2年-1w 1年-5k 半年-1w 3个月-2w = 4.5w</p>
-			<p class="fc_fff">list_real _一次填入实际利率 ->  (netPresentTrend*3)</p>
-			<p class="fc_fff">annual_rate _记录每年实际利率 -> (atPresentactualRate)</p>
-			<p class="fc_fff">onClickMsg 记录投资日，未来回收日(预发轮询月)(milestone)</p>
-			<button class="layui-btn layui-btn-normal layui-btn-sm layui-btn-radius" id="LAY-Mock">Mock</button>
+			操作流程：
+			<div class="plr20">
+				<p class="c-fff">2年-1w | 1年-5k | 半年-1w | 3个月-2w  || 4.5w</p>
+				<p class="fc-fff">list_real _一次填入实际利率 ->  (netPresentTrend*3)</p>
+				<p class="fc-fff">annual_rate _记录每年实际利率 -> (atPresentactualRate)</p>
+				<p class="fc-fff">onClickMsg 记录投资日，未来回收日(预发轮询月)(milestone)</p>
+				<button class="layui-btn layui-btn-normal layui-btn-sm layui-btn-radius" id="LAY-Mock">Mock</button>
+			</div>
 		</span>
 	</pre>
 	<!-- 表单1 -->

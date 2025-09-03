@@ -5,19 +5,25 @@
  * @Author: Kenny
  * @Date: 2024-07-05 11:06:37
  * @LastEditors: ~
- * @LastEditTime: 2025-07-09 09:49:58
+ * @LastEditTime: 2025-09-03 11:01:57
  */
 /***REM***/
-.fz-style-blue {
+.fc-fff {
+  color: #e5f7ff; }
+
+.c-fff {
+  color: #fff; }
+
+.c-blue {
   color: #BCF0FE; }
 
-.fz-style-red {
+.c-red {
   color: #ff6c34; }
 
-.fz-style-orange {
+.c-orange {
   color: #F8AC15; }
 
-.fz-style-green {
+.c-green {
   color: #34f2d5; }
 
 * {
