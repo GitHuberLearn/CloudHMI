@@ -27,11 +27,11 @@ var LSList = {
   ],
   list2: [
     "/plugins/jquery/jquery.min.js",
-    '/plugins/knockout/knockout-3.2.0.js',
-    '/plugins/knockout/knockout.mapping.js',
+    "/plugins/knockout/knockout-3.2.0.js",
+    "/plugins/knockout/knockout.mapping.js",
     "/plugins/lib/xe-utils.js",
     "/plugins/layui/layui.js",
-    '/js/product/httpClient.js',
+    "/js/product/httpClient.js",
     "/js/product/stylenew.js", //本部js
   ],
 };
@@ -51,22 +51,22 @@ var writeImportFile = function (type, list, isBasics) {
     for (var i = 0; i < list.length; i++) {
       document.write(
         '<link rel="stylesheet" type="text/css" href="' +
-        path +
-        list[i] +
-        "?v=" +
-        version +
-        '">'
+          path +
+          list[i] +
+          "?v=" +
+          version +
+          '">'
       );
     }
   } else if (type === "script") {
     for (var i = 0; i < list.length; i++) {
       document.write(
         '<script type="text/javascript" type="module" charset="utf-8" src="' +
-        path +
-        list[i] +
-        "?v=" +
-        version +
-        '"></script>'
+          path +
+          list[i] +
+          "?v=" +
+          version +
+          '"></script>'
       );
     }
   } else if (type === "scriptmodule") {
@@ -74,11 +74,11 @@ var writeImportFile = function (type, list, isBasics) {
     for (var i = 0; i < list.length; i++) {
       document.write(
         '<script  type="module" src="' +
-        path +
-        list[i] +
-        "?v=" +
-        version +
-        '"></script>'
+          path +
+          list[i] +
+          "?v=" +
+          version +
+          '"></script>'
       );
     }
   }
@@ -88,8 +88,8 @@ var writeImportFile = function (type, list, isBasics) {
 //logon 图片 //module
 document.write(
   '<link rel="shortcut icon" type="image/x-icon" href="' +
-  cubeInit.gatewayURL_basics +
-  '/favicon.ico">'
+    cubeInit.gatewayURL_basics +
+    '/favicon.ico">'
 );
 
 writeImportFile(LSList.type1, LSList.list1, true);

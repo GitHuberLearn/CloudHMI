@@ -1,7 +1,36 @@
 @import "./variables.scss";
 
+
+@mixin pc-wh {
+  width: 100%;
+  height: 100%;
+  min-width: 640px;
+  margin: 0 auto;
+}
+
+/***REM***/
+//start
+@mixin rem-pd5 {
+  padding: 0.5rem 0;
+  box-sizing: border-box;
+}
+
+//end
+
+@mixin trapezoid($w) {
+  width: $w;
+  height: #{$w*0.75};
+  line-height: #{$w*0.75};
+}
+
+@mixin flex-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @mixin el-form-fz-fzfff {
-  color: $fzcolor;
+  color: $f_color;
   font-size: 0.8rem;
 }
 
@@ -15,16 +44,27 @@
   }
 }
 
-@mixin el-form-disabled-css-fzfff {
+@mixin el-form-disabled-input($f_color) {
   background: none;
   border-width: 0;
-  color: $fzcolor;
   text-align: left;
+  padding: 0;
+  box-shadow: none;
+  color: $f_color;
+  -webkit-text-fill-color: $f_color;
 
   .el-range-separator,
   .el-range__icon {
-    color: $fzcolor;
+    color: $f_color;
   }
+}
+
+@mixin el-form-disabled-css {
+  @include el-form-disabled-input($f_color_main);
+}
+
+@mixin el-form-disabled-css-fzfff {
+  @include el-form-disabled-input($f_color);
 }
 
 @mixin el-form-disabled-fzfff {
@@ -37,7 +77,6 @@
     *,
     .el-radio__inner::after {
       cursor: default !important;
-
     }
 
     .el-input__inner,
@@ -58,16 +97,9 @@
   }
 }
 
-@mixin el-form-disabled-css {
+@mixin el-none {
   background: none;
-  border-width: 0;
-  color: #333;
-  text-align: left;
-
-  .el-range-separator,
-  .el-range__icon {
-    color: #333;
-  }
+  box-shadow: none;
 }
 
 @mixin el-form-disabled {
@@ -75,21 +107,35 @@
     @include el-form-disabled-css;
   }
 
+  .el-textarea.is-disabled textarea {
+    line-height: 2.9;
+  }
+
   .el-input-group--append.is-disabled {
+
+    .el-input__wrapper {
+      box-shadow: 0 0 0 1px #eee inset;
+    }
+
     .el-input__inner {
+      padding: 0 15px;
       border-width: 1px;
       border-color: #eee;
     }
   }
 
+  //.el-select__wrapper.is-disabled,
   .is-disabled {
+    @include el-none;
+
+    .el-input__wrapper {
+      @include el-none;
+    }
 
     *,
     .el-radio__inner::after {
       cursor: default !important;
-
     }
-
 
     .el-input__inner,
     .el-textarea__inner,
@@ -101,12 +147,27 @@
       text-align: center;
     }
 
+    .el-select__suffix,
     .el-input-number__decrease,
     .el-input-number__increase,
     .el-input__suffix {
       display: none;
     }
   }
+
+
+  //数值不隐藏
+  // .el-input-number.is-disabled {
+  //   .el-input__inner {
+  //     border-width: 1px;
+  //     border-color: #eee;
+  //   }
+
+  //   .el-input-number__decrease,
+  //   .el-input-number__increase {
+  //     display: block;
+  //   }
+  // }
 }
 
 @mixin el-select-dropdown {
@@ -118,7 +179,7 @@
   }
 
   span {
-    color: $fzcolor;
+    color: $f_color;
     font-size: 0.8rem;
   }
 
@@ -143,7 +204,7 @@
   }
 
   .el-icon-arrow-right:before {
-    color: $fzcolor;
+    color: $f_color;
   }
 
 }
@@ -235,6 +296,32 @@
   height: 100%;
 }
 
+@mixin whs {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+@mixin m($m) {
+  margin: $m;
+}
+
+@mixin mt($top) {
+  margin-top: $top;
+}
+
+@mixin mb($bottom) {
+  margin-bottom: $bottom;
+}
+
+@mixin ml($left) {
+  margin-left: $left;
+}
+
+@mixin mr($right) {
+  margin-right: $right;
+}
+
 //倒三角
 //$position:位置：top:向下，left：向右
 //$w:大小
@@ -267,5 +354,16 @@
     border: #{$w} solid transparent;
     border-#{$position}: #{$w} solid #{$bg};
   }
+}
 
+//清除浮动
+@mixin clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
 }

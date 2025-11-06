@@ -4,17 +4,83 @@
  * @Author: Kenny
  * @Date: 2024-07-05 11:06:37
  * @LastEditors: ~
- * @LastEditTime: 2024-08-29 15:27:35
+ * @LastEditTime: 2025-09-03 11:01:57
  */
+@import "./mixin.scss";
 
-.w100 {
-    width: 100% !important;
+//颜色
+.fc-fff {
+    color: $f_color;
+}
+
+.c-fff {
+    color: $f_color_fff;
+}
+
+.c-blue {
+    color: $blue_BCF0FE;
+}
+
+.c-red {
+    color: $red_ff6c34;
+}
+
+.c-orange {
+    color: $orange_F8AC15;
+}
+
+.c-green {
+    color: $green_34f2d5;
+}
+
+
+
+// .fz-style-blue {
+//     color: $blue_BCF0FE;
+// }
+
+// .fz-style-red {
+//     color: $red_ff6c34;
+// }
+
+// .fz-style-orange {
+//     color: $orange_F8AC15;
+// }
+
+// .fz-style-green {
+//     color: $green_34f2d5;
+// }
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.wauto {
+    @include wauto;
+}
+
+.wautos {
+    @include wautos;
 }
 
 .w50 {
     width: 50% !important;
 }
 
+.h50 {
+    height: 50% !important;
+}
+
+.w70 {
+    width: 70% !important;
+}
+
+.w100 {
+    width: 100% !important;
+}
 
 .h100 {
     height: 100% !important;
@@ -22,24 +88,36 @@
 
 //margin
 .m0 {
-    margin: 0 !important;
+    @include m(0px);
+}
+
+.m10 {
+    @include m(10px);
+}
+
+.mt5 {
+    @include mt(5px);
+}
+
+.ml5 {
+    @include ml(5px);
+}
+
+.mr5 {
+    @include mr(5px);
 }
 
 .mb20 {
-    margin-bottom: 20px !important;
+    @include mb(20px);
 }
 
 .mb50 {
-    margin-bottom: 50px !important;
+    @include mb(50px);
 }
 
 //padding
 .pd {
     padding: 0 !important;
-}
-
-.mg {
-    margin: 0 !important;
 }
 
 .pt {
@@ -48,6 +126,12 @@
 
 .pd5 {
     padding: 5px;
+    box-sizing: border-box;
+}
+
+.ptb5 {
+    padding: 5px 0;
+    box-sizing: border-box;
 }
 
 .plr20 {
@@ -70,6 +154,7 @@
     padding-bottom: 0 !important;
 }
 
-.fw {
+.fw,
+.fz-w {
     font-weight: bolder;
 }
