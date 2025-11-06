@@ -4,9 +4,9 @@
  * @Author: Kenny
  * @Date: 2022-10-08 15:53:31
  * @LastEditors: ~
- * @LastEditTime: 2025-11-06 20:38:17
+ * @LastEditTime: 2025-11-06 20:39:55
 -->
-# CloudHMI：云页面 2022-10-08 - 20xx-xx-xx
+# CloudHMI：云页面 2022-10-08 - 202x-xx-xx
 
 ```bash
 # 计划：实现动态接口改利调息
