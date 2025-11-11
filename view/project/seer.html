@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2025-07-23 15:48:40
+ * @LastEditTime: 2025-11-11 13:42:47
  -->
 <!DOCTYPE html>
 <html>
@@ -18,7 +18,7 @@
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<title>思尔</title>
 	<!--common css/js-->
-	<script src="/CloudHMI/js/common/common-cloud.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/common/common-cloud.js" type="text/javascript" charset="utf-8"></script>
 	<!--声明css,js变量-->
 	<script type="text/javascript">
 		var LSList = {
@@ -33,15 +33,22 @@
 	</script>
 	<!--About css-->
 	<script type="text/javascript">writeImportFile(LSList.type1, LSList.list1);</script>
+	<style>
+		.iframe {
+			min-height: 100vh;
+		}
+	</style>
 </head>
 
 <body class="catalogue-url">
 	<pre class="foldBox">
 		<a href="https://www.shxseer.com/" target="_blank">项目：官网 [2022.05 - 至今]</a>
 		<a href="https://seer-health.com" target="_blank">项目里程碑 [2022.05 - 至今]</a>
+		<a href="https://www.yuque.com" target="_blank">更新语雀笔记网</a>
 	</pre>
 	<p class="title"><i class="lins"></i>大屏</p>
 	<ol>
+		<!-- 经销商后台管理系统 -->
 		<li>
 			<a href="https://admin.seer-health.com/seerDealer/#/login" target="_blank">经销商后台管理系统-dealer[2022-09-21 ~
 				2024-xx-xx]
@@ -55,18 +62,31 @@
 				</li>
 			</ol>
 		</li>
+		<!-- 公交 -->
 		<li>
 			<a href="https://admin.seer-health.com/web/largeScreen/#/login" target="_blank">公交-bus [2022-09-14 ~ 至今]</a>
-			<pre class="foldBox">
-				-统一路径：https://admin.seer-health.com/web/largeScreenAA/#/loginBB
-				## 环境
-				## 整合项目
-				- https://admin.seer-health.com/web/largeScreen/#/loginBB
-				- https://dev.seer-health.com/app/largeScreen/html/#/loginBB
-				- BB: login/loginMT/loginCR/loginTR/loginOC/loginMI
-				### 单独项目 (login)
-				- 生产：https://admin.seer-health.com/web/largeScreenAA/#/login
-				- 测试：https://dev.seer-health.com/app/largeScreenAA/html/#/login
+			<div class="foldBox">
+				<a class="item-block" href="https://admin.seer-health.com/web/largeScreenAA/#/loginBB" target="_blank">
+					-统一路径：https://admin.seer-health.com/web/largeScreenAA/#/loginBB
+				</a>
+				<p>## 环境</p>
+				<p>## 整合项目</p>
+				<a class="item-block" href="https://admin.seer-health.com/web/largeScreen/#/loginBB" target="_blank">
+					- https://admin.seer-health.com/web/largeScreen/#/loginBB
+				</a>
+				<a class="item-block" href="https://admin.seer-health.com/web/largeScreen/#/loginBB" target="_blank">
+					- https://dev.seer-health.com/app/largeScreen/html/#/loginBB
+				</a>
+				<p>- BB: login/loginMT/loginCR/loginTR/loginOC/loginMI</p>
+
+				<p>### 单独项目 (login)</p>
+				<a class="item-block" href="https://admin.seer-health.com/web/largeScreenAA/#/login" target="_blank">
+					- 生产：https://admin.seer-health.com/web/largeScreenAA/#/login
+				</a>
+				<a class="item-block" href="https://dev.seer-health.com/app/largeScreenAA/html/#/login" target="_blank">
+					- 测试：https://dev.seer-health.com/app/largeScreenAA/html/#/login
+				</a>
+				<pre>
 				- AA: largeScreenHO/largeScreenCO/largeScreenCCO/
 					largeScreenOC/largeScreenEnOC/
 					largeScreenAC/largeScreenAW/largeScreenSC/
@@ -74,21 +94,67 @@
 				# 帐号(*推荐)
 				- *bus/(1*6)
 				- 15200000011/1
-			</pre>
+				</pre>
+			</div>
 		</li>
+		<!-- 移动Vue项目-AppHealth -->
 		<li>
 			<a href="https://admin.seer-health.com/web/AppHealth/#/evaluate/drugUseEvaluation?userId=24fe6d0c05ad4e89b33080902da78bd0dates2022-12-24"
 				target="_blank">移动Vue项目-AppHealth [2022-09-16 ~
 				2024-xx-xx]
 			</a>
-			<pre class="foldBox">
-				## AI健康检测报告 2025-07-15 ~ 2025-xx-xx
-				## 移动端管理 2024-12-31 ~ 2025-02-20
-				## 在线药店 2024-01-29 ~ 2024-04-25 弹框|资质
-				## 趣味饮食运动 2023-08-24 ~ 2023-09-11
-				## 心理评估 2022-07-26 ~ 2023-03-20
-				## 用药评估 2022-05-20 ~ 2023-12-19
-			</pre>
+			<div class="foldBox">
+				<a class="item-block"
+					href="https://admin.seer-health.com/web/AppHealth/#/games/lottery?userId=af4a9dadb6114c788e879cbd2e72bca7"
+					target="_blank">
+					## 抽奖游戏 2025-10-22 ~ 2025-10-28
+				</a>
+				<a class="item-block"
+					href="https://admin.seer-health.com/web/AppHealth/#/AIHealth/inspectionReport?date=2025-01-12&userId=a7c9bff53f2e4a70af7a9f641552507a"
+					target="_blank">
+					## AI健康检测报告 2025-07-15 ~ 2025-07-15
+				</a>
+				<a class="item-block" href="https://admin.seer-health.com/web/AppHealth/#/mobileTerminalAdmin/login"
+					target="_blank">
+					## 移动端管理 2024-12-31 ~ 2025-02-20
+				</a>
+				<p class="item-block">
+					## 在线药店 2024-01-29 ~ 2024-04-25
+					<a href="https://admin.seer-health.com/web/AppHealth/#/onlinePharmacy/prompt?userId=3e3f15bf3af6452cb5c1cc59289f684e"
+						target="_blank">
+						弹框
+					</a>|
+					<a href="https://admin.seer-health.com/web/AppHealth/#/onlinePharmacy/home" target="_blank">
+						资质
+					</a>
+				</p>
+				<a class="item-block"
+					href="https://admin.seer-health.com/web/AppHealth/#/interestEvaluation/exercise?userId=67f5045d737945cca2d527f896491ebc&foodTargetId=cb1792c6bf0f483b9b26ba8bd74e5c8c"
+					target="_blank">
+					## 趣味饮食运动 2023-08-24 ~ 2023-09-11
+				</a>
+
+				<a class="item-block"
+					href="https://admin.seer-health.com/web/AppHealth/#/psychological/cescl?userId=caf1c12ecc2149a1a4b2d6951c8355f1&dates=2022-07-26"
+					target="_blank">
+					## 心理评估 2022-07-26 ~ 2023-03-20
+				</a>
+				<p class="item-block">
+					## 用药评估 2022-05-20 ~ 2023-12-19
+					<a href="https://admin.seer-health.com/web/AppHealth/#/evaluate/drugUseEvaluation?userId=24fe6d0c05ad4e89b33080902da78bd0dates2022-12-24"
+						target="_blank">
+						1.0
+					</a>|
+					<a href="https://admin.seer-health.com/web/AppHealth/#/evaluate/home?userId=7f4c1884b4e7438f9752db3b508e596edates2023-06-14"
+						target="_blank">
+						2.0
+					</a>|
+					<a href="https://uat.seer-health.com/web/AppHealth/#/evaluate/home?userId=7f4c1884b4e7438f9752db3b508e596edates2023-06-15"
+						target="_blank">
+						2.1
+					</a>
+				</p>
+			</div>
 			<ol>
 				<li>
 					<a href="https://www.seer-health.com/web/v1/AppHealth/html/views/prompt.html?userId=3e3f15bf3af6452cb5c1cc59289f684e"
@@ -102,7 +168,7 @@
 				</li>
 			</ol>
 		</li>
-
+		<!-- Datacenter -->
 		<li>
 			<a href="https://admin.seer-health.com/web/datacenter/#/login" target="_blank">数据管理系统-Datacenter [2023-04-10
 				~ 2024-12-02]
@@ -125,6 +191,7 @@
 				</li>
 			</ol>
 		</li>
+		<!-- 大屏BI智能系统 -->
 		<li>
 			<a target="_blank">大屏BI智能系统-SmartScreen [2024-04-18 ~ 2024-xx-xx]
 			</a>
@@ -145,13 +212,13 @@
 				</li>
 			</ol>
 		</li>
+		<!-- H5宣传工具网页 -->
 		<li>
 			<a href="https://admin.seer-health.com" target="_blank">H5宣传工具网页-YZWatch
 				[2020-07-15 ~ 2023-09-13]
 			</a>
 		</li>
 	</ol>
-
 </body>
 <!--Tripartite js-->
 <!--About js-->

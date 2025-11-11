@@ -4,13 +4,13 @@
  * @Author: Kenny
  * @Date: 2023-11-10 10:46:25
  * @LastEditors: ~
- * @LastEditTime: 2025-06-09 11:04:55
+ * @LastEditTime: 2025-11-11 13:58:36
  */
 
 //来源web-tools
 $(function () {
   //折叠文字
-  $("pre.foldBox").prepend('<span class="fold J_fold"></span>');
+  $(".foldBox").prepend('<span class="fold J_fold"></span>');
   $(".foldBox .J_fold").on("click", function () {
     var index = $(this).parent().attr("index");
     var i = index == 0 ? 1 : 0;
@@ -23,10 +23,9 @@ $(function () {
   });
 });
 
-
 /**
  * 详情页面log开关  false：关  true：开
- * @param {*any} data 
+ * @param {*any} data
  * @param {*boole} boole 默认开启
  * 无法定位具体距离位置
  */
@@ -54,21 +53,21 @@ $(document).bind("mouseover mouseout mousemove", function (event) {
     ele.title = "";
     if (title != null && title != "") {
       var styleCss = {
-        position: "absolute",
-        top: top + 15,
-        left: left + 15,
-        paddingLeft: "12px",
-        paddingRight: "12px",
-        paddingTop: "3px",
-        paddingBottom: "3px",
-        border: "1px solid #D2DDE6",
-        borderRadius: "2px",
-        backgroundColor: "#DEEBF0",
-        fontSize: "12px",
-        fontColor: "#2C2C2C",
-        fontFamily: "MicrosoftYaHeiUI",
-        zIndex: "100000",
-      },
+          position: "absolute",
+          top: top + 15,
+          left: left + 15,
+          paddingLeft: "12px",
+          paddingRight: "12px",
+          paddingTop: "3px",
+          paddingBottom: "3px",
+          border: "1px solid #D2DDE6",
+          borderRadius: "2px",
+          backgroundColor: "#DEEBF0",
+          fontSize: "12px",
+          fontColor: "#2C2C2C",
+          fontFamily: "MicrosoftYaHeiUI",
+          zIndex: "100000",
+        },
         dvTitle = $("<div></div>");
       dvTitle.addClass("showTitleBox");
       dvTitle.css(styleCss);

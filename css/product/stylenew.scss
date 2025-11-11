@@ -46,7 +46,17 @@ body.catalogue-url .title {
 body.catalogue-url li {
 	line-height: 33px;
 	padding: 0 15px;
-	box-sizing: border-box
+	box-sizing: border-box;
+
+	a {
+		color: #322fff;
+	}
+
+	.item-block {
+		line-height: 1.5;
+		display: block;
+	}
+
 }
 
 body.catalogue-url li:hover {
@@ -54,7 +64,7 @@ body.catalogue-url li:hover {
 }
 
 body.catalogue-url li:hover a {
-	color: #adff2f
+	color: #ff2f7f
 }
 
 body.catalogue-url ol {

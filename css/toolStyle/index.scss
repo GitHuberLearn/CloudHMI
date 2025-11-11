@@ -1,1 +1,6 @@
 @import "./control/index.scss";
+
+.iframe,
+iframe {
+    min-height: 100vh;
+}
