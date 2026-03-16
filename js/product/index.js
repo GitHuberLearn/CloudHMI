@@ -55,7 +55,7 @@ export function getRecentMonth(news, type) {
   const time = XEUtils.isObject(news) ? news.time : new Date();
   const num = XEUtils.isObject(news) ? news.num : news;
   let month = XEUtils.getWhatMonth(time, num);
-  type = type ? type : "yyyy-MM";
+  type = type ? type : 'yyyy-MM';
   return XEUtils.toDateString(month, type);
 }
 
@@ -66,7 +66,7 @@ export function getRecentMonth(news, type) {
  */
 export function getRecentDate(n, type) {
   let day = XEUtils.getWhatDay(new Date(), n);
-  type = type ? type : "yyyy-MM-dd";
+  type = type ? type : 'yyyy-MM-dd';
   return XEUtils.toDateString(day, type);
 }
 
@@ -75,41 +75,80 @@ export function getRecentDate(n, type) {
  * @returns 年龄
  */
 export function age_cofig(birthday) {
-  let age = "--";
+  let age = '--';
   if (birthday) {
     const date = new Date().getFullYear();
-    age = date - birthday.split("-")[0];
+    age = date - birthday.split('-')[0];
   }
   return age;
 }
 
 /**
- * Parse the time to string
- * @param {(Object|string|number)} time
- * @param {string} cFormat
- * @returns {string | null}
+ * 格式化时间
+ * @param {Date|number|string} time - Date对象、时间戳或可解析的时间字符串
+ * @param {string} [cFormat='{y}-{m}-{d} {h}:{i}:{s} {a}'] - 自定义格式，如 '{y}-{m}-{d}'
+ * @returns {string|null} 格式化后的时间字符串，无效输入返回 null
  */
 export function parseTime(time, cFormat) {
+  // 1. 处理无效输入
+  if (!time) return null;
+
+  // 2. 统一转换为 Date 对象
+  let date;
+  if (time instanceof Date) {
+    date = time;
+  } else if (typeof time === 'number' || typeof time === 'string') {
+    date = new Date(time);
+    // 处理无效日期（如非法时间戳或字符串）
+    if (isNaN(date.getTime())) return null;
+  } else {
+    return null;
+  }
+
+  // 3. 预定义格式化对象（避免每次调用重复创建）
+  const formatObj = {
+    y: date.getFullYear(),
+    m: String(date.getMonth() + 1).padStart(2, '0'),
+    d: String(date.getDate()).padStart(2, '0'),
+    h: String(date.getHours()).padStart(2, '0'),
+    i: String(date.getMinutes()).padStart(2, '0'),
+    s: String(date.getSeconds()).padStart(2, '0'),
+    a: date.getDay(), // 星期几（0-6）
+  };
+
+  // 4. 替换格式占位符
+  return cFormat.replace(/\{([ymdhisa])\}/g, (match, key) => {
+    if (key === 'a') {
+      return `星期${['日', '一', '二', '三', '四', '五', '六'][formatObj.a]}`;
+    }
+    return formatObj[key];
+  });
+}
+
+/**
+ * 对uniapp不兼容
+ */
+export function parseTime1(time, cFormat) {
   if (arguments.length === 0 || !time) {
     return null;
   }
-  const format = cFormat || "{y}-{m}-{d} {h}:{i}:{s}";
+  const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
   let date;
-  if (typeof time === "object") {
+  if (typeof time === 'object') {
     date = time;
   } else {
-    if (typeof time === "string") {
+    if (typeof time === 'string') {
       if (/^[0-9]+$/.test(time)) {
         // support "1548221490638"
         time = parseInt(time);
       } else {
         // support safari
         // https://stackoverflow.com/questions/4310953/invalid-date-in-safari
-        time = time.replace(new RegExp(/-/gm), "/");
+        time = time.replace(new RegExp(/-/gm), '/');
       }
     }
 
-    if (typeof time === "number" && time.toString().length === 10) {
+    if (typeof time === 'number' && time.toString().length === 10) {
       time = time * 1000;
     }
     date = new Date(time);
@@ -126,10 +165,10 @@ export function parseTime(time, cFormat) {
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key];
     // Note: getDay() returns 0 on Sunday
-    if (key === "a") {
-      return ["日", "一", "二", "三", "四", "五", "六"][value];
+    if (key === 'a') {
+      return ['日', '一', '二', '三', '四', '五', '六'][value];
     }
-    return value.toString().padStart(2, "0");
+    return value.toString().padStart(2, '0');
   });
   return time_str;
 }
@@ -140,7 +179,7 @@ export function parseTime(time, cFormat) {
  * @returns {string}
  */
 export const formatTime = (time, option) => {
-  if (("" + time).length === 10) {
+  if (('' + time).length === 10) {
     time = parseInt(time) * 1000;
   } else {
     time = +time;
@@ -150,14 +189,14 @@ export const formatTime = (time, option) => {
 
   const diff = (now - d) / 1000;
   if (diff < 30) {
-    return "刚刚";
+    return '刚刚';
   } else if (diff < 3600) {
     // less 1 hour
-    return Math.ceil(diff / 60) + "分钟前";
+    return Math.ceil(diff / 60) + '分钟前';
   } else if (diff < 3600 * 24) {
-    return Math.ceil(diff / 3600) + "小时前";
+    return Math.ceil(diff / 3600) + '小时前';
   } else if (diff < 3600 * 24 * 2) {
-    return "1天前";
+    return '1天前';
   }
   if (option) {
     return parseTime(time, option);
@@ -165,13 +204,13 @@ export const formatTime = (time, option) => {
     return (
       d.getMonth() +
       1 +
-      "月" +
+      '月' +
       d.getDate() +
-      "日" +
+      '日' +
       d.getHours() +
-      "时" +
+      '时' +
       d.getMinutes() +
-      "分"
+      '分'
     );
   }
 };
@@ -181,14 +220,14 @@ export const formatTime = (time, option) => {
  * @returns {Object}
  */
 export const param2Obj = (url) => {
-  const search = decodeURIComponent(url.split("?")[1]).replace(/\+/g, " ");
+  const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ');
   if (!search) {
     return {};
   }
   const obj = {};
-  const searchArr = search.split("&");
+  const searchArr = search.split('&');
   searchArr.forEach((v) => {
-    const index = v.indexOf("=");
+    const index = v.indexOf('=');
     if (index !== -1) {
       const name = v.substring(0, index);
       const val = v.substring(index + 1, v.length);
@@ -203,22 +242,22 @@ export const param2Obj = (url) => {
  * @returns {string}
  */
 export const actionUrl = () => {
-  if (window.location.host.indexOf("localhost") > -1) {
-    return "/dev-api/api/common/v1/uploadAttachment/";
-  } else if (window.location.host.indexOf("dev.seer-health") > -1) {
-    return "https://dev.seer-health.com/v1/mall/api/common/v1/uploadAttachment/";
+  if (window.location.host.indexOf('localhost') > -1) {
+    return '/dev-api/api/common/v1/uploadAttachment/';
+  } else if (window.location.host.indexOf('dev.seer-health') > -1) {
+    return 'https://dev.seer-health.com/v1/mall/api/common/v1/uploadAttachment/';
   } else {
-    return "https://api.seer-health.com/v1/mall/api/common/v1/uploadAttachment/";
+    return 'https://api.seer-health.com/v1/mall/api/common/v1/uploadAttachment/';
   }
 };
 
 export const actionUrl2 = () => {
-  if (window.location.host.indexOf("localhost") > -1) {
-    return "/portal-api/nAdv/uploadFile";
-  } else if (window.location.host.indexOf("dev.seer-health") > -1) {
-    return "https://dev.seer-health.com/v1/portal/nAdv/uploadFile";
+  if (window.location.host.indexOf('localhost') > -1) {
+    return '/portal-api/nAdv/uploadFile';
+  } else if (window.location.host.indexOf('dev.seer-health') > -1) {
+    return 'https://dev.seer-health.com/v1/portal/nAdv/uploadFile';
   } else {
-    return "https://api.seer-health.com/v1/portal/nAdv/uploadFile";
+    return 'https://api.seer-health.com/v1/portal/nAdv/uploadFile';
   }
 };
 
@@ -249,12 +288,12 @@ export const initEchart = (echart, config, bg, color) => {
  * echarts 无数据
  */
 export const echartsNoData = (bg, color) => {
-  let text = bg ? "" : "暂无数据";
+  let text = bg ? '' : '暂无数据';
   return {
     title: {
       text,
-      x: "center",
-      y: "center",
+      x: 'center',
+      y: 'center',
       textStyle: NoDataStyle(color),
     },
   };
@@ -297,8 +336,8 @@ export const initHchart = (el, config, bgs, flag) => {
  * highchart 无数据
  */
 export const highchartsNoData = (bg, el) => {
-  let text = bg ? "" : "暂无数据";
-  let chart = { backgroundColor: "none" };
+  let text = bg ? '' : '暂无数据';
+  let chart = { backgroundColor: 'none' };
   if (el) {
     chart.renderTo = el;
   }
@@ -308,7 +347,7 @@ export const highchartsNoData = (bg, el) => {
       enabled: false,
     },
     lang: {
-      noData: "",
+      noData: '',
     },
     title: {
       text,
@@ -322,11 +361,11 @@ export const highchartsNoData = (bg, el) => {
  * @returns 无数据样式
  */
 export const NoDataStyle = (c) => {
-  let color = c === "admin" ? "#6D6D6D" : "#3DF4F5";
+  let color = c === 'admin' ? '#6D6D6D' : '#3DF4F5';
   return {
     color,
-    fontWeight: "bold",
-    fontSize: "1.2rem",
+    fontWeight: 'bold',
+    fontSize: '1.2rem',
   };
 };
 
@@ -397,7 +436,7 @@ const marqueeInterval = (bodyWrapper, len) => {
     const dome = bodyWrapper.childNodes[0];
     // dome.style.transform = `translateY(${tbTop}px)`;//`translate(0,${tbTop}px)`
     // dome.style.transition = "all 1s";//all 0ms ease-in 0s
-    dome.style.top = tbTop + "px";
+    dome.style.top = tbTop + 'px';
   };
   let timer = 0;
   timer = setInterval(marquehq, speedhq);
@@ -411,7 +450,7 @@ const marqueeInterval = (bodyWrapper, len) => {
     };
   };
   clearElement(bodyWrapper);
-  const this_dom = document.querySelectorAll(".popperBoxs .content");
+  const this_dom = document.querySelectorAll('.popperBoxs .content');
   this_dom.forEach((element) => {
     clearElement(element);
   });
@@ -445,7 +484,7 @@ const marqueeIntervals = (bodyWrapper, len) => {
     } else {
       tbTop -= 0.36;
     }
-    bodyWrapper.childNodes[0].style.top = tbTop + "px";
+    bodyWrapper.childNodes[0].style.top = tbTop + 'px';
   };
   let timers = 0;
   timers = setInterval(marquehq, speedhq);
@@ -459,7 +498,7 @@ const marqueeIntervals = (bodyWrapper, len) => {
     };
   };
   clearElement(bodyWrapper);
-  const this_dom = document.querySelectorAll(".popperBoxs .content");
+  const this_dom = document.querySelectorAll('.popperBoxs .content');
   this_dom.forEach((element) => {
     clearElement(element);
   });
@@ -475,9 +514,9 @@ export const toStartName = (name) => {
     return;
   }
   if (name.length > 2) {
-    return name.substring(0, 1) + "*" + name.substring(1 + 1);
+    return name.substring(0, 1) + '*' + name.substring(1 + 1);
   } else if (name.length === 2) {
-    return name.substring(0, 1) + "*";
+    return name.substring(0, 1) + '*';
   } else {
     return name;
   }
@@ -565,23 +604,23 @@ export function oninput(num) {
   var len1 = str.substr(0, 1);
   var len2 = str.substr(1, 1);
   // 如果第一位是0，第二位不是点，就用数字把点替换掉
-  if (str.length > 1 && len1 == 0 && len2 != ".") {
+  if (str.length > 1 && len1 == 0 && len2 != '.') {
     str = str.substr(1, 1);
   }
   // 第一位不能是.
-  if (len1 == ".") {
-    str = "";
+  if (len1 == '.') {
+    str = '';
   }
   // 限制只能输入一个小数点
-  if (str.indexOf(".") != -1) {
-    var str_ = str.substr(str.indexOf(".") + 1);
-    if (str_.indexOf(".") != -1) {
-      str = str.substr(0, str.indexOf(".") + str_.indexOf(".") + 1);
+  if (str.indexOf('.') != -1) {
+    var str_ = str.substr(str.indexOf('.') + 1);
+    if (str_.indexOf('.') != -1) {
+      str = str.substr(0, str.indexOf('.') + str_.indexOf('.') + 1);
     }
   }
   // 正则替换
-  str = str.replace(/[^\d^\.]+/g, ""); // 保留数字和小数点
-  str = str.replace(/\.\d\d\d$/, ""); // 小数点后只能输两位
+  str = str.replace(/[^\d^\.]+/g, ''); // 保留数字和小数点
+  str = str.replace(/\.\d\d\d$/, ''); // 小数点后只能输两位
   return str;
 }
 
@@ -591,20 +630,20 @@ export function oninput(num) {
  * @returns
  */
 export function toTImeString(val) {
-  const t = val.split(" ");
-  return t[1] === "00:00:00" ? t[0] : val;
+  const t = val.split(' ');
+  return t[1] === '00:00:00' ? t[0] : val;
 }
 
 //前8天的日期
 const date = [
-  parseTime(new Date() - 7 * 24 * 3600 * 1000, "{y}-{m}-{d}"),
-  parseTime(new Date() - 6 * 24 * 3600 * 1000, "{y}-{m}-{d}"),
-  parseTime(new Date() - 5 * 24 * 3600 * 1000, "{y}-{m}-{d}"),
-  parseTime(new Date() - 4 * 24 * 3600 * 1000, "{y}-{m}-{d}"),
-  parseTime(new Date() - 3 * 24 * 3600 * 1000, "{y}-{m}-{d}"),
-  parseTime(new Date() - 2 * 24 * 3600 * 1000, "{y}-{m}-{d}"),
-  parseTime(new Date() - 1 * 24 * 3600 * 1000, "{y}-{m}-{d}"),
-  parseTime(new Date() - 0 * 24 * 3600 * 1000, "{y}-{m}-{d}"),
+  parseTime(new Date() - 7 * 24 * 3600 * 1000, '{y}-{m}-{d}'),
+  parseTime(new Date() - 6 * 24 * 3600 * 1000, '{y}-{m}-{d}'),
+  parseTime(new Date() - 5 * 24 * 3600 * 1000, '{y}-{m}-{d}'),
+  parseTime(new Date() - 4 * 24 * 3600 * 1000, '{y}-{m}-{d}'),
+  parseTime(new Date() - 3 * 24 * 3600 * 1000, '{y}-{m}-{d}'),
+  parseTime(new Date() - 2 * 24 * 3600 * 1000, '{y}-{m}-{d}'),
+  parseTime(new Date() - 1 * 24 * 3600 * 1000, '{y}-{m}-{d}'),
+  parseTime(new Date() - 0 * 24 * 3600 * 1000, '{y}-{m}-{d}'),
 ];
 //前七天
 export const dateFs = date.slice(0, 7);
