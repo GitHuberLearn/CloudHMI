@@ -19,6 +19,20 @@
 // cylinder(Highcharts);
 
 /**
+ * 精确四舍五入到指定位数
+ * @param {number} num - 需要处理的数字
+ * @param {number} decimals - 保留的小数位数（默认2位）
+ * @returns {number} 返回四舍五入后的数字
+ */
+export const roundToDecimal = (num, decimals = 2) => {
+  if (isNaN(num) || isNaN(decimals)) {
+    throw new Error('参数必须是数字');
+  }
+  const factor = 10 ** decimals;
+  return Math.round((num + Number.EPSILON) * factor) / factor;
+};
+
+/**
  * 定时器
  * @param {*} fn
  * @param {*} time 默认5分钟
