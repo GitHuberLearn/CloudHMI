@@ -537,6 +537,36 @@ export const toStartName = (name) => {
 };
 
 /**
+ * 判断手机号
+ */
+export const isValidPhoneNumber = (phone) => {
+  // 中国大陆手机号正则：11位，以1开头，第二位通常是3-9
+  const regex = /^1[3-9]\d{9}$/;
+  return regex.test(phone);
+};
+
+/**
+ * 手机号格式化
+ * @param {String} phone 手机号
+ * @returns {string} 格式化为 3-4-4 分组
+ * @throws {TypeError} 如果参数无法转换为字符串
+ */
+export const formatPhoneNumber = (phone) => {
+  if (phone == null) {
+    throw new TypeError('参数不能为 null 或 undefined');
+  }
+  if (typeof phone === 'object') {
+    throw new TypeError('参数不能是对象');
+  }
+  const cleaned = String(phone).replace(/\D/g, '');
+  const formatted = cleaned.replace(
+    /^(\d{3})(\d{4})(\d{0,4})$/,
+    (_, p1, p2, p3) => `${p1} ${p2}${p3 ? ` ${p3}` : ''}`,
+  );
+  return formatted;
+};
+
+/**
  * 手机号隐藏关键号
  * @param {*手机号} phone
  * @returns
