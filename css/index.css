@@ -113,7 +113,7 @@
 /***REM***/
 .el-dropdown-link {
   cursor: pointer;
-  color: #409EFF; }
+  color: #409eff; }
 
 .multiple-selection .el-table__header-wrapper .el-table__header .el-checkbox {
   display: none; }
@@ -126,7 +126,7 @@
 .el-breadcrumb__inner a {
   font-weight: 400 !important; }
 
-.el-upload input[type="file"] {
+.el-upload input[type='file'] {
   display: none !important; }
 
 .el-upload--picture-card i {
@@ -293,18 +293,18 @@
     max-height: 6.3rem;
     overflow: auto; }
 
-.el-popover.popperBox[x-placement^="bottom"] .popper__arrow,
-.el-popover.popperBoxs[x-placement^="bottom"] .popper__arrow {
+.el-popover.popperBox[x-placement^='bottom'] .popper__arrow,
+.el-popover.popperBoxs[x-placement^='bottom'] .popper__arrow {
   border-bottom-color: #546cc4; }
-.el-popover.popperBox[x-placement^="bottom"] .popper__arrow::after,
-.el-popover.popperBoxs[x-placement^="bottom"] .popper__arrow::after {
+.el-popover.popperBox[x-placement^='bottom'] .popper__arrow::after,
+.el-popover.popperBoxs[x-placement^='bottom'] .popper__arrow::after {
   border-bottom-color: #19369d; }
 
-.el-popover.popperBox[x-placement^="top"] .popper__arrow,
-.el-popover.popperBoxs[x-placement^="top"] .popper__arrow {
+.el-popover.popperBox[x-placement^='top'] .popper__arrow,
+.el-popover.popperBoxs[x-placement^='top'] .popper__arrow {
   border-bottom-color: #546cc4; }
-.el-popover.popperBox[x-placement^="top"] .popper__arrow::after,
-.el-popover.popperBoxs[x-placement^="top"] .popper__arrow::after {
+.el-popover.popperBox[x-placement^='top'] .popper__arrow::after,
+.el-popover.popperBoxs[x-placement^='top'] .popper__arrow::after {
   border-top-color: #19369d; }
 
 .tsp.el-tooltip__popper {
@@ -312,14 +312,14 @@
   border: 1px solid #546cc4;
   color: #e5f7ff; }
 
-.tsp.el-tooltip__popper[x-placement^="right"] .popper__arrow::after {
+.tsp.el-tooltip__popper[x-placement^='right'] .popper__arrow::after {
   border-right-color: #19369d; }
-.tsp.el-tooltip__popper[x-placement^="right"] .popper__arrow {
+.tsp.el-tooltip__popper[x-placement^='right'] .popper__arrow {
   border-right-color: #546cc4; }
 
-.tsp.el-tooltip__popper[x-placement^="left"] .popper__arrow::after {
+.tsp.el-tooltip__popper[x-placement^='left'] .popper__arrow::after {
   border-left-color: #19369d; }
-.tsp.el-tooltip__popper[x-placement^="left"] .popper__arrow {
+.tsp.el-tooltip__popper[x-placement^='left'] .popper__arrow {
   border-left-color: #546cc4; }
 
 .el-card {
@@ -330,10 +330,13 @@
   height: 100%; }
 
 .el-table__body tr.current-row > td.el-table__cell {
-  background: #FFF0D4; }
+  background: #fff0d4; }
 
-.el-table--striped .el-table__body tr.el-table__row--striped.current-row td.el-table__cell {
-  background: #FFF0D4; }
+.el-table--striped
+.el-table__body
+tr.el-table__row--striped.current-row
+td.el-table__cell {
+  background: #fff0d4; }
 
 .el-table ::-webkit-scrollbar {
   height: 10px; }
@@ -343,11 +346,11 @@
   line-height: 20px; }
 
 .el-tooltip__popper.is-light {
-  border-color: #EBEEF5;
+  border-color: #ebeef5;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); }
 
-.el-tooltip__popper.is-light[x-placement^=top] .popper__arrow {
-  border-top-color: #EBEEF5; }
+.el-tooltip__popper.is-light[x-placement^='top'] .popper__arrow {
+  border-top-color: #ebeef5; }
 
 .el-dialog__body .el-form.el-form-wv {
   width: 80%;
@@ -1077,80 +1080,84 @@ iframe {
   .grid-purple-bg .bg-purple .repertLeft .totalTxt,
   .grid-purple-bg .bg-purple .repertLeft .totalNum {
     color: #fff; }
-.grid-purple-bg .grid-purple-item[data-index="0"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='0'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/0s.png); }
-.grid-purple-bg .grid-purple-item[data-index="1"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='1'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/1s.png); }
-.grid-purple-bg .grid-purple-item[data-index="2"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='2'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/2s.png); }
-.grid-purple-bg .grid-purple-item[data-index="3"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='3'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/3s.png); }
-.grid-purple-bg .grid-purple-item[data-index="4"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='4'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/4s.png); }
-.grid-purple-bg .grid-purple-item[data-index="5"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='5'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/5s.png); }
-.grid-purple-bg .grid-purple-item[data-index="6"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='6'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/0s.png); }
-.grid-purple-bg .grid-purple-item[data-index="7"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='7'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/1s.png); }
-.grid-purple-bg .grid-purple-item[data-index="8"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='8'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/2s.png); }
-.grid-purple-bg .grid-purple-item[data-index="9"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='9'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/3s.png); }
-.grid-purple-bg .grid-purple-item[data-index="10"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='10'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/4s.png); }
-.grid-purple-bg .grid-purple-item[data-index="11"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='11'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/5s.png); }
-.grid-purple-bg .grid-purple-item[data-index="12"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='12'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/0s.png); }
-.grid-purple-bg .grid-purple-item[data-index="13"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='13'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/1s.png); }
-.grid-purple-bg .grid-purple-item[data-index="14"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='14'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/2s.png); }
-.grid-purple-bg .grid-purple-item[data-index="15"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='15'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/3s.png); }
-.grid-purple-bg .grid-purple-item[data-index="16"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='16'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/4s.png); }
-.grid-purple-bg .grid-purple-item[data-index="17"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='17'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/5s.png); }
-.grid-purple-bg .grid-purple-item[data-index="18"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='18'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/0s.png); }
-.grid-purple-bg .grid-purple-item[data-index="19"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='19'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/1s.png); }
-.grid-purple-bg .grid-purple-item[data-index="20"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='20'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/2s.png); }
-.grid-purple-bg .grid-purple-item[data-index="21"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='21'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/3s.png); }
-.grid-purple-bg .grid-purple-item[data-index="22"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='22'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/4s.png); }
-.grid-purple-bg .grid-purple-item[data-index="23"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='23'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/5s.png); }
-.grid-purple-bg .grid-purple-item[data-index="24"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='24'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/0s.png); }
-.grid-purple-bg .grid-purple-item[data-index="25"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='25'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/1s.png); }
-.grid-purple-bg .grid-purple-item[data-index="26"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='26'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/2s.png); }
-.grid-purple-bg .grid-purple-item[data-index="27"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='27'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/3s.png); }
-.grid-purple-bg .grid-purple-item[data-index="28"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='28'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/4s.png); }
-.grid-purple-bg .grid-purple-item[data-index="29"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='29'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/5s.png); }
-.grid-purple-bg .grid-purple-item[data-index="30"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='30'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/0s.png); }
-.grid-purple-bg .grid-purple-item[data-index="31"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='31'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/1s.png); }
-.grid-purple-bg .grid-purple-item[data-index="32"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='32'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/2s.png); }
-.grid-purple-bg .grid-purple-item[data-index="33"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='33'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/3s.png); }
-.grid-purple-bg .grid-purple-item[data-index="34"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='34'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/4s.png); }
-.grid-purple-bg .grid-purple-item[data-index="35"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='35'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/5s.png); }
-.grid-purple-bg .grid-purple-item[data-index="36"] .bg-purple {
+.grid-purple-bg .grid-purple-item[data-index='36'] .bg-purple {
   background-image: url(~@toolStyle/assets/bg-list/0s.png); }
+
+.iframe,
+iframe {
+  min-height: 100vh; }
 
 .snapshot {
   display: flex;

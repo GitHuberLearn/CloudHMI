@@ -11,7 +11,7 @@ const { getDateN, getDateF } = await import(
 
 //全局变量
 let laytpl = null,
-  time = "2023-08-28", //显示当前时间new Date()
+  time = '2023-08-28', //显示当前时间new Date()
   table = null;
 const init = {
   circulation: 4,
@@ -49,10 +49,10 @@ let data = {
   monthsPresentActualRate: [],
   monthsMsg: null,
   selected: {
-    "2年": true,
-    "1年": false,
+    '2年': true,
+    '1年': false,
     半年: false,
-    "3个月": false,
+    '3个月': false,
     复息: false,
     单息: false,
     收益值: false,
@@ -75,7 +75,7 @@ $(function () {
     var laydate = layui.laydate;
     var layer = layui.layer;
     laydate.render({
-      elem: "#selectDate",
+      elem: '#selectDate',
       // format: 'yyyy/MM/dd',// HH:mm:ss
       value: time,
       mark: data.monthsMsg,
@@ -93,34 +93,34 @@ $(function () {
       },
     });
     // 选择数据
-    $("#LAY-twoYears").on("click", function () {
-      selectedlistChart({ key: "2年" });
+    $('#LAY-twoYears').on('click', function () {
+      selectedlistChart({ key: '2年' });
     });
-    $("#LAY-oneYear").on("click", function () {
-      selectedlistChart({ key: "1年" });
+    $('#LAY-oneYear').on('click', function () {
+      selectedlistChart({ key: '1年' });
     });
-    $("#LAY-halfYear").on("click", function () {
-      selectedlistChart({ key: "半年" });
+    $('#LAY-halfYear').on('click', function () {
+      selectedlistChart({ key: '半年' });
     });
-    $("#LAY-march").on("click", function () {
-      selectedlistChart({ key: "3个月" });
+    $('#LAY-march').on('click', function () {
+      selectedlistChart({ key: '3个月' });
     });
 
-    $("#LAY-Choose").on("click", function () {
+    $('#LAY-Choose').on('click', function () {
       selectedlistChart({ status: 1 });
     });
 
     // 显示mock数据
-    $("#LAY-Mock").on("click", function () {
+    $('#LAY-Mock').on('click', function () {
       console.log(getMockData({ isMock: true }));
     });
 
     // 表单2计算
-    $("#LAY-component-form-getval").on("click", function () {
-      let getval = form.val("calc-filter");
+    $('#LAY-component-form-getval').on('click', function () {
+      let getval = form.val('calc-filter');
       const { principal, interestRate, duration } = getval;
       if (!principal || !interestRate || !duration) {
-        layer.msg("请输入必选项");
+        layer.msg('请输入必选项');
         return false;
       }
       data.principalInterest =
@@ -129,8 +129,8 @@ $(function () {
       return false; // 阻止默认 form 跳转
     });
     // 表单2重置
-    $("#LAY-component-form-reset").on("click", function () {
-      form.val("calc-filter", {
+    $('#LAY-component-form-reset').on('click', function () {
+      form.val('calc-filter', {
         ...init_calc,
       });
       data.principalInterest = 0;
@@ -138,28 +138,28 @@ $(function () {
       return false; // 阻止默认 form 跳转
     });
     // 表单1重置
-    $("#LAY-component-form-setval").on("click", function () {
+    $('#LAY-component-form-setval').on('click', function () {
       Object.assign(data, initData);
-      form.val("val-filter", {
+      form.val('val-filter', {
         date: time,
         ...init,
       });
       listChart();
       return false; // 阻止默认 form 跳转
     });
-    form.on("select(circulation)", function (env) {
+    form.on('select(circulation)', function (env) {
       const value = env.value;
       data.circulation = value;
       listChart();
     });
-    form.on("select(spacing)", function (env) {
+    form.on('select(spacing)', function (env) {
       const value = env.value;
       data.spacing = value;
       const key = `跨度${data.spacing}个月`;
       data.selected[key] = false;
       listChart();
     });
-    form.on("select(message)", function (env) {
+    form.on('select(message)', function (env) {
       const value = env.value;
       data.message = value;
       listChart();
@@ -174,7 +174,7 @@ $(function () {
  */
 const requestData = () => {
   return new Promise((resolve, reject) => {
-    const url = cube.gatewayURL_resource + "/netPresentTrend";
+    const url = cube.gatewayURL_resource + '/netPresentTrend';
     const parame = {
       circulation: data.circulation,
     };
@@ -188,7 +188,7 @@ const requestData = () => {
       },
       (error) => {
         reject(error);
-      }
+      },
     );
     // getUnshippedCount()
     //   .then((response) => {
@@ -207,7 +207,7 @@ const requestData = () => {
  */
 const requestAtPresentActualRate = () => {
   return new Promise((resolve, reject) => {
-    const url = cube.gatewayURL_resource + "/atPresentactualRate";
+    const url = cube.gatewayURL_resource + '/atPresentactualRate';
     HttpUtils.request.get(
       url,
       null,
@@ -218,7 +218,7 @@ const requestAtPresentActualRate = () => {
       },
       (error) => {
         reject(error);
-      }
+      },
     );
   });
 };
@@ -227,7 +227,7 @@ const requestAtPresentActualRate = () => {
  */
 const requestMsg = () => {
   return new Promise((resolve, reject) => {
-    const url = cube.gatewayURL_resource + "/milestone";
+    const url = cube.gatewayURL_resource + '/milestone';
     HttpUtils.request.get(
       url,
       null,
@@ -238,7 +238,7 @@ const requestMsg = () => {
       },
       (error) => {
         reject(error);
-      }
+      },
     );
   });
 };
@@ -272,7 +272,7 @@ const selectedlistChart = (obj) => {
     Object.entries(data.selected).map(([key, value]) => [
       key,
       status ? !value : false,
-    ])
+    ]),
   );
   if (key) {
     selects[key] = true;
@@ -294,23 +294,23 @@ const listChart = async () => {
   //大→小
   //实际利率
   const real = await list_real();
-  const _configt_real = option(real, "大→小 (实际利率)");
-  const myChart_real = echarts.init(document.getElementById("charts_real"));
+  const _configt_real = option(real, '大→小 (实际利率)');
+  const myChart_real = echarts.init(document.getElementById('charts_real'));
   initEchart(myChart_real, _configt_real);
   //固定利率
   const fixed = await list();
-  const _config = option(fixed, "大→小 (固定利率)");
-  const myChart = echarts.init(document.getElementById("charts"));
+  const _config = option(fixed, '大→小 (固定利率)');
+  const myChart = echarts.init(document.getElementById('charts'));
   initEchart(myChart, _config);
   //小→大
   const toBig = await listBig(true);
-  const _configBig = option(toBig, "小→大");
-  const myChartBig = echarts.init(document.getElementById("chartsBig"));
+  const _configBig = option(toBig, '小→大');
+  const myChartBig = echarts.init(document.getElementById('chartsBig'));
   initEchart(myChartBig, _configBig);
   //组合
   const Groups = await listGroup();
-  const _confiGroup = option(Groups, "组合");
-  const myChartGroup = echarts.init(document.getElementById("chartsGroup"));
+  const _confiGroup = option(Groups, '组合');
+  const myChartGroup = echarts.init(document.getElementById('chartsGroup'));
   initEchart(myChartGroup, _confiGroup);
 };
 /**
@@ -328,7 +328,7 @@ const accrual = async (months, principal) => {
   let recycle_simple = principal;
   for (const el of months) {
     // 改为 for...of 循环
-    const day = getRecentMonth(n, "yyyy-MM-dd");
+    const day = getRecentMonth(n, 'yyyy-MM-dd');
     monthDate.push(day);
     const num = el instanceof Array ? el[0] : el;
     n.num += num;
@@ -383,21 +383,21 @@ const list_real = async () => {
 
   const chartList = [
     {
-      name: "2年",
-      type: "line",
+      name: '2年',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#FDAD26" },
-      itemStyle: { color: "#FDAD26" },
+      lineStyle: { color: '#FDAD26' },
+      itemStyle: { color: '#FDAD26' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#FDAD26",
+            color: '#FDAD26',
           },
           {
             offset: 0.8,
-            color: "#322C5B",
+            color: '#322C5B',
           },
         ]),
       },
@@ -408,21 +408,21 @@ const list_real = async () => {
       interest_simple: data24.value_simple,
     },
     {
-      name: "1年",
-      type: "line",
+      name: '1年',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#46E7A5" },
-      itemStyle: { color: "#46E7A5" },
+      lineStyle: { color: '#46E7A5' },
+      itemStyle: { color: '#46E7A5' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#1B527C",
+            color: '#1B527C',
           },
           {
             offset: 0.8,
-            color: "#184E79",
+            color: '#184E79',
           },
         ]),
       },
@@ -433,21 +433,21 @@ const list_real = async () => {
       interest_simple: data12.value_simple,
     },
     {
-      name: "半年",
-      type: "line",
+      name: '半年',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#3FD7F8" },
-      itemStyle: { color: "#3FD7F8" },
+      lineStyle: { color: '#3FD7F8' },
+      itemStyle: { color: '#3FD7F8' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#153881",
+            color: '#153881',
           },
           {
             offset: 0.8,
-            color: "#0B2678",
+            color: '#0B2678',
           },
         ]),
       },
@@ -458,21 +458,21 @@ const list_real = async () => {
       interest_simple: data06.value_simple,
     },
     {
-      name: "3个月",
-      type: "line",
+      name: '3个月',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#FF7A45" },
-      itemStyle: { color: "#FF7A45" },
+      lineStyle: { color: '#FF7A45' },
+      itemStyle: { color: '#FF7A45' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#B98989",
+            color: '#B98989',
           },
           {
             offset: 0.8,
-            color: "#B99B9B",
+            color: '#B99B9B',
           },
         ]),
       },
@@ -483,9 +483,9 @@ const list_real = async () => {
       interest_simple: data03.value_simple,
     },
   ];
-  if (data.message === "1") {
+  if (data.message === '1') {
     data.compare = chartList;
-    console.log("实际发布值interest", chartList);
+    console.log('实际发布值interest', chartList);
   }
   return chartList;
 };
@@ -494,7 +494,7 @@ const list_real = async () => {
  */
 const principalInterestCalc = () => {
   let getTpl = compare_pr.innerHTML,
-    view = document.getElementById("view_pr"),
+    view = document.getElementById('view_pr'),
     value = Math.round(data.principalInterest * 100) / 100;
   //本息赋值
   if (value > 0) {
@@ -502,7 +502,7 @@ const principalInterestCalc = () => {
       view.innerHTML = html;
     });
   } else {
-    view.innerHTML = "-";
+    view.innerHTML = '-';
   }
 };
 /**
@@ -523,21 +523,21 @@ const list = async (text) => {
   const data03 = await accrual(months03, data.principal.value03);
   const chartList = [
     {
-      name: "2年",
-      type: "line",
+      name: '2年',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#FDAD26" },
-      itemStyle: { color: "#FDAD26" },
+      lineStyle: { color: '#FDAD26' },
+      itemStyle: { color: '#FDAD26' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#FDAD26",
+            color: '#FDAD26',
           },
           {
             offset: 0.8,
-            color: "#322C5B",
+            color: '#322C5B',
           },
         ]),
       },
@@ -547,21 +547,21 @@ const list = async (text) => {
       interest_simple: data24.value_simple,
     },
     {
-      name: "1年",
-      type: "line",
+      name: '1年',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#46E7A5" },
-      itemStyle: { color: "#46E7A5" },
+      lineStyle: { color: '#46E7A5' },
+      itemStyle: { color: '#46E7A5' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#1B527C",
+            color: '#1B527C',
           },
           {
             offset: 0.8,
-            color: "#184E79",
+            color: '#184E79',
           },
         ]),
       },
@@ -571,21 +571,21 @@ const list = async (text) => {
       interest_simple: data12.value_simple,
     },
     {
-      name: "半年",
-      type: "line",
+      name: '半年',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#3FD7F8" },
-      itemStyle: { color: "#3FD7F8" },
+      lineStyle: { color: '#3FD7F8' },
+      itemStyle: { color: '#3FD7F8' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#153881",
+            color: '#153881',
           },
           {
             offset: 0.8,
-            color: "#0B2678",
+            color: '#0B2678',
           },
         ]),
       },
@@ -595,21 +595,21 @@ const list = async (text) => {
       interest_simple: data06.value_simple,
     },
     {
-      name: "3个月",
-      type: "line",
+      name: '3个月',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#FF7A45" },
-      itemStyle: { color: "#FF7A45" },
+      lineStyle: { color: '#FF7A45' },
+      itemStyle: { color: '#FF7A45' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#B98989",
+            color: '#B98989',
           },
           {
             offset: 0.8,
-            color: "#B99B9B",
+            color: '#B99B9B',
           },
         ]),
       },
@@ -620,17 +620,17 @@ const list = async (text) => {
     },
   ];
   let getTpl = compare.innerHTML,
-    view = document.getElementById("view");
+    view = document.getElementById('view');
   //列表赋值
-  if (data.message === "1") {
+  if (data.message === '1') {
     data.compare_real = chartList;
-    const le = text ? `-${text}` : "";
+    const le = text ? `-${text}` : '';
     console.log(`固定发布值interest${le}`, chartList);
     laytpl(getTpl).render(data, function (html) {
       view.innerHTML = html;
     });
   } else {
-    view.innerHTML = "";
+    view.innerHTML = '';
   }
   return chartList;
 };
@@ -654,21 +654,21 @@ const listBig = async (bg) => {
 
   const chartList = [
     {
-      name: "2年",
-      type: "line",
+      name: '2年',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: bg ? "#EDED46" : "#FDAD26" },
-      itemStyle: { color: bg ? "#EDED46" : "#FDAD26" },
+      lineStyle: { color: bg ? '#EDED46' : '#FDAD26' },
+      itemStyle: { color: bg ? '#EDED46' : '#FDAD26' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#FDAD26",
+            color: '#FDAD26',
           },
           {
             offset: 0.8,
-            color: "#322C5B",
+            color: '#322C5B',
           },
         ]),
       },
@@ -678,21 +678,21 @@ const listBig = async (bg) => {
       interest_simple: data24.value_simple,
     },
     {
-      name: "1年",
-      type: "line",
+      name: '1年',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: bg ? "#B2ED50" : "#46E7A5" },
-      itemStyle: { color: bg ? "#B2ED50" : "#46E7A5" },
+      lineStyle: { color: bg ? '#B2ED50' : '#46E7A5' },
+      itemStyle: { color: bg ? '#B2ED50' : '#46E7A5' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#1B527C",
+            color: '#1B527C',
           },
           {
             offset: 0.8,
-            color: "#184E79",
+            color: '#184E79',
           },
         ]),
       },
@@ -702,21 +702,21 @@ const listBig = async (bg) => {
       interest_simple: data12.value_simple,
     },
     {
-      name: "半年",
-      type: "line",
+      name: '半年',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: bg ? "#D3EDED" : "#3FD7F8" },
-      itemStyle: { color: bg ? "#D3EDED" : "#3FD7F8" },
+      lineStyle: { color: bg ? '#D3EDED' : '#3FD7F8' },
+      itemStyle: { color: bg ? '#D3EDED' : '#3FD7F8' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#153881",
+            color: '#153881',
           },
           {
             offset: 0.8,
-            color: "#0B2678",
+            color: '#0B2678',
           },
         ]),
       },
@@ -726,21 +726,21 @@ const listBig = async (bg) => {
       interest_simple: data06.value_simple,
     },
     {
-      name: "3个月",
-      type: "line",
+      name: '3个月',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: bg ? "#E01F6A" : "#FF7A45" },
-      itemStyle: { color: bg ? "#E01F6A" : "#FF7A45" },
+      lineStyle: { color: bg ? '#E01F6A' : '#FF7A45' },
+      itemStyle: { color: bg ? '#E01F6A' : '#FF7A45' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#B98989",
+            color: '#B98989',
           },
           {
             offset: 0.8,
-            color: "#B99B9B",
+            color: '#B99B9B',
           },
         ]),
       },
@@ -757,7 +757,7 @@ const listBig = async (bg) => {
  * @returns 组合数据
  */
 const listGroup = async () => {
-  const group = await list("组合");
+  const group = await list('组合');
   const groupBig = await listBig(true);
   const chartList = [...group, ...groupBig];
   return chartList;
@@ -853,25 +853,25 @@ const option = (chartList, title) => {
   const accrual = optionpi(seriesValue, title);
   const accrual_simple = optionpi(seriesValue_simple, title);
   series.push(...seriesList, ...seriesValue, ...seriesValue_simple);
-  if (title != "组合") {
+  if (title != '组合') {
     series.push(
       {
         yAxisIndex: 1,
-        name: "复息", //最长时间复息
-        type: "line",
+        name: '复息', //最长时间复息
+        type: 'line',
         smooth: true,
-        lineStyle: { color: "#F5084B" },
-        itemStyle: { color: "#F5084B" },
+        lineStyle: { color: '#F5084B' },
+        itemStyle: { color: '#F5084B' },
         areaStyle: {
           opacity: 0.5,
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: "#F27E9B",
+              color: '#F27E9B',
             },
             {
               offset: 0.8,
-              color: "#AF4664",
+              color: '#AF4664',
             },
           ]),
         },
@@ -879,46 +879,46 @@ const option = (chartList, title) => {
       },
       {
         yAxisIndex: 1,
-        name: "单息", //最长时间单息
-        type: "line",
+        name: '单息', //最长时间单息
+        type: 'line',
         smooth: true,
-        lineStyle: { color: "#DB29F0" },
-        itemStyle: { color: "#DB29F0" },
+        lineStyle: { color: '#DB29F0' },
+        itemStyle: { color: '#DB29F0' },
         areaStyle: {
           opacity: 0.5,
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: "#F27E9B",
+              color: '#F27E9B',
             },
             {
               offset: 0.8,
-              color: "#AF4664",
+              color: '#AF4664',
             },
           ]),
         },
         data: accrual_simple.PI,
-      }
+      },
     );
   } else {
     series.push(
       {
         yAxisIndex: 1,
-        name: "复息", //最长时间复息(大→小)
-        type: "line",
+        name: '复息', //最长时间复息(大→小)
+        type: 'line',
         smooth: true,
-        lineStyle: { color: "#F5084B" },
-        itemStyle: { color: "#F5084B" },
+        lineStyle: { color: '#F5084B' },
+        itemStyle: { color: '#F5084B' },
         areaStyle: {
           opacity: 0.5,
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: "#F27E9B",
+              color: '#F27E9B',
             },
             {
               offset: 0.8,
-              color: "#AF4664",
+              color: '#AF4664',
             },
           ]),
         },
@@ -926,21 +926,21 @@ const option = (chartList, title) => {
       },
       {
         yAxisIndex: 1,
-        name: "复息", //最长时间复息(小→大)
-        type: "line",
+        name: '复息', //最长时间复息(小→大)
+        type: 'line',
         smooth: true,
-        lineStyle: { color: "#FF7A45" },
-        itemStyle: { color: "#FF7A45" },
+        lineStyle: { color: '#FF7A45' },
+        itemStyle: { color: '#FF7A45' },
         areaStyle: {
           opacity: 0.5,
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: "#F27E9B",
+              color: '#F27E9B',
             },
             {
               offset: 0.8,
-              color: "#AF4664",
+              color: '#AF4664',
             },
           ]),
         },
@@ -948,21 +948,21 @@ const option = (chartList, title) => {
       },
       {
         yAxisIndex: 1,
-        name: "单息", //最长时间单息(大→小)
-        type: "line",
+        name: '单息', //最长时间单息(大→小)
+        type: 'line',
         smooth: true,
-        lineStyle: { color: "#F5084B" },
-        itemStyle: { color: "#F5084B" },
+        lineStyle: { color: '#F5084B' },
+        itemStyle: { color: '#F5084B' },
         areaStyle: {
           opacity: 0.5,
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: "#F27E9B",
+              color: '#F27E9B',
             },
             {
               offset: 0.8,
-              color: "#AF4664",
+              color: '#AF4664',
             },
           ]),
         },
@@ -970,174 +970,174 @@ const option = (chartList, title) => {
       },
       {
         yAxisIndex: 1,
-        name: "单息", //最长时间单息(小→大)
-        type: "line",
+        name: '单息', //最长时间单息(小→大)
+        type: 'line',
         smooth: true,
-        lineStyle: { color: "#FF7A45" },
-        itemStyle: { color: "#FF7A45" },
+        lineStyle: { color: '#FF7A45' },
+        itemStyle: { color: '#FF7A45' },
         areaStyle: {
           opacity: 0.5,
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: "#F27E9B",
+              color: '#F27E9B',
             },
             {
               offset: 0.8,
-              color: "#AF4664",
+              color: '#AF4664',
             },
           ]),
         },
         data: accrual_simple.PIs,
-      }
+      },
     );
   }
   series.push(
     {
       yAxisIndex: 1,
-      name: "收益值", //按照时间(层级合计值)
-      type: "line",
+      name: '收益值', //按照时间(层级合计值)
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#F5084B" },
-      itemStyle: { color: "#F5084B" },
+      lineStyle: { color: '#F5084B' },
+      itemStyle: { color: '#F5084B' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#F27E9B",
+            color: '#F27E9B',
           },
           {
             offset: 0.8,
-            color: "#AF4664",
+            color: '#AF4664',
           },
         ]),
       },
       data: xyValue,
     },
     {
-      name: "净现率", //全量净现值：按照时间(重复率：斜率为0)
-      type: "line",
+      name: '净现率', //全量净现值：按照时间(重复率：斜率为0)
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#F5084B" },
-      itemStyle: { color: "#F5084B" },
+      lineStyle: { color: '#F5084B' },
+      itemStyle: { color: '#F5084B' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#F27E9B",
+            color: '#F27E9B',
           },
           {
             offset: 0.8,
-            color: "#AF4664",
+            color: '#AF4664',
           },
         ]),
       },
       data: xy,
     },
     {
-      name: "净现值", //按照时间去重(重复率：净现率相差)
-      type: "line",
+      name: '净现值', //按照时间去重(重复率：净现率相差)
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#009885" },
-      itemStyle: { color: "#009885" },
+      lineStyle: { color: '#009885' },
+      itemStyle: { color: '#009885' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#93C6C1",
+            color: '#93C6C1',
           },
           {
             offset: 0.8,
-            color: "#2C5852",
+            color: '#2C5852',
           },
         ]),
       },
       data: y,
     },
     {
-      name: "全量跨度",
-      type: "line",
+      name: '全量跨度',
+      type: 'line',
       smooth: true,
-      symbol: "arrow",
+      symbol: 'arrow',
       symbolSize: 8,
       symbolRotate: 270,
       lineStyle: {
-        color: "#F508ED",
+        color: '#F508ED',
       },
-      itemStyle: { color: "#F276F0" },
+      itemStyle: { color: '#F276F0' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#D867D8",
+            color: '#D867D8',
           },
           {
             offset: 0.8,
-            color: "#9B409D",
+            color: '#9B409D',
           },
         ]),
       },
       data: xy1,
     },
     {
-      name: "跨度" + data.spacing + "个月",
-      type: "line",
+      name: '跨度' + data.spacing + '个月',
+      type: 'line',
       smooth: true,
-      lineStyle: { color: "#F508ED" },
-      itemStyle: { color: "#F508ED" },
+      lineStyle: { color: '#F508ED' },
+      itemStyle: { color: '#F508ED' },
       areaStyle: {
         opacity: 0.5,
         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
           {
             offset: 0,
-            color: "#D867D8",
+            color: '#D867D8',
           },
           {
             offset: 0.8,
-            color: "#9B409D",
+            color: '#9B409D',
           },
         ]),
       },
       data: xyn,
-    }
+    },
   );
   const selected = data.selected;
   return {
     legend: {
-      x: "center",
-      textStyle: { color: "white" },
+      x: 'center',
+      textStyle: { color: 'white' },
       padding: [28, 10, 0, 0],
       selected,
     },
     title: {
       text: title,
       textStyle: {
-        color: "#fff",
+        color: '#fff',
         fontSize: 16,
         fontWeight: 600,
       },
-      left: "center",
+      left: 'center',
       itemGap: 20,
     },
     tooltip: {
-      trigger: "axis",
+      trigger: 'axis',
       confine: true,
     },
     grid: {
-      top: "20%",
-      left: "5%",
-      right: "8%",
-      bottom: "10%",
+      top: '20%',
+      left: '5%',
+      right: '8%',
+      bottom: '10%',
     },
     xAxis: {
-      type: "category",
+      type: 'category',
       boundaryGap: false,
       axisLabel: {
-        color: "#fff",
+        color: '#fff',
         // formatter: function (value) {
         // 	return value.slice(5);
         // },
@@ -1146,30 +1146,30 @@ const option = (chartList, title) => {
     },
     yAxis: [
       {
-        type: "value",
-        name: "级层",
+        type: 'value',
+        name: '级层',
         minInterval: 1,
         nameTextStyle: {
-          color: "#23FFFC",
+          color: '#23FFFC',
           padding: [0, 30, 0, 0],
         },
         axisLabel: {
-          color: "#fff",
+          color: '#fff',
         },
-        splitLine: { lineStyle: { color: "#22467D" } },
+        splitLine: { lineStyle: { color: '#22467D' } },
       },
       {
-        type: "value",
-        name: "收益",
+        type: 'value',
+        name: '收益',
         minInterval: 1,
         nameTextStyle: {
-          color: "#23FFFC",
+          color: '#23FFFC',
           padding: [0, -50, 0, 0],
         },
         axisLabel: {
-          color: "#fff",
+          color: '#fff',
         },
-        splitLine: { lineStyle: { color: "#22467D" } },
+        splitLine: { lineStyle: { color: '#22467D' } },
       },
     ],
     series,
@@ -1211,7 +1211,7 @@ const optionpi = (chartList, title) => {
 const maxTime = (chartList, title) => {
   let arr = [];
   switch (title) {
-    case "小→大":
+    case '小→大':
       arr = chartList[2];
       break;
     default:
@@ -1258,7 +1258,7 @@ const sortMin = (xAxisList) => {
   let list = xAxisList.concat([]); //防止改变原数据
   list.sort(function (a, b) {
     return (
-      Date.parse(a.x.replace(/-/g, "/")) - Date.parse(b.x.replace(/-/g, "/"))
+      Date.parse(a.x.replace(/-/g, '/')) - Date.parse(b.x.replace(/-/g, '/'))
     );
   });
   return list;
@@ -1305,11 +1305,11 @@ const teve = (el, index, obj) => {
     l = 0;
   if (index < obj.length - 1) {
     const xl = el.x.substring(0, 7);
-    txl = Date.parse(xl.replace(/-/g, "/"));
+    txl = Date.parse(xl.replace(/-/g, '/'));
     const afxl = obj[index + 1].x.substring(0, 7);
-    tafxl = Date.parse(afxl.replace(/-/g, "/"));
-    const xln = xl.split("-")[1];
-    const afxln = afxl.split("-")[1];
+    tafxl = Date.parse(afxl.replace(/-/g, '/'));
+    const xln = xl.split('-')[1];
+    const afxln = afxl.split('-')[1];
     if (xln > afxln) {
       l = 12 - xln + Number(afxln);
     } else {

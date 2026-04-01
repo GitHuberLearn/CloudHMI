@@ -1,8 +1,8 @@
-@import "./tools/variables.scss";
-@import "./tools/fixStyle.scss";
-@import "./tools/mixin.scss";
-@import "./tools/element-ui.scss";
-@import "./tools/graphicStyle.scss";
+@import './tools/variables.scss';
+@import './tools/fixStyle.scss';
+@import './tools/mixin.scss';
+@import './tools/element-ui.scss';
+@import './tools/graphicStyle.scss';
 
 :root {
   box-sizing: border-box;
@@ -15,13 +15,18 @@
   /* 继承根元素的盒模型 */
 }
 
-
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB,
-    Microsoft YaHei, Arial, sans-serif;
+  font-family:
+    Helvetica Neue,
+    Helvetica,
+    PingFang SC,
+    Hiragino Sans GB,
+    Microsoft YaHei,
+    Arial,
+    sans-serif;
 }
 
 //加入fixStyle验证
@@ -58,7 +63,7 @@ $h-login: 740px;
         }
 
         .login-left-title {
-          width: #{$w-login*0.8*0.68*0.7};
+          width: #{$w-login * 0.8 * 0.68 * 0.7};
         }
 
         .login-left-icon {
@@ -98,7 +103,6 @@ $h-login: 740px;
 label {
   font-weight: 700;
 }
-
 
 *,
 *:before,
@@ -259,7 +263,6 @@ li {
   color: $violet !important;
 }
 
-
 .fzred,
 .fc-red {
   color: $red !important;
@@ -274,7 +277,6 @@ li {
 .fc-1ac9ff {
   color: $f_color_1ac9ff !important;
 }
-
 
 .fzcolor_00FFF4,
 .fc-00FFF4 {
@@ -406,31 +408,27 @@ li {
 .gradient-line-left {
   width: 100%;
   height: 1px;
-  background: linear-gradient(to right,
-      /* 修改方向为从上到下 */
-      transparent 0%,
-      /* 顶部透明 */
-      #ff6b6b 20%,
-      /* 20% 高度处开始红色 */
-      #4ecdc4 50%,
-      /* 50% 高度处过渡到蓝绿色 */
-      #45b7d1 80%,
-      /* 80% 高度处过渡到浅蓝色 */
-      transparent 100%
-      /* 底部透明 */
-    );
-
+  background: linear-gradient(
+    to right,
+    /* 修改方向为从上到下 */ transparent 0%,
+    /* 顶部透明 */ #ff6b6b 20%,
+    /* 20% 高度处开始红色 */ #4ecdc4 50%,
+    /* 50% 高度处过渡到蓝绿色 */ #45b7d1 80%,
+    /* 80% 高度处过渡到浅蓝色 */ transparent 100% /* 底部透明 */
+  );
 }
 
 .gradient-line-top {
   width: 1px;
   height: 100%;
-  background: linear-gradient(to bottom,
-      transparent 0%,
-      #ff6b6b 20%,
-      #4ecdc4 50%,
-      #45b7d1 80%,
-      transparent 100%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    #ff6b6b 20%,
+    #4ecdc4 50%,
+    #45b7d1 80%,
+    transparent 100%
+  );
 }
 
 .border-gradient {
@@ -444,9 +442,8 @@ li {
 $border_color: #ccc;
 
 .border-color {
-  border-color: $border_color
+  border-color: $border_color;
 }
-
 
 .bd {
   border: 1px solid #{$border_color};
@@ -492,7 +489,6 @@ $border_color: #ccc;
   @include wh;
   @include patm;
 }
-
 
 //text-align
 .tac {
@@ -726,7 +722,6 @@ iframe {
     box-sizing: border-box;
 
     .repertLeft {
-
       .totalTxt,
       .totalNum {
         color: #fff;
@@ -743,7 +738,7 @@ iframe {
     //   background-image: url(~@toolStyle/assets/bg-list/#{$img-index}s.png);
     // }
 
-    .grid-purple-item[data-index="#{$i}"] .bg-purple {
+    .grid-purple-item[data-index='#{$i}'] .bg-purple {
       background-image: url(~@toolStyle/assets/bg-list/#{$img-index}s.png);
     }
   }
