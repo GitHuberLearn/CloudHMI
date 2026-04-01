@@ -707,3 +707,25 @@ export const dateNs = date.slice(1, 8);
 
 //后台图片存放地址
 export const imgBaseUrl = window.location.origin;
+
+/**
+ * 复制文本到剪贴板
+ * @param {String} context 复制的内容
+ */
+const copyToClipboard = (context) => {
+  // 创建输入框元素
+  const input = document.createElement('input');
+  // 将想要复制的值
+  input.value = context;
+  // 页面底部追加输入框
+  document.body.appendChild(input);
+  // 选中输入框
+  input.select();
+  // 执行浏览器复制命令
+  document.execCommand('Copy');
+  // 复制后移除输入框
+  input.remove();
+};
+export {
+  copyToClipboard
+}
