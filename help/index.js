@@ -6,7 +6,7 @@
  * @LastEditors: ~
  * @LastEditTime: 2025-07-02 17:11:25
  */
-const mock = await import("./mock/index.js");
+const mock = await import('./mock/index.js');
 // import mock from "./mock";
 // import requestApi from "./webApi/index";//暂时未应用
 // import utils from "./utils/index";//暂时未应用

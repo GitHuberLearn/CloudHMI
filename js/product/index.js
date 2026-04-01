@@ -38,14 +38,14 @@ export const roundToDecimal = (num, decimals = 2) => {
  * @param {*} time 默认5分钟
  * @returns
  */
-export function setInter_tiem(fn, time) {
+export function setInter_time(fn, time) {
   fn();
   time = time ? time : 1000 * 60 * 5;
   return setInterval(() => {
     fn();
   }, time);
 }
-export function setClear_tiem(TIMECLEAR) {
+export function setClear_time(TIMECLEAR) {
   clearInterval(TIMECLEAR);
 }
 
@@ -707,25 +707,3 @@ export const dateNs = date.slice(1, 8);
 
 //后台图片存放地址
 export const imgBaseUrl = window.location.origin;
-
-/**
- * 复制文本到剪贴板
- * @param {String} context 复制的内容
- */
-const copyToClipboard = (context) => {
-  // 创建输入框元素
-  const input = document.createElement('input');
-  // 将想要复制的值
-  input.value = context;
-  // 页面底部追加输入框
-  document.body.appendChild(input);
-  // 选中输入框
-  input.select();
-  // 执行浏览器复制命令
-  document.execCommand('Copy');
-  // 复制后移除输入框
-  input.remove();
-};
-export {
-  copyToClipboard
-}
