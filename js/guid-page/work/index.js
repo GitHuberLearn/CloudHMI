@@ -62,6 +62,48 @@ let data = {
     [key]: false,
   },
 };
+
+/**
+ * 当下实际利率
+ * 存在变量提升
+ */
+const requestAtPresentActualRate = () => {
+  return new Promise((resolve, reject) => {
+    const url = cube.gatewayURL_resource + '/atPresentactualRate';
+    HttpUtils.request.get(
+      url,
+      null,
+      (result) => {
+        if (result.code == 200) {
+          resolve(result.data);
+        }
+      },
+      (error) => {
+        reject(error);
+      },
+    );
+  });
+};
+
+/**
+ * 图表数据请求
+ * 存在变量提升
+ */
+const initList = async () => {
+  //当下实际利率
+  try {
+    data.monthsPresentActualRate = await requestAtPresentActualRate();
+  } catch (error) {
+    console.error(error);
+  }
+  //数据里程碑数据
+  try {
+    data.monthsMsg = await requestMsg();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 //选择项目文件右击打开
 $(function () {
   //layui声明模块
@@ -70,6 +112,7 @@ $(function () {
     await initList();
     //初步启动
     await listChart();
+
     var $ = layui.$;
     var form = layui.form;
     var laydate = layui.laydate;
@@ -202,26 +245,7 @@ const requestData = () => {
     //   });
   });
 };
-/**
- * 当下实际利率
- */
-const requestAtPresentActualRate = () => {
-  return new Promise((resolve, reject) => {
-    const url = cube.gatewayURL_resource + '/atPresentactualRate';
-    HttpUtils.request.get(
-      url,
-      null,
-      (result) => {
-        if (result.code == 200) {
-          resolve(result.data);
-        }
-      },
-      (error) => {
-        reject(error);
-      },
-    );
-  });
-};
+
 /**
  * 数据里程碑数据
  */
@@ -242,23 +266,7 @@ const requestMsg = () => {
     );
   });
 };
-/**
- * 图表数据请求
- */
-const initList = async () => {
-  //当下实际利率
-  try {
-    data.monthsPresentActualRate = await requestAtPresentActualRate();
-  } catch (error) {
-    console.error(error);
-  }
-  //数据里程碑数据
-  try {
-    data.monthsMsg = await requestMsg();
-  } catch (error) {
-    console.error(error);
-  }
-};
+
 
 /**
  * 图例选中状态
@@ -313,6 +321,7 @@ const listChart = async () => {
   const myChartGroup = echarts.init(document.getElementById('chartsGroup'));
   initEchart(myChartGroup, _confiGroup);
 };
+
 /**
  * @param {*月列表} months
  * @param {*本金} principal
