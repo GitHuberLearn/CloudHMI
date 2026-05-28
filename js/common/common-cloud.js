@@ -16,23 +16,23 @@ cubeInit = new CUBEINIT();
 
 //声明公共css,js变量
 var LSList = {
-  type1: "link",
-  type2: "script",
-  type1_scss: "link_scss",
+  type1: 'link',
+  type2: 'script',
+  type1_scss: 'link_scss',
   // 引入的路径列表
   list1: [
-    "/plugins/layui/css/layui.css",
-    "/api_resource/lib/stylenew.css",
-    "/css/index.css",
+    '/plugins/layuiList/layui/css/layui.css',
+    '/api_resource/lib/stylenew.css',
+    '/css/index.css',
   ],
   list2: [
-    "/plugins/jquery/jquery.min.js",
-    "/plugins/knockout/knockout-3.2.0.js",
-    "/plugins/knockout/knockout.mapping.js",
-    "/plugins/lib/xe-utils.js",
-    "/plugins/layui/layui.js",
-    "/js/product/httpClient.js",
-    "/js/product/stylenew.js", //本部js
+    '/plugins/jquery/jquery.min.js',
+    '/plugins/knockout/knockout-3.2.0.js',
+    '/plugins/knockout/knockout.mapping.js',
+    '/plugins/lib/xe-utils.js',
+    '/plugins/layuiList/layui/layui.js',
+    '/js/product/httpClient.js',
+    '/js/product/stylenew.js', //本部js
   ],
 };
 
