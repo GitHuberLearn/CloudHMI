@@ -26,7 +26,7 @@ var LSList = {
     '/css/index.css',
   ],
   list2: [
-    '/plugins/lib/jquery/jquery.min.js',
+    '/plugins/lib/jquery.min.js',
     '/plugins/knockout/knockout-3.2.0.js',
     '/plugins/knockout/knockout.mapping.js',
     '/plugins/lib/xe-utils.js',
