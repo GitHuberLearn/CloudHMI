@@ -45,9 +45,10 @@ let data = {
   max: [3, 6, 12, 24],
   compare: [],
   compare_real: [],
-  monthsList: [],
-  monthsPresentActualRate: [],
-  monthsMsg: null,
+  monthsList: [], //实际利率 netPresentTrend
+  monthsPresentActualRate: [], //每年实际利率 atPresentactualRate
+  monthsMsg: null, //投资日 milestone
+  monthsMsgTime: 5000,
   selected: {
     '2年': true,
     '1年': false,
@@ -128,7 +129,8 @@ $(function () {
         const values = Object.values(list);
         keys.forEach((element, index) => {
           if (element === value) {
-            layer.msg(values[index]);
+            layer.msg(values[index], { time: data.monthsMsgTime });
+            console.log(values[index]);
           }
         });
         data.time.time = value;
@@ -153,9 +155,18 @@ $(function () {
       selectedlistChart({ status: 1 });
     });
 
-    // 显示mock数据
+    // 显示 Mock 数据
     $('#LAY-Mock').on('click', function () {
-      console.log(getMockData({ isMock: true }));
+      console.log('Mock', getMockData({ isMock: true }));
+    });
+
+    // 显示Really数据
+    $('#LAY-Really').on('click', function () {
+      console.log('Really', {
+        netPresentTrend: data.monthsList,
+        atPresentactualRate: data.monthsPresentActualRate,
+        milestone: data.monthsMsg,
+      });
     });
 
     // 表单2计算
