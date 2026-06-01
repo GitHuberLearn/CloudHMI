@@ -137,22 +137,20 @@ $(function () {
         listChart();
       },
     });
-    // 选择数据
-    $('#LAY-twoYears').on('click', function () {
-      selectedlistChart({ key: '2年' });
-    });
-    $('#LAY-oneYear').on('click', function () {
-      selectedlistChart({ key: '1年' });
-    });
-    $('#LAY-halfYear').on('click', function () {
-      selectedlistChart({ key: '半年' });
-    });
-    $('#LAY-march').on('click', function () {
-      selectedlistChart({ key: '3个月' });
+
+    // 点击事件添加active
+    $('.layui .layui-btn').click(function () {
+      $(this).addClass('active').siblings().removeClass('active');
+      const key = $(this).data('id');
+      selectedlistChart({ key });
     });
 
+    // 反选事件
     $('#LAY-Choose').on('click', function () {
       selectedlistChart({ status: 1 });
+      $('.layui .layui-btn').each(function () {
+        $(this).toggleClass('active');
+      });
     });
 
     // 显示 Mock 数据
@@ -277,7 +275,6 @@ const requestMsg = () => {
     );
   });
 };
-
 
 /**
  * 图例选中状态
