@@ -4,7 +4,7 @@
  * @Author: YangKe
  * @Date: 2019-12-17 09:41:06
  * @LastEditors: ~
- * @LastEditTime: 2026-06-01 14:37:17
+ * @LastEditTime: 2026-08-31 14:53:07
  -->
 <!doctype html>
 <html>
@@ -19,7 +19,7 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <title>净现率</title>
     <!--common css/js-->
-    <!--本地：去掉/CloudHMI -->
+    <!--本地：去掉 -->
     <script
       src="/CloudHMI/js/common/common-cloud.js"
       type="text/javascript"
@@ -119,9 +119,10 @@
 		<span class="common-btn default">
 			总结：无论大→小还是小→大，每期重率3.75年(45个月)首期复利（98元），最大跨度6个月，15年复利2651元
 		</span>
-		<span class="common-btn default">
-			目前使用专享类型（缺点需要自己续存，实际利率只能按照最新更新的来计算）
-			利率每年有更新，定期会更新，暂时不使用续存功能（不易做到立即续存的行为），实际利率仅代表当前实际利率，未来利率一律按照最新利率计算，未来与实际利率有变化浮动，时间有可能滞后
+		<span class="common-btn default">  
+            <div>未来利率一律按照最大利率计算，未来与实际最大利率有可能存在浮动时差。</div>
+            <div>实际利率按照最大利率来计算，防止当前利率降低，旧利率未续存导致的降息损失。</div>
+            <div>目前使用专享类型，2026.08.29之前手动续存，之后使用续存，判断利率效益最大化，确定续存最大利率。</div>
 		</span>
 		<span class="common-btn default">
 			一项三线（复利与单利、跨度值）
