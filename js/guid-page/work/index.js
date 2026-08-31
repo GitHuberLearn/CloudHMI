@@ -69,6 +69,7 @@ let data = {
  * 存在变量提升
  */
 const requestAtPresentActualRate = () => {
+  debugger;
   return new Promise((resolve, reject) => {
     const url = cube.gatewayURL_resource + '/atPresentactualRate';
     HttpUtils.request.get(
@@ -155,11 +156,13 @@ $(function () {
 
     // 显示 Mock 数据
     $('#LAY-Mock').on('click', function () {
+      debugger;
       console.log('Mock', getMockData({ isMock: true }));
     });
 
     // 显示Really数据
     $('#LAY-Really').on('click', function () {
+      debugger;
       console.log('Really', {
         netPresentTrend: data.monthsList,
         atPresentactualRate: data.monthsPresentActualRate,
